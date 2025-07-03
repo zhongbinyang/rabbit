@@ -2,16 +2,20 @@ import datetime
 import time
 from collections import OrderedDict
 
-from flask import Flask, render_template, session, request, \
-    copy_current_request_context, jsonify
-# from flask_socketio import SocketIO, emit, join_room, leave_room, close_room, \
-#     rooms, disconnect, send
+from flask import Flask, render_template, session, request, copy_current_request_context, jsonify, send_from_directory
+
 from Global import *
 from flask import Response
 import json
+from flask_cors import CORS
 
 api = Flask(__name__)
+CORS(api)
 api.config['JSON_SORT_KEYS'] = False
+
+@api.route('/testapi.html')
+def serve_testapi():
+    return send_from_directory('static', 'testapi.html')
 
 tasks = '''All can use POST or GET
 <div>{
