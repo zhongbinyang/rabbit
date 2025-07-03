@@ -1,0 +1,87 @@
+[
+    {
+        "action": "lifter_up",
+        "description": "升降台上升",
+        "expected": "1",
+        "timeout": 10,
+        "commands": [
+            {
+                "command": "M10024",
+                "type": "write",
+                "value": "1"
+            },
+            {
+                "command": "M10050",
+                "type": "read"
+            }
+        ]
+    },
+    {
+        "action": "test02",
+        "description": "Clamp X out",
+        "expected": "1",    
+        "timeout": 10,
+        "commands": [
+            {
+                "command": "M10020",
+                "type": "write",
+                "value": "1"
+            },
+            {
+                "command": "M10002",
+                "type": "read"
+            }
+        ]
+    },
+    {
+        "action": "test03", 
+        "description": "Clamp Y in",
+        "expected": "1",    
+        "timeout": 10,
+        "commands": [
+            {
+                "command": "M10054",
+                "type": "write",
+                "value": "1"
+            },
+            {
+                "command": "M10022",
+                "type": "read"
+            }
+        ]
+    },
+    {
+        "action": "test04", 
+        "description": "Clamp Y out",
+        "expected": "1",        
+        "timeout": 10,
+        "commands": [
+            {
+                "command": "M10006",
+                "type": "write",
+                "value": "1"
+            },
+            {
+                "command": "M10028",
+                "type": "read"
+            }
+        ]
+    },
+    {
+        "action": "test05",
+        "description": "Busbar Cylinder",
+        "expected": "1",    
+        "timeout": 10,
+        "commands": [
+            {
+                "command": "M10031",
+                "type": "write",
+                "value": "1"
+            },
+            {
+                "command": "M10026",
+                "type": "read"
+            }
+        ]
+    }
+]

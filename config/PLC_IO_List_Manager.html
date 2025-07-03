@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>PLC IO List & 分组管理</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { padding: 2rem; background: #f8f9fa; }
+    .tab-btns { margin-bottom: 2rem; }
+    .tab-btns .btn { margin-right: 1rem; }
+    .tab-content-area { display: none; }
+    .tab-content-area.active { display: block; }
+    /* 共用样式 */
+    .table th, .table td { vertical-align: middle; }
+    .btn-sm { font-size: 0.8rem; }
+    .readonly-input {
+      background: #f1f3f4 !important;
+      color: #888 !important;
+      border: 1px solid #e0e0e0 !important;
+      pointer-events: none;
+    }
+    /* 分组管理样式 */
+    .commands-table { margin-left: 2rem; }
+    .commands-table th.plc-col { width: 120px; }
+    .commands-table th.func-col { width: 180px; }
+    .commands-table th.y-col { width: 70px; }
+    .commands-table th.del-col { width: 90px; }
+    .commands-table td.y-col input { width: 100%; min-width: 40px; max-width: 70px; }
+    .commands-table td.del-col { text-align: center; }
+    /* 拖动排序样式 */
+    .drag-handle { cursor: grab; font-size: 18px; color: #b0b0b0; user-select: none; padding-right: 6px; }
+    tr.dragging { opacity: 0.5; background: #b3e5fc !important; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="tab-btns">
+      <button class="btn btn-primary" id="tab1Btn" onclick="switchTab(1)">分组管理</button>
+      <button class="btn btn-outline-primary" id="tab2Btn" onclick="switchTab(2)">PLC IO List 管理</button>
+    </div>
+    <!-- 分组管理区 -->
+    <div id="tab1" class="tab-content-area active">
+      <h2 class="mb-4">JSON 分组增删改查工具</h2>
+      <div class="mb-3 row">
+        <div class="col-md-6 mb-2">
+          <label class="form-label">上传分组文件</label>
+          <input type="file" id="fileInput" accept=".json" class="form-control" />
+        </div>
+        <div class="col-md-6 mb-2">
+          <label class="form-label">上传PLC列表文件</label>
+          <input type="file" id="itemInput" accept=".json" class="form-control" />
+        </div>
+      </div>
+      <button class="btn btn-success mb-3" onclick="addGroup()">添加分组</button>
+      <table class="table table-bordered" id="jsonTable"></table>
+      <button class="btn btn-primary mt-3" onclick="downloadJson()">保存为JSON</button>
+    </div>
+    <!-- PLC IO List 管理区 -->
+    <div id="tab2" class="tab-content-area">
+      <h2 class="mb-4">PLC IO List 管理</h2>
+      <div class="mb-3">
+        <label class="form-label">上传PLC列表文件</label>
+        <input type="file" id="ioFileInput" accept=".json" class="form-control">
+      </div>
+      <table class="table table-bordered" id="ioTable">
+        <thead>
+          <tr>
+            <th width="40"></th>
+            <th width="120">PLC</th>
+            <th>功能</th>
+            <th width="80">输出Y</th>
+            <th width="100">操作</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td><input type="text" id="newPLC" placeholder="PLC" class="form-control"></td>
+            <td><input type="text" id="newFunc" placeholder="功能" class="form-control"></td>
+            <td><input type="text" id="newY" placeholder="输出Y" class="form-control"></td>
+            <td><button class="btn btn-success" onclick="addRow()">新增</button></td>
+          </tr>
+        </tfoot>
+      </table>
+      <button class="btn btn-primary mt-3" onclick="downloadJSON()">保存为JSON</button>
+    </div>
+  </div>
+  <script>
+    // Tab切换
+    function switchTab(tabIdx) {
+      document.getElementById('tab1').classList.remove('active');
+      document.getElementById('tab2').classList.remove('active');
+      document.getElementById('tab1Btn').classList.remove('btn-primary');
+      document.getElementById('tab2Btn').classList.remove('btn-primary');
+      document.getElementById('tab1Btn').classList.add('btn-outline-primary');
+      document.getElementById('tab2Btn').classList.add('btn-outline-primary');
+      if(tabIdx === 1) {
+        document.getElementById('tab1').classList.add('active');
+        document.getElementById('tab1Btn').classList.add('btn-primary');
+        document.getElementById('tab1Btn').classList.remove('btn-outline-primary');
+      } else {
+        document.getElementById('tab2').classList.add('active');
+        document.getElementById('tab2Btn').classList.add('btn-primary');
+        document.getElementById('tab2Btn').classList.remove('btn-outline-primary');
+      }
+    }
+
+    // ========== 分组管理区(edit_grouped_json.html) ==========
+    let jsonData = [];
+    let itemList = [];
+    let plcMap = {};
+
+    document.getElementById('fileInput').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        jsonData = JSON.parse(evt.target.result);
+        renderTable();
+      };
+      reader.readAsText(file, 'utf-8');
+    });
+
+    document.getElementById('itemInput').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        itemList = JSON.parse(evt.target.result);
+        plcMap = {};
+        itemList.forEach(item => {
+          if (item.PLC) plcMap[item.PLC] = item;
+        });
+        renderTable();
+      };
+      reader.readAsText(file, 'utf-8');
+    });
+
+    function renderTable() {
+      // 获取所有PLC选项
+      const plcOptions = itemList.map(item => `<option value="${item.PLC}">${item.PLC}</option>`).join('');
+      const table = document.getElementById('jsonTable');
+      table.innerHTML = `
+        <thead>
+          <tr>
+            <th>分组名 (action)</th>
+            <th>命令列表 (commands)</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${jsonData.map((group, gi) => `
+            <tr>
+              <td>
+                <input class="form-control" value="${group.action || ''}" onchange="updateGroupAction(${gi}, this.value)">
+              </td>
+              <td>
+                <table class="table table-sm table-bordered commands-table">
+                  <thead>
+                    <tr>
+                      <th class="plc-col">PLC</th>
+                      <th class="func-col">功能</th>
+                      <th class="y-col">输出Y</th>
+                      <th class="del-col">操作</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${Array.isArray(group.commands) ? group.commands.map((plc, ci) => {
+                      let plcValue = typeof plc === 'string' ? plc : (plc && plc.PLC ? plc.PLC : '');
+                      const item = plcMap[plcValue] || {};
+                      return `
+                        <tr>
+                          <td>
+                            <select class=\"form-select\" onchange=\"updateCommand(${gi}, ${ci}, this.value)\">
+                              <option value=\"\">请选择</option>
+                              ${plcOptions.replace(`value=\"${plcValue}\"`, `value=\"${plcValue}\" selected`)}
+                            </select>
+                          </td>
+                          <td><input class=\"form-control readonly-input\" value=\"${item['功能'] || ''}\" readonly></td>
+                          <td class=\"y-col\"><input class=\"form-control readonly-input\" value=\"${item['输出Y'] || ''}\" readonly></td>
+                          <td class=\"del-col\"><button class=\"btn btn-danger btn-sm\" style=\"width:70px\" onclick=\"deleteCommand(${gi}, ${ci})\">删除</button></td>
+                        </tr>
+                      `;
+                    }).join('') : ''}
+                    <tr>
+                      <td colspan="4">
+                        <button class="btn btn-success btn-sm" onclick="addCommand(${gi})">添加命令</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+              <td>
+                <button class="btn btn-danger btn-sm" style="width:80px" onclick="deleteGroup(${gi})">删除分组</button>
+              </td>
+            </tr>
+          `).join('')}
+        </tbody>
+      `;
+    }
+
+    function updateGroupAction(gi, value) {
+      jsonData[gi].action = value;
+    }
+    function addGroup() {
+      jsonData.push({ action: '', commands: [] });
+      renderTable();
+    }
+    function deleteGroup(gi) {
+      if (confirm('确定删除该分组？')) {
+        jsonData.splice(gi, 1);
+        renderTable();
+      }
+    }
+    function addCommand(gi) {
+      if (!Array.isArray(jsonData[gi].commands)) jsonData[gi].commands = [];
+      jsonData[gi].commands.push("");
+      renderTable();
+    }
+    function deleteCommand(gi, ci) {
+      jsonData[gi].commands.splice(ci, 1);
+      renderTable();
+    }
+    function updateCommand(gi, ci, value) {
+      jsonData[gi].commands[ci] = value;
+      renderTable(); // 让功能和输出Y联动刷新
+    }
+    function downloadJson() {
+      // 只保存PLC字符串数组
+      const dataToSave = jsonData.map(group => ({
+        action: group.action,
+        commands: Array.isArray(group.commands) ? group.commands.map(plc => {
+          return typeof plc === 'string' ? plc : (plc && plc.PLC ? plc.PLC : '');
+        }) : []
+      }));
+      const blob = new Blob([JSON.stringify(dataToSave, null, 2)], {type: 'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'grouped_filled.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // ========== PLC IO List 管理区(PLC_IO_List_Manager.html) ==========
+    let data = [];
+    let dragSrcIdx = null;
+
+    function renderIOTable() {
+      const tbody = document.querySelector('#ioTable tbody');
+      tbody.innerHTML = '';
+      data.forEach((row, idx) => {
+        const tr = document.createElement('tr');
+        tr.setAttribute('draggable', 'true');
+        tr.setAttribute('data-idx', idx);
+        tr.innerHTML = `
+          <td class="drag-handle" title="拖动排序">☰</td>
+          <td><input type="text" class="form-control" value="${row.PLC}" onchange="editCell(${idx}, 'PLC', this.value)"></td>
+          <td><input type="text" class="form-control" value="${row.功能}" onchange="editCell(${idx}, '功能', this.value)"></td>
+          <td><input type="text" class="form-control" value="${row['输出Y'] || ''}" onchange="editCell(${idx}, '输出Y', this.value)"></td>
+          <td><button class="btn btn-danger btn-sm" onclick="deleteRow(${idx})">删除</button></td>
+        `;
+        // 拖动事件
+        tr.addEventListener('dragstart', function(e) {
+          dragSrcIdx = idx;
+          tr.classList.add('dragging');
+        });
+        tr.addEventListener('dragend', function(e) {
+          dragSrcIdx = null;
+          tr.classList.remove('dragging');
+        });
+        tr.addEventListener('dragover', function(e) {
+          e.preventDefault();
+        });
+        tr.addEventListener('drop', function(e) {
+          e.preventDefault();
+          const targetIdx = Number(tr.getAttribute('data-idx'));
+          if (dragSrcIdx !== null && dragSrcIdx !== targetIdx) {
+            const moved = data.splice(dragSrcIdx, 1)[0];
+            data.splice(targetIdx, 0, moved);
+            renderIOTable();
+          }
+        });
+        tbody.appendChild(tr);
+      });
+    }
+
+    function editCell(idx, key, value) {
+      data[idx][key] = value;
+    }
+
+    function addRow() {
+      const plc = document.getElementById('newPLC').value.trim();
+      const func = document.getElementById('newFunc').value.trim();
+      const y = document.getElementById('newY').value.trim();
+      if (!plc) { alert('PLC 不能为空'); return; }
+      data.push({ PLC: plc, 功能: func, '输出Y': y });
+      renderIOTable();
+      document.getElementById('newPLC').value = '';
+      document.getElementById('newFunc').value = '';
+      document.getElementById('newY').value = '';
+    }
+
+    function deleteRow(idx) {
+      if (confirm('确定要删除这行吗？')) {
+        data.splice(idx, 1);
+        renderIOTable();
+      }
+    }
+
+    function downloadJSON() {
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'PLC_IO_List_A01.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    document.getElementById('ioFileInput').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        try {
+          data = JSON.parse(evt.target.result);
+          renderIOTable();
+        } catch (err) {
+          alert('文件格式错误');
+        }
+      };
+      reader.readAsText(file, 'utf-8');
+    });
+
+    // 初始化
+    renderTable();
+    renderIOTable();
+  </script>
+</body>
+</html> 
