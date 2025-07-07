@@ -6,11 +6,11 @@ import datetime
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QColor, QFont
 
-from Ui_MainFrom import *
+from ui.Ui_MainFrom import *
 from PyQt5.QtWidgets import QMainWindow
 
-from PLCUI import *
-from Global import *
+from ui.PLCUI import *
+from ui.Global import *
 
 import platform
 

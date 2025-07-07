@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>BM 控制界面</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/static/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #3498db;
+      --secondary-color: #2c3e50;
+      --success-color: #2ecc71;
+      --danger-color: #e74c3c;
+      --warning-color: #f39c12;
+      --light-bg: #f8f9fa;
+      --border-color: #dee2e6;
+    }
+    
+    body { 
+      padding: 2rem; 
+      background: var(--light-bg);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .tab-btns { 
+      margin-bottom: 2rem; 
+      border-bottom: 2px solid #eee;
+      padding-bottom: 1rem;
+    }
+    
+    .tab-btns .btn { 
+      margin-right: 1rem; 
+      min-width: 120px;
+      font-weight: 500;
+    }
+    
+    .tab-content-area { 
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+    
+    .tab-content-area.active { 
+      display: block; 
+      opacity: 1;
+    }
+    
+    .page-title {
+      color: var(--secondary-color);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      border-left: 5px solid var(--primary-color);
+      padding-left: 15px;
+    }
+    
+    .action-card {
+      margin-bottom: 1rem;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .action-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    }
+    
+    .card-header {
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 0.75rem 1rem;
+      font-weight: 600;
+    }
+    
+    .card-body {
+      padding: 1rem;
+    }
+    
+    .control-action-btn {
+      width: 100%;
+      padding: 0.75rem;
+      font-weight: 500;
+      font-size: 1.1rem;
+      text-align: left;
+    }
+    
+    .control-action-btn:hover {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    .log-container {
+      margin-top: 2rem;
+      border-top: 2px solid #eee;
+      padding-top: 1rem;
+    }
+    
+    .log-area {
+      height: 200px;
+      overflow-y: auto;
+      background-color: #f1f1f1;
+      border-radius: 5px;
+      padding: 10px;
+      font-family: monospace;
+      font-size: 0.9rem;
+    }
+    
+    .log-entry {
+      margin-bottom: 0.25rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 3px;
+    }
+    
+    .log-entry.info {
+      background-color: rgba(52, 152, 219, 0.1);
+    }
+    
+    .log-entry.success {
+      background-color: rgba(46, 204, 113, 0.1);
+    }
+    
+    .log-entry.error {
+      background-color: rgba(231, 76, 60, 0.1);
+      color: var(--danger-color);
+    }
+    
+    .loading-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.7);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(0, 0, 0, 0.1);
+      border-radius: 50%;
+      border-left-color: var(--primary-color);
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .status-value {
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    
+    .status-badge {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+    
+    .status-active {
+      background-color: var(--success-color);
+    }
+    
+    .status-inactive {
+      background-color: var(--danger-color);
+    }
+  </style>
+</head>
+<body>
+  <div class="loading-overlay">
+    <div class="spinner"></div>
+  </div>
+  
+  <div class="container">
+    <div class="tab-btns">
+      <button class="btn btn-primary" id="tab1Btn" onclick="switchTab(1)">控制</button>
+      <button class="btn btn-outline-primary" id="tab2Btn" onclick="switchTab(2)">状态</button>
+    </div>
+    
+    <!-- 控制页面 -->
+    <div id="tab1" class="tab-content-area active">
+      <h2 class="page-title">控制功能</h2>
+      <div class="row" id="controlActions">
+        <!-- 控制动作将被动态添加到这里 -->
+      </div>
+    </div>
+    
+    <!-- 状态页面 -->
+    <div id="tab2" class="tab-content-area">
+      <div class="d-flex align-items-center mb-3">
+        <h2 class="page-title mb-0">状态监控</h2>
+        <button class="btn btn-outline-secondary ms-3" onclick="loadActionFile()">
+          <i class="bi bi-arrow-clockwise"></i> 刷新数据
+        </button>
+      </div>
+      <div class="row" id="statusActions">
+        <!-- 状态信息将被动态添加到这里 -->
+      </div>
+    </div>
+    
+    <!-- 日志区域 -->
+    <div class="log-container">
+      <h4>操作日志</h4>
+      <div class="log-area" id="logArea">
+        <!-- 日志内容将被动态添加到这里 -->
+      </div>
+      <div class="mt-2">
+        <button class="btn btn-sm btn-outline-secondary" onclick="clearLog()">清空日志</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 全局变量
+    let actionData = [];
+    let controlActions = [];
+    let statusActions = [];
+    
+    // 显示/隐藏加载指示器
+    function toggleLoading(show) {
+      document.querySelector('.loading-overlay').style.display = show ? 'flex' : 'none';
+    }
+    
+    // Tab切换
+    function switchTab(tabIdx) {
+      document.getElementById('tab1').classList.remove('active');
+      document.getElementById('tab2').classList.remove('active');
+      document.getElementById('tab1Btn').classList.remove('btn-primary');
+      document.getElementById('tab2Btn').classList.remove('btn-primary');
+      document.getElementById('tab1Btn').classList.add('btn-outline-primary');
+      document.getElementById('tab2Btn').classList.add('btn-outline-primary');
+      if(tabIdx === 1) {
+        document.getElementById('tab1').classList.add('active');
+        document.getElementById('tab1Btn').classList.add('btn-primary');
+        document.getElementById('tab1Btn').classList.remove('btn-outline-primary');
+      } else {
+        document.getElementById('tab2').classList.add('active');
+        document.getElementById('tab2Btn').classList.add('btn-primary');
+        document.getElementById('tab2Btn').classList.remove('btn-outline-primary');
+      }
+    }
+    
+    // 添加日志
+    function addLog(type, message) {
+      const logArea = document.getElementById('logArea');
+      const logEntry = document.createElement('div');
+      logEntry.className = `log-entry ${type}`;
+      
+      const timestamp = new Date().toLocaleTimeString();
+      logEntry.textContent = `[${timestamp}] ${message}`;
+      
+      logArea.appendChild(logEntry);
+      logArea.scrollTop = logArea.scrollHeight;
+    }
+    
+    // 清空日志
+    function clearLog() {
+      document.getElementById('logArea').innerHTML = '';
+      addLog('info', '日志已清空');
+    }
+    
+    // 加载动作文件
+    function loadActionFile() {
+      const filename = "PLC_IO_List_A01_grouped.json";
+      
+      toggleLoading(true);
+      addLog('info', '正在加载动作配置文件...');
+      
+      fetch(`/api/read_json_file?filename=${encodeURIComponent(filename)}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          actionData = data;
+          processActionData();
+          addLog('success', '动作配置文件加载成功');
+        })
+        .catch(error => {
+          console.error('Error loading action file:', error);
+          addLog('error', `加载失败: ${error.message}`);
+        })
+        .finally(() => {
+          toggleLoading(false);
+        });
+    }
+    
+    // 处理动作数据，分为控制组和状态组
+    function processActionData() {
+      controlActions = [];
+      statusActions = [];
+      
+      actionData.forEach(action => {
+        // 根据readonly属性分组
+        if (action.readonly === true) {
+          statusActions.push(action);
+        } else {
+          controlActions.push(action);
+        }
+      });
+      
+      renderControlActions();
+      renderStatusActions();
+    }
+    
+    // 渲染控制动作
+    function renderControlActions() {
+      const container = document.getElementById('controlActions');
+      container.innerHTML = '';
+      
+      if (controlActions.length === 0) {
+        container.innerHTML = '<div class="col-12 text-center p-5">没有可用的控制动作</div>';
+        return;
+      }
+      
+      controlActions.forEach(action => {
+        const col = document.createElement('div');
+        col.className = 'col-md-4 col-sm-6 mb-3';
+        
+        col.innerHTML = `
+          <div class="action-card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              ${action.action}
+              <span class="badge bg-light text-dark">${action.commands ? action.commands.length : 0} 命令</span>
+            </div>
+            <div class="card-body">
+              <p>${action.description || '无描述'}</p>
+              <button class="btn btn-outline-primary control-action-btn" 
+                onclick="executeAction('${action.action}')">
+                执行
+              </button>
+            </div>
+          </div>
+        `;
+        
+        container.appendChild(col);
+      });
+    }
+    
+    // 渲染状态信息
+    function renderStatusActions() {
+      const container = document.getElementById('statusActions');
+      container.innerHTML = '';
+      
+      if (statusActions.length === 0) {
+        container.innerHTML = '<div class="col-12 text-center p-5">没有可用的状态信息</div>';
+        return;
+      }
+      
+      statusActions.forEach(action => {
+        const col = document.createElement('div');
+        col.className = 'col-md-4 col-sm-6 mb-3';
+        
+        col.innerHTML = `
+          <div class="action-card">
+            <div class="card-header">
+              ${action.action}
+            </div>
+            <div class="card-body">
+              <p>${action.description || '无描述'}</p>
+              <div class="status-display mt-2">
+                <span class="status-badge status-inactive" id="status-badge-${action.action}"></span>
+                <span class="status-value" id="status-value-${action.action}">未知</span>
+              </div>
+            </div>
+          </div>
+        `;
+        
+        container.appendChild(col);
+      });
+      
+      // 在实际应用中，这里可以添加代码来定期刷新状态
+      // 这需要后端API支持获取当前状态
+    }
+    
+    // 执行动作
+    function executeAction(actionName) {
+      addLog('info', `正在执行动作: ${actionName}`);
+      toggleLoading(true);
+      
+      // 调用后端API执行动作
+      fetch('/PLC/Control/execute_command', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          action: actionName
+        }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.Result) {
+          addLog('success', `动作 ${actionName} 执行成功: ${data.Message}`);
+        } else {
+          addLog('error', `动作 ${actionName} 执行失败: ${data.Message}`);
+        }
+      })
+      .catch(error => {
+        console.error('Error executing action:', error);
+        addLog('error', `执行失败: ${error.message}`);
+      })
+      .finally(() => {
+        toggleLoading(false);
+      });
+    }
+    
+    // 初始化
+    window.addEventListener('load', function() {
+      addLog('info', 'BM UI 界面已加载');
+      loadActionFile();
+    });
+  </script>
+</body>
+</html>

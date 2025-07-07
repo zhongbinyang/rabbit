@@ -1,8 +1,5 @@
 from PyQt5.QtCore import pyqtSignal, QObject
 
-from PLCAPI import PLC
-PLC = PLC()
-
 class Global(QObject):
     logSignal = pyqtSignal(int, str)
     calSignal = pyqtSignal()

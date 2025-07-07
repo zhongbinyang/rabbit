@@ -1,0 +1,29 @@
+{
+    "commands": [
+      {
+        "command": "M10024",
+        "delayseconds": 1,
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil"
+      },
+      {
+        "command": "M10024",
+        "delayseconds": 1,
+        "expected_value": [
+          0
+        ],
+        "type": "write_single_coil"
+      },
+      {
+        "command": "M10024",
+        "expected_value": [
+          0
+        ],
+        "type": "write_single_coil"
+      }
+    ],
+    "description": "升降台上升"
+  }

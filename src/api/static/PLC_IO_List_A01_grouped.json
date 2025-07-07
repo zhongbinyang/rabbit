@@ -1,0 +1,115 @@
+[
+  {
+    "action": "lifter_up",
+    "commands": [
+      {
+        "command": "M10024",
+        "delayseconds": 1,
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil"
+      },
+      {
+        "command": "M10024",
+        "delayseconds": 1,
+        "expected_value": [
+          0
+        ],
+        "type": "write_single_coil"
+      },
+      {
+        "command": "M10024",
+        "expected_value": [
+          0
+        ],
+        "type": "write_single_coil"
+      }
+    ],
+    "description": "升降台上升",
+    "readonly": false
+  },
+  {
+    "action": "lifter_down",
+    "commands": [
+      {
+        "command": "M10024",
+        "delayseconds": 1,
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil"
+      },
+      {
+        "command": "M10024",
+        "delayseconds": 0,
+        "expected_value": [
+          0
+        ],
+        "type": "write_single_coil"
+      },
+      {
+        "command": "M10024",
+        "expected_value": [
+          0
+        ],
+        "type": "read_single_coil"
+      }
+    ],
+    "description": "升降台上升",
+    "readonly": false
+  },
+  {
+    "action": "lifter_up_state",
+    "description": "升降台上升状态",
+    "expected": "1",
+    "timeout": 10,
+    "readonly": true,
+    "commands": [
+      {
+        "command": "M10000",
+        "type": "read_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "action": "lifter_up_state",
+    "description": "升降台上升状态",
+    "expected": "1",
+    "timeout": 10,
+    "readonly": true,
+    "commands": [
+      {
+        "command": "M10000",
+        "type": "read_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "action": "lifter_up_state",
+    "description": "升降台上升状态",
+    "expected": "1",
+    "timeout": 10,
+    "readonly": true,
+    "commands": [
+      {
+        "command": "M10000",
+        "type": "read_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          0
+        ]
+      }
+    ]
+  }
+]

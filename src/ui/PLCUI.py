@@ -4,9 +4,10 @@ import threading
 import time
 
 from PyQt5.QtWidgets import QWidget
-from Ui_PLC import *
-from SwitchGroup import *
-from Global import *
+from ui.Ui_PLC import *
+from ui.SwitchGroup import *
+from ui.Global import *
+from core.plc_controller import plc_controller
 
 
 
@@ -126,10 +127,10 @@ class PLCUI(QWidget):
 
     def initConnect(self):
         self.connectPLC(True, "")
-        if PLC.modbus.is_open == False:
+        if plc_controller.is_connected == False:
             self.connectPLC(False, "")
             self.connectPLC(True, "")
-        if PLC.modbus.is_open == False:
+        if plc_controller.is_connected == False:
             self.connectPLCSwitch.setToggled(False)
         else:
             self.connectPLCSwitch.setToggled(True)
@@ -233,7 +234,7 @@ class PLCUI(QWidget):
                     time.sleep(0.2)
                     continue
                 if len(self.sensorList):
-                    ret = PLC.modbus.readMultipleCoil(10020,len(self.sensorList))
+                    ret = plc_controller.modbus.read_multiple_coil(10020,len(self.sensorList))
                     if ret[0]!= True:
                         continue
                     l = ret[1]
@@ -304,9 +305,9 @@ class PLCUI(QWidget):
         if value == True:
             ip = self.ui.ip.text()
             port = self.ui.port.value()
-            ret = PLC.connectPLC(ip,port)
+            ret = plc_controller.connect_plc(ip,port)
         else:
-            ret = PLC.disconnectPLC()
+            ret = plc_controller.disconnect_plc()
         if ret[0] == True:
             addLog(0,ret)
         else:
@@ -315,9 +316,9 @@ class PLCUI(QWidget):
     def lifterAction(self, value, text):
         ret = None
         if value == True:
-            ret = PLC.lifterUp()
+            ret = plc_controller.lifter_up()
         else:
-            ret = PLC.lifterDown()
+            ret = plc_controller.lifter_down()
         if ret[0] == True:
             addLog(0, ret)
         else:
@@ -326,9 +327,9 @@ class PLCUI(QWidget):
     def clampX_action(self, value, text):
         ret = None
         if value == False:
-            ret = PLC.clampX_out()
+            ret = plc_controller.clamp_x_out()
         else:
-            ret = PLC.clampX_in()
+            ret = plc_controller.clamp_x_in()
         if ret[0] == True:
             addLog(0, ret)
         else:
@@ -337,9 +338,9 @@ class PLCUI(QWidget):
     def clampY_action(self, value, text):
         ret = None
         if value == False:
-            ret = PLC.clampY_out()
+            ret = plc_controller.clamp_y_out()
         else:
-            ret = PLC.clampY_in()
+            ret = plc_controller.clamp_y_in()
         if ret[0] == True:
             addLog(0, ret)
         else:
@@ -348,9 +349,9 @@ class PLCUI(QWidget):
     def powerAction(self, value, text):
         ret = None
         if value == False:
-            ret = PLC.powerOut()
+            ret = plc_controller.power_out()
         else:
-            ret = PLC.powerIn()
+            ret = plc_controller.power_in()
         if ret[0] == True:
             addLog(0, ret)
         else:
@@ -359,9 +360,9 @@ class PLCUI(QWidget):
     def commAction(self, value, text):
         ret = None
         if value == False:
-            ret = PLC.commOut()
+            ret = plc_controller.comm_out()
         else:
-            ret = PLC.commIn()
+            ret = plc_controller.comm_in()
         if ret[0] == True:
             addLog(0, ret)
         else:
@@ -370,9 +371,9 @@ class PLCUI(QWidget):
     def resetAction(self, value, text):
         ret = None
         if value == False:
-            ret = PLC.reset_off()
+            ret = plc_controller.reset_off()
         else:
-            ret = PLC.reset_on()
+            ret = plc_controller.reset_on()
         if ret[0] == True:
             addLog(0, ret)
         else:
@@ -381,9 +382,9 @@ class PLCUI(QWidget):
     def lanAction(self, value, text):
         ret = None
         if value == False:
-            ret = PLC.lane_select_off()
+            ret = plc_controller.lane_select_off()
         else:
-            ret = PLC.lane_select_on()
+            ret = plc_controller.lane_select_on()
         if ret[0] == True:
             addLog(0, ret)
         else:
@@ -392,9 +393,9 @@ class PLCUI(QWidget):
     def startStopAction(self, value, text):
         ret = None
         if value == False:
-            ret = PLC.cradle_extracted()
+            ret = plc_controller.cradle_extracted()
         else:
-            ret = PLC.cradle_inserted()
+            ret = plc_controller.cradle_inserted()
         if ret[0] == True:
             addLog(0, ret)
         else:

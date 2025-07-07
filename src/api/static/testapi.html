@@ -178,6 +178,12 @@ function debug(msg) {
 
 const apiDefs = [
   {
+    name: 'get_api_version',
+    url: '/get_api_version',
+    method: ['GET', 'POST'],
+    params: []
+  },
+  {
     name: 'ConnectPLC',
     url: '/PLC/Control/ConnectPLC',
     method: ['GET', 'POST'],
@@ -191,6 +197,23 @@ const apiDefs = [
     url: '/PLC/Control/DisconnectPLC',
     method: ['GET', 'POST'],
     params: []
+  },
+  {
+    name: 'execute_plc_command',
+    url: '/PLC/Control/execute_command',
+    method: ['GET'],
+    params: [
+      {label: '操作名称', name: 'action', type: 'text', value: 'lifter_up'}
+    ]
+  },
+  {
+    name: 'execute_plc_command (JSON)',
+    url: '/PLC/Control/execute_command',
+    method: ['POST'],
+    json: true,
+    params: [
+      {label: 'JSON参数', name: 'action', type: 'textarea', value: `{"action": "lifter_up"}`}
+    ]
   },
   { name: 'LifterUp', url: '/PLC/Control/LifterUp', method: ['GET', 'POST'], params: [] },
   { name: 'LifterDown', url: '/PLC/Control/LifterDown', method: ['GET', 'POST'], params: [] },
@@ -209,38 +232,17 @@ const apiDefs = [
   { name: 'CRADLE_INSERT', url: '/PLC/Control/CRADLE_INSERT', method: ['GET', 'POST'], params: [] },
   { name: 'CRADLE_EXTRACT', url: '/PLC/Control/CRADLE_EXTRACT', method: ['GET', 'POST'], params: [] },
   {
-    name: 'set_control',
-    url: '/set_control',
-    method: ['POST'],
-    params: [
-      {label: 'control_name', name: 'control_name', type: 'text', value: ''},
-      {label: 'control_state', name: 'control_state', type: 'text', value: ''},
-      {label: 'kwargs (JSON)', name: 'kwargs', type: 'textarea', value: '{}'}
-    ],
-    json: true
-  },
-  {
-    name: 'get_control',
-    url: '/get_control',
-    method: ['POST'],
-    params: [
-      {label: 'control_name', name: 'control_name', type: 'text', value: ''},
-      {label: 'kwargs (JSON)', name: 'kwargs', type: 'textarea', value: '{}'}
-    ],
-    json: true
-  },
-  {
     name: 'get_version',
     url: '/get_version',
     method: ['GET', 'POST'],
     params: []
   },
-  {
-    name: 'API说明',
-    url: '/',
-    method: ['GET'],
-    params: []
-  }
+  // {
+  //   name: 'API说明',
+  //   url: '/',
+  //   method: ['GET'],
+  //   params: []
+  // }
 ];
 
 function createApiBlock(api, idx) {
@@ -349,8 +351,8 @@ document.addEventListener('DOMContentLoaded', () => {
       
       // 检查JSON格式是否有效（仅在json模式下）
       if (api.json) {
-        const kwargsField = this.querySelector('textarea[name="kwargs"]');
-        if (kwargsField && kwargsField.classList.contains('invalid')) {
+        const jsonTextarea = this.querySelector('textarea');
+        if (jsonTextarea && jsonTextarea.classList.contains('invalid')) {
           resultBox.className = 'result-box mt-2 result-fail';
           resultBox.textContent = 'JSON格式错误，请修复后重试';
           return;
@@ -358,6 +360,20 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       
       if(api.json) {
+        // 特殊处理执行命令的JSON请求
+        if(api.name === 'execute_plc_command (JSON)') {
+          try {
+            // 直接使用textarea中的JSON作为请求体
+            const jsonContent = this.querySelector('textarea').value;
+            options.headers = { 'Content-Type': 'application/json' };
+            options.body = jsonContent;
+          } catch(err) {
+            resultBox.className = 'result-box mt-2 result-fail';
+            resultBox.textContent = 'JSON解析错误: ' + err.message;
+            return;
+          }
+        } else {
+          // 其他JSON API的处理保持不变
         let body = {};
         api.params.forEach(p => {
           let v = this[p.name].value;
@@ -369,6 +385,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         options.headers = { 'Content-Type': 'application/json' };
         options.body = JSON.stringify(body);
+        }
       } else {
         // GET/POST参数拼接
         const params = api.params.map(p => `${encodeURIComponent(p.name)}=${encodeURIComponent(this[p.name].value)}`).join('&');

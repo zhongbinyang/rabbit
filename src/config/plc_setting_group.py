@@ -1,4 +1,4 @@
-[
+PLC_SETTING_GROUP = [
     {
         "action": "test01",
         "commands": [
