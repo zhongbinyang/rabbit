@@ -264,8 +264,8 @@ def api_documentation():
 @plc_api.route('/connect_plc', methods=['GET', 'POST'])
 def connect_plc():
     """连接PLC设备"""
-    host = request.args.get('Host', type=str, default=PLC_CONFIG.get('host', '192.168.1.11'))
-    port = request.args.get('Port', type=int, default=PLC_CONFIG.get('port', 502))
+    host = request.args.get('Host', type=str, default=API_CONFIG.get('host', '192.168.1.11'))
+    port = request.args.get('Port', type=int, default=API_CONFIG.get('port', 502))
     
     logger.info(f"API request: Connect PLC {host}:{port}")
     ret = plc_controller.connect_plc(host, port)

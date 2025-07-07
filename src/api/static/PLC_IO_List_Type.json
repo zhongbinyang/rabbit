@@ -2,5 +2,7 @@
     "write_multiple_coil",
     "read_multiple_coil",
     "write_single_coil",
-    "read_single_coil"
+    "read_single_coil",
+    "read_holding_registers",
+    "write_holding_registers"
 ]

@@ -63,48 +63,65 @@
   },
   {
     "action": "lifter_up_state",
-    "description": "升降台上升状态",
-    "expected": "1",
-    "timeout": 10,
-    "readonly": true,
     "commands": [
       {
         "command": "M10000",
-        "type": "read_multiple_coil",
         "delayseconds": 1,
         "expected_value": [
           0
-        ]
+        ],
+        "type": "read_multiple_coil"
       }
-    ]
-  },
-  {
-    "action": "lifter_up_state",
+    ],
     "description": "升降台上升状态",
     "expected": "1",
-    "timeout": 10,
     "readonly": true,
+    "timeout": 10
+  },
+  {
+    "action": "lifter_down_state",
     "commands": [
       {
-        "command": "M10000",
-        "type": "read_multiple_coil",
+        "command": "M10020",
         "delayseconds": 1,
         "expected_value": [
           0
-        ]
+        ],
+        "type": "read_multiple_coil"
       }
-    ]
+    ],
+    "description": "升降台上升状态",
+    "expected": "1",
+    "readonly": true,
+    "timeout": 10
   },
   {
-    "action": "lifter_up_state",
+    "action": "clamp_y_state",
+    "commands": [
+      {
+        "command": "M10002",
+        "delayseconds": 1,
+        "expected_value": [
+          0
+        ],
+        "type": "read_multiple_coil"
+      }
+    ],
     "description": "升降台上升状态",
+    "expected": "1",
+    "readonly": true,
+    "timeout": 10
+  },
+  {
+    "action": "get_firmware_version",
+    "description": "获取Firmware版本号",
     "expected": "1",
     "timeout": 10,
     "readonly": true,
     "commands": [
       {
-        "command": "M10000",
-        "type": "read_multiple_coil",
+        "command": "M50",
+        "type": "read_holding_registers",
         "delayseconds": 1,
         "expected_value": [
           0

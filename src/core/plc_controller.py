@@ -289,6 +289,124 @@ class PLCController:
         return True, success_msg
     
     @handle_exception
+    def _execute_plc_command_state(self, action: str) -> Tuple[bool, str]:
+        """
+        执行PLC通用命令状态
+        
+        Args:
+            action: 动作名称
+            
+        Returns:
+            操作结果(True/False, 消息)
+        """
+        logger.info(f"========== START EXECUTING PLC COMMAND: {action} ==========")
+        
+        if not self.is_connected:
+            logger.error("Not connected to PLC, cannot execute command")
+            return False, "Not connected to PLC"
+        
+        # 读取动作配置
+        logger.info("Reading action configuration file...")
+        try:
+            with open(os.path.join(os.path.dirname(__file__), '..', 'api', 'static', 'PLC_IO_List_A01_grouped.json'), 'r') as f:
+                action_config = json.load(f)
+                logger.info("Action configuration file read successfully")
+        except Exception as e:
+            logger.error(f"Failed to read action configuration file: {e}")
+            return False, f"Failed to read action config: {str(e)}"
+            
+        # 根据动作名称查找配置
+        logger.info(f"Looking for configuration of action '{action}'...")
+        action_config = next((item for item in action_config if item['action'] == action), None)
+        if not action_config:
+            logger.error(f"Configuration for action '{action}' not found")
+            return False, f"Action '{action}' not found in action_config"
+        else:
+            logger.info(f"Configuration for action '{action}' found successfully")
+            logger.debug(f"Action '{action}' configuration details: {action_config}")
+
+        # 存储每个命令的执行结果
+        results = []
+        total_commands = len(action_config['commands'])
+        logger.info(f"Starting to execute {total_commands} PLC commands...")
+
+        # 根据配置中的命令地址和值对执行操作
+        for index, command in enumerate(action_config['commands'], 1):
+            command_addr = command['command']
+            expected_value = command['expected_value']
+            delayseconds = command.get('delayseconds', 0)
+            type = command['type']
+            
+            logger.info(f"[{index}/{total_commands}] Executing command: {type} - Address: {command_addr}, Expected value: {expected_value}")
+        
+            addr = self.get_plc_address_from_name(command_addr)
+            logger.debug(f"Address parsed: {command_addr} -> {addr}")
+                    
+            # 执行命令前记录
+            logger.info(f"Starting command execution: {type} to address {addr}")
+
+            if type == 'write_multiple_coil':
+                with self.lock:
+                    ret = self.modbus.write_multiple_coil(addr, expected_value)
+                    logger.debug(f"write_multiple_coil result: {ret}")
+            elif type == 'write_single_coil':
+                with self.lock:
+                    ret = self.modbus.write_single_coil(addr, expected_value)
+                    logger.debug(f"write_single_coil result: {ret}")
+            elif type == 'read_multiple_coil':
+                with self.lock:
+                    ret = self.modbus.read_multiple_coil(addr, 2)
+                    logger.debug(f"read_multiple_coil result: {ret}")
+            elif type == 'read_single_coil':
+                with self.lock:
+                    ret = self.modbus.read_single_coil(addr, 2)
+                    logger.debug(f"read_single_coil result: {ret}")
+            else:
+                logger.error(f"Unknown command type: {type}")
+                results.append((False, f"Unknown command type: {type}"))
+                continue
+            
+            if not ret[0]:
+                error_msg = f"{action} command failed: {ret[1]}"
+                logger.error(error_msg)
+                results.append((False, error_msg))
+                continue
+            
+            # 等待操作完成
+            if delayseconds > 0:
+                    logger.info(f"Waiting for operation to complete, delay: {delayseconds} seconds")
+            time.sleep(delayseconds)
+            logger.info(f"Delay completed")
+            
+            if ret[1] != expected_value:
+                    error_msg = f"{action} command failed: Actual value {ret[1]} does not match expected value {expected_value}"
+                    logger.error(error_msg)
+                    results.append((False, error_msg))
+                    continue
+                
+            success_msg = f"Command {command_addr} executed successfully"    
+            logger.info(success_msg)
+            results.append((True, success_msg))
+        
+        # 如果有任何命令失败，整个操作视为失败
+        success_count = sum(1 for success, _ in results if success)
+        logger.info(f"Command execution completed. Total: {len(results)}, Success: {success_count}, Failed: {len(results) - success_count}")
+        
+        if any(not success for success, _ in results):
+            # 找出第一个失败的命令信息
+            for success, msg in results:
+                if not success:
+                    logger.error(f"Operation failed: {msg}")
+                    logger.info(f"========== PLC COMMAND EXECUTION ENDED: {action} [FAILED] ==========")
+                    return False, msg
+        
+        # 全部命令成功执行
+        success_msg = f"{action} command executed successfully"
+        logger.info(success_msg)
+        logger.info(f"========== PLC COMMAND EXECUTION ENDED: {action} [SUCCESS] ==========")
+        return True, success_msg
+    
+    @handle_exception
     def lifter_up(self) -> Tuple[bool, str]:
         """
         升降台上升命令

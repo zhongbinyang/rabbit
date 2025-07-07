@@ -202,8 +202,8 @@
     <div id="tab2" class="tab-content-area">
       <div class="d-flex align-items-center mb-3">
         <h2 class="page-title mb-0">状态监控</h2>
-        <button class="btn btn-outline-secondary ms-3" onclick="executeAllStatusActions()">
-          <i class="bi bi-play-circle"></i> 全部执行
+        <button class="btn btn-outline-secondary ms-3" id="toggleAllStatusBtn" onclick="toggleAllStatusActions()">
+          <i class="bi bi-play-circle" id="toggleAllStatusBtnIcon"></i> <span id="toggleAllStatusBtnText">全部执行</span>
         </button>
       </div>
       <div class="row" id="statusActions">
@@ -243,6 +243,10 @@
     let logListControl = [];
     let logListStatus = [];
     let currentTab = 'control';
+    
+    // 全局维护每个action的定时器ID
+    const statusActionIntervalMap = {};
+    let allStatusInterval = null;
     
     // 显示/隐藏加载指示器
     function toggleLoading(show) {
@@ -314,31 +318,25 @@
     }
     
     // 加载动作文件
-    function loadActionFile() {
+    async function loadActionFile() {
       const filename = "PLC_IO_List_A01_grouped.json";
-      
       toggleLoading(true);
       addLog('info', '正在加载动作配置文件...', currentTab);
-      
-      fetch(`/api/read_json_file?filename=${encodeURIComponent(filename)}`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then(data => {
-          actionData = data;
-          processActionData();
-          addLog('success', '动作配置文件加载成功', currentTab);
-        })
-        .catch(error => {
-          console.error('Error loading action file:', error);
-          addLog('error', `加载失败: ${error.message}`, currentTab);
-        })
-        .finally(() => {
-          toggleLoading(false);
-        });
+      try {
+        const response = await fetch(`/api/read_json_file?filename=${encodeURIComponent(filename)}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        actionData = data;
+        processActionData();
+        addLog('success', '动作配置文件加载成功', currentTab);
+      } catch (error) {
+        console.error('Error loading action file:', error);
+        addLog('error', `加载失败: ${error.message}`, currentTab);
+      } finally {
+        toggleLoading(false);
+      }
     }
     
     // 处理动作数据，分为控制组和状态组
@@ -425,16 +423,13 @@
     function renderStatusActions() {
       const container = document.getElementById('statusActions');
       container.innerHTML = '';
-      
       if (statusActions.length === 0) {
         container.innerHTML = '<div class="col-12 text-center p-5">没有可用的状态信息</div>';
         return;
       }
-      
       statusActions.forEach(action => {
         const col = document.createElement('div');
         col.className = 'col-md-4 col-sm-6 mb-3';
-        
         col.innerHTML = `
           <div class="action-card">
             <div class="card-header">
@@ -446,128 +441,213 @@
                 <span class="status-badge status-inactive" id="status-badge-${action.action}"></span>
                 <span class="status-value" id="status-value-${action.action}">未知</span>
               </div>
+              <div class="mt-3">
+                <button class="btn btn-sm btn-outline-success" onclick="toggleStatusActionPolling('${action.action}')" id="toggle-btn-${action.action}">开始监听</button>
+              </div>
             </div>
           </div>
         `;
-        
         container.appendChild(col);
       });
-      
-      // 在实际应用中，这里可以添加代码来定期刷新状态
-      // 这需要后端API支持获取当前状态
+      updateAllStatusBtn();
+      updateAllToggleBtns();
     }
     
     // 执行动作
-    function executeAction(actionName) {
+    async function executeAction(actionName) {
       addLog('info', `正在执行动作: ${actionName}`, currentTab);
       toggleLoading(true);
-      
-      // 调用后端API执行动作
-      fetch('/execute_command', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          action: actionName
-        }),
-      })
-      .then(response => response.json())
-      .then(data => {
+      try {
+        const response = await fetch('/execute_command', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            action: actionName
+          }),
+        });
+        const data = await response.json();
         if (data.Result) {
           addLog('success', `动作 ${actionName} 执行成功: ${data.Message}`, currentTab);
         } else {
           addLog('error', `动作 ${actionName} 执行失败: ${data.Message}`, currentTab);
         }
-      })
-      .catch(error => {
+      } catch (error) {
         console.error('Error executing action:', error);
         addLog('error', `执行失败: ${error.message}`, currentTab);
-      })
-      .finally(() => {
+      } finally {
         toggleLoading(false);
-      });
+      }
     }
     
     // 新增连接/断开PLC的函数
-    function connectPLC() {
+    async function connectPLC() {
       addLog('info', '正在连接PLC...', currentTab);
       toggleLoading(true);
-      fetch('/connect_plc', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({}),
-      })
-      .then(response => response.json())
-      .then(data => {
+      try {
+        const response = await fetch('/connect_plc', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({}),
+        });
+        const data = await response.json();
         if (data.Result) {
           addLog('success', '连接PLC成功: ' + data.Message, currentTab);
         } else {
           addLog('error', '连接PLC失败: ' + data.Message, currentTab);
         }
-      })
-      .catch(error => {
+      } catch (error) {
         addLog('error', '连接PLC异常: ' + error.message, currentTab);
-      })
-      .finally(() => {
+      } finally {
         toggleLoading(false);
-      });
+      }
     }
-    function disconnectPLC() {
+    async function disconnectPLC() {
       addLog('info', '正在断开PLC...', currentTab);
       toggleLoading(true);
-      fetch('/disconnect_plc', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({}),
-      })
-      .then(response => response.json())
-      .then(data => {
+      try {
+        const response = await fetch('/disconnect_plc', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({}),
+        });
+        const data = await response.json();
         if (data.Result) {
           addLog('success', '断开PLC成功: ' + data.Message, currentTab);
         } else {
           addLog('error', '断开PLC失败: ' + data.Message, currentTab);
         }
-      })
-      .catch(error => {
+      } catch (error) {
         addLog('error', '断开PLC异常: ' + error.message, currentTab);
-      })
-      .finally(() => {
+      } finally {
         toggleLoading(false);
-      });
+      }
     }
     
-    // 新增：批量执行所有状态动作
-    async function executeAllStatusActions() {
+    // 启动单个action的定时监听
+    function startStatusActionPolling(actionName) {
+      if (statusActionIntervalMap[actionName]) {
+        addLog('info', `[轮询] ${actionName} 已在监听中`, 'status');
+        return;
+      }
+      addLog('info', `[轮询] ${actionName} 开始监听`, 'status');
+      statusActionIntervalMap[actionName] = setInterval(async () => {
+        try {
+          const response = await fetch('/execute_command', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: actionName }),
+          });
+          const data = await response.json();
+          if (data.Result) {
+            addLog('success', `[轮询] ${actionName}: ${data.Message}`, 'status');
+          } else {
+            addLog('error', `[轮询] ${actionName}: ${data.Message}`, 'status');
+          }
+        } catch (e) {
+          addLog('error', `[轮询] ${actionName}: 请求异常`, 'status');
+        }
+      }, 1000);
+      updateAllStatusBtn();
+      updateAllToggleBtns();
+    }
+
+    // 停止单个action的定时监听
+    function stopStatusActionPolling(actionName) {
+      if (statusActionIntervalMap[actionName]) {
+        clearInterval(statusActionIntervalMap[actionName]);
+        delete statusActionIntervalMap[actionName];
+        addLog('info', `[轮询] ${actionName} 已停止监听`, 'status');
+      } else {
+        addLog('info', `[轮询] ${actionName} 未在监听中`, 'status');
+      }
+      updateAllStatusBtn();
+      updateAllToggleBtns();
+    }
+
+    // 切换单个action监听状态
+    function toggleStatusActionPolling(actionName) {
+      if (statusActionIntervalMap[actionName]) {
+        stopStatusActionPolling(actionName);
+      } else {
+        startStatusActionPolling(actionName);
+      }
+    }
+
+    // 批量执行/停止所有状态动作（定时轮询方式）
+    function toggleAllStatusActions() {
+      const allListening = statusActions.length > 0 && statusActions.every(action => statusActionIntervalMap[action.action]);
+      if (allListening) {
+        stopAllStatusActions();
+      } else {
+        executeAllStatusActions();
+      }
+    }
+    function executeAllStatusActions() {
       if (statusActions.length === 0) {
         addLog('info', '没有可执行的状态动作', 'status');
         return;
       }
-      addLog('info', '正在批量执行所有状态动作...', 'status');
-      toggleLoading(true);
-      for (const action of statusActions) {
-        await new Promise(resolve => {
-          fetch('/execute_command', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ action: action.action }),
-          })
-          .then(response => response.json())
-          .then(data => {
-            if (data.Result) {
-              addLog('success', `动作 ${action.action} 执行成功: ${data.Message}`, 'status');
-            } else {
-              addLog('error', `动作 ${action.action} 执行失败: ${data.Message}`, 'status');
-            }
-          })
-          .catch(error => {
-            addLog('error', `动作 ${action.action} 执行异常: ${error.message}`, 'status');
-          })
-          .finally(resolve);
-        });
-      }
+      addLog('info', '正在批量轮询监听所有状态动作...', 'status');
       toggleLoading(false);
-      addLog('info', '所有状态动作已执行完毕', 'status');
+      statusActions.forEach(action => {
+        if (!statusActionIntervalMap[action.action]) {
+          startStatusActionPolling(action.action);
+        }
+      });
+      updateAllStatusBtn();
+      updateAllToggleBtns();
+    }
+    function stopAllStatusActions() {
+      let stopped = false;
+      statusActions.forEach(action => {
+        if (statusActionIntervalMap[action.action]) {
+          stopStatusActionPolling(action.action);
+          stopped = true;
+        }
+      });
+      if (stopped) {
+        addLog('info', '已全部停止所有状态动作监听', 'status');
+      } else {
+        addLog('info', '当前无正在监听的状态动作', 'status');
+      }
+      updateAllStatusBtn();
+      updateAllToggleBtns();
+    }
+
+    // 联动更新全部按钮状态
+    function updateAllStatusBtn() {
+      const btn = document.getElementById('toggleAllStatusBtn');
+      const btnText = document.getElementById('toggleAllStatusBtnText');
+      const btnIcon = document.getElementById('toggleAllStatusBtnIcon');
+      const allListening = statusActions.length > 0 && statusActions.every(action => statusActionIntervalMap[action.action]);
+      if (allListening) {
+        btn.classList.remove('btn-outline-secondary');
+        btn.classList.add('btn-outline-danger');
+        btnText.textContent = '全部停止';
+        btnIcon.className = 'bi bi-stop-circle';
+      } else {
+        btn.classList.remove('btn-outline-danger');
+        btn.classList.add('btn-outline-secondary');
+        btnText.textContent = '全部执行';
+        btnIcon.className = 'bi bi-play-circle';
+      }
+    }
+    function updateAllToggleBtns() {
+      statusActions.forEach(action => {
+        const btn = document.getElementById(`toggle-btn-${action.action}`);
+        if (!btn) return;
+        if (statusActionIntervalMap[action.action]) {
+          btn.textContent = '停止监听';
+          btn.classList.remove('btn-outline-success');
+          btn.classList.add('btn-outline-danger');
+        } else {
+          btn.textContent = '开始监听';
+          btn.classList.remove('btn-outline-danger');
+          btn.classList.add('btn-outline-success');
+        }
+      });
     }
     
     // 初始化
