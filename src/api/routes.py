@@ -1,12 +1,9 @@
 import os
 import datetime
-import time
-from collections import OrderedDict
 
 from flask import Flask, render_template, session, request, copy_current_request_context, jsonify, send_from_directory, Blueprint, Response
 
 import json
-from flask_cors import CORS
 from config.version import *
 from typing import Dict, Any
 from config.settings import API_CONFIG, PLC_CONFIG

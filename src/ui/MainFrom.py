@@ -11,6 +11,7 @@ from PyQt5.QtWidgets import QMainWindow
 
 from ui.PLCUI import *
 from ui.Global import *
+from core.plc_controller import plc_controller
 
 import platform
 
@@ -114,7 +115,7 @@ QLineEdit{  background-color: rgb(225, 225, 225);
         file = open(path, "w+")
         json.dump(Global.Config, file)
         file.close()
-        PLC.disconnectPLC()
+        plc_controller.disconnect_plc()
         os.kill(os.getpid(), signal.SIGTERM)
     def initConnect(self):
         self.timerConnect.stop()
