@@ -184,8 +184,8 @@ const apiDefs = [
     params: []
   },
   {
-    name: 'ConnectPLC',
-    url: '/PLC/Control/ConnectPLC',
+    name: 'connect_plc',
+    url: '/connect_plc',
     method: ['GET', 'POST'],
     params: [
       {label: 'Host', name: 'Host', type: 'text', value: '192.168.1.11'},
@@ -193,44 +193,44 @@ const apiDefs = [
     ]
   },
   {
-    name: 'DisconnectPLC',
-    url: '/PLC/Control/DisconnectPLC',
+    name: 'disconnect_plc',
+    url: '/disconnect_plc',
     method: ['GET', 'POST'],
     params: []
   },
   {
-    name: 'execute_plc_command',
-    url: '/PLC/Control/execute_command',
+    name: 'execute_command',
+    url: '/execute_command',
     method: ['GET'],
     params: [
       {label: '操作名称', name: 'action', type: 'text', value: 'lifter_up'}
     ]
   },
   {
-    name: 'execute_plc_command (JSON)',
-    url: '/PLC/Control/execute_command',
+    name: 'execute_command (JSON)',
+    url: '/execute_command',
     method: ['POST'],
     json: true,
     params: [
       {label: 'JSON参数', name: 'action', type: 'textarea', value: `{"action": "lifter_up"}`}
     ]
   },
-  { name: 'LifterUp', url: '/PLC/Control/LifterUp', method: ['GET', 'POST'], params: [] },
-  { name: 'LifterDown', url: '/PLC/Control/LifterDown', method: ['GET', 'POST'], params: [] },
-  { name: 'ClampX_Out', url: '/PLC/Control/ClampX_Out', method: ['GET', 'POST'], params: [] },
-  { name: 'ClampX_In', url: '/PLC/Control/ClampX_In', method: ['GET', 'POST'], params: [] },
-  { name: 'ClampY_Out', url: '/PLC/Control/ClampY_Out', method: ['GET', 'POST'], params: [] },
-  { name: 'ClampY_In', url: '/PLC/Control/ClampY_In', method: ['GET', 'POST'], params: [] },
-  { name: 'PowerOut', url: '/PLC/Control/PowerOut', method: ['GET', 'POST'], params: [] },
-  { name: 'PowerIn', url: '/PLC/Control/PowerIn', method: ['GET', 'POST'], params: [] },
-  { name: 'CommOut', url: '/PLC/Control/CommOut', method: ['GET', 'POST'], params: [] },
-  { name: 'CommIn', url: '/PLC/Control/CommIn', method: ['GET', 'POST'], params: [] },
-  { name: 'ResetOut', url: '/PLC/Control/ResetOut', method: ['GET', 'POST'], params: [] },
-  { name: 'ResetIn', url: '/PLC/Control/ResetIn', method: ['GET', 'POST'], params: [] },
-  { name: 'LANE_SELECT_Out', url: '/PLC/Control/LANE_SELECT_Out', method: ['GET', 'POST'], params: [] },
-  { name: 'LANE_SELECT_In', url: '/PLC/Control/LANE_SELECT_In', method: ['GET', 'POST'], params: [] },
-  { name: 'CRADLE_INSERT', url: '/PLC/Control/CRADLE_INSERT', method: ['GET', 'POST'], params: [] },
-  { name: 'CRADLE_EXTRACT', url: '/PLC/Control/CRADLE_EXTRACT', method: ['GET', 'POST'], params: [] },
+  { name: 'lifter_up', url: '/lifter_up', method: ['GET', 'POST'], params: [] },
+  { name: 'lifter_down', url: '/lifter_down', method: ['GET', 'POST'], params: [] },
+  { name: 'clampx_out', url: '/clampx_out', method: ['GET', 'POST'], params: [] },
+  { name: 'clampx_in', url: '/clampx_in', method: ['GET', 'POST'], params: [] },
+  { name: 'clampy_out', url: '/clampy_out', method: ['GET', 'POST'], params: [] },
+  { name: 'clampy_in', url: '/clampy_in', method: ['GET', 'POST'], params: [] },
+  { name: 'power_out', url: '/power_out', method: ['GET', 'POST'], params: [] },
+  { name: 'power_in', url: '/power_in', method: ['GET', 'POST'], params: [] },
+  { name: 'comm_out', url: '/comm_out', method: ['GET', 'POST'], params: [] },
+  { name: 'comm_in', url: '/comm_in', method: ['GET', 'POST'], params: [] },
+  { name: 'reset_out', url: '/reset_out', method: ['GET', 'POST'], params: [] },
+  { name: 'reset_in', url: '/reset_in', method: ['GET', 'POST'], params: [] },
+  { name: 'lane_select_out', url: '/lane_select_out', method: ['GET', 'POST'], params: [] },
+  { name: 'lane_select_in', url: '/lane_select_in', method: ['GET', 'POST'], params: [] },
+  { name: 'cradle_insert', url: '/cradle_insert', method: ['GET', 'POST'], params: [] },
+  { name: 'cradle_extract', url: '/cradle_extract', method: ['GET', 'POST'], params: [] },
   {
     name: 'get_version',
     url: '/get_version',
@@ -361,7 +361,7 @@ document.addEventListener('DOMContentLoaded', () => {
       
       if(api.json) {
         // 特殊处理执行命令的JSON请求
-        if(api.name === 'execute_plc_command (JSON)') {
+        if(api.name === 'execute_command (JSON)') {
           try {
             // 直接使用textarea中的JSON作为请求体
             const jsonContent = this.querySelector('textarea').value;

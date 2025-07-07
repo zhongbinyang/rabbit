@@ -202,8 +202,8 @@
     <div id="tab2" class="tab-content-area">
       <div class="d-flex align-items-center mb-3">
         <h2 class="page-title mb-0">状态监控</h2>
-        <button class="btn btn-outline-secondary ms-3" onclick="loadActionFile()">
-          <i class="bi bi-arrow-clockwise"></i> 刷新数据
+        <button class="btn btn-outline-secondary ms-3" onclick="executeAllStatusActions()">
+          <i class="bi bi-play-circle"></i> 全部执行
         </button>
       </div>
       <div class="row" id="statusActions">
@@ -213,12 +213,23 @@
     
     <!-- 日志区域 -->
     <div class="log-container">
-      <h4>操作日志</h4>
-      <div class="log-area" id="logArea">
-        <!-- 日志内容将被动态添加到这里 -->
+      <div id="log-control" class="log-tab-area">
+        <h4>操作日志（控制）</h4>
+        <div class="log-area" id="logAreaControl">
+          <!-- 日志内容将被动态添加到这里 -->
+        </div>
+        <div class="mt-2">
+          <button class="btn btn-sm btn-outline-secondary" onclick="clearLog('control')">清空日志</button>
+        </div>
       </div>
-      <div class="mt-2">
-        <button class="btn btn-sm btn-outline-secondary" onclick="clearLog()">清空日志</button>
+      <div id="log-status" class="log-tab-area" style="display:none;">
+        <h4>操作日志（状态）</h4>
+        <div class="log-area" id="logAreaStatus">
+          <!-- 日志内容将被动态添加到这里 -->
+        </div>
+        <div class="mt-2">
+          <button class="btn btn-sm btn-outline-secondary" onclick="clearLog('status')">清空日志</button>
+        </div>
       </div>
     </div>
   </div>
@@ -228,6 +239,10 @@
     let actionData = [];
     let controlActions = [];
     let statusActions = [];
+    // 日志缓存
+    let logListControl = [];
+    let logListStatus = [];
+    let currentTab = 'control';
     
     // 显示/隐藏加载指示器
     function toggleLoading(show) {
@@ -242,34 +257,60 @@
       document.getElementById('tab2Btn').classList.remove('btn-primary');
       document.getElementById('tab1Btn').classList.add('btn-outline-primary');
       document.getElementById('tab2Btn').classList.add('btn-outline-primary');
+      document.getElementById('log-control').style.display = 'none';
+      document.getElementById('log-status').style.display = 'none';
       if(tabIdx === 1) {
         document.getElementById('tab1').classList.add('active');
         document.getElementById('tab1Btn').classList.add('btn-primary');
         document.getElementById('tab1Btn').classList.remove('btn-outline-primary');
+        document.getElementById('log-control').style.display = '';
+        currentTab = 'control';
+        renderLog('control');
       } else {
         document.getElementById('tab2').classList.add('active');
         document.getElementById('tab2Btn').classList.add('btn-primary');
         document.getElementById('tab2Btn').classList.remove('btn-outline-primary');
+        document.getElementById('log-status').style.display = '';
+        currentTab = 'status';
+        renderLog('status');
       }
     }
     
     // 添加日志
-    function addLog(type, message) {
-      const logArea = document.getElementById('logArea');
-      const logEntry = document.createElement('div');
-      logEntry.className = `log-entry ${type}`;
-      
-      const timestamp = new Date().toLocaleTimeString();
-      logEntry.textContent = `[${timestamp}] ${message}`;
-      
-      logArea.appendChild(logEntry);
+    function addLog(type, message, tab) {
+      const logObj = { type, message, time: new Date().toLocaleTimeString() };
+      if(tab === 'status') {
+        logListStatus.push(logObj);
+        if(currentTab === 'status') renderLog('status');
+      } else {
+        logListControl.push(logObj);
+        if(currentTab === 'control') renderLog('control');
+      }
+    }
+    // 渲染日志
+    function renderLog(tab) {
+      const logArea = tab === 'status' ? document.getElementById('logAreaStatus') : document.getElementById('logAreaControl');
+      const logList = tab === 'status' ? logListStatus : logListControl;
+      logArea.innerHTML = '';
+      logList.forEach(log => {
+        const logEntry = document.createElement('div');
+        logEntry.className = `log-entry ${log.type}`;
+        logEntry.textContent = `[${log.time}] ${log.message}`;
+        logArea.appendChild(logEntry);
+      });
       logArea.scrollTop = logArea.scrollHeight;
     }
-    
     // 清空日志
-    function clearLog() {
-      document.getElementById('logArea').innerHTML = '';
-      addLog('info', '日志已清空');
+    function clearLog(tab) {
+      if(tab === 'status') {
+        logListStatus = [];
+        renderLog('status');
+        addLog('info', '日志已清空', 'status');
+      } else {
+        logListControl = [];
+        renderLog('control');
+        addLog('info', '日志已清空', 'control');
+      }
     }
     
     // 加载动作文件
@@ -277,7 +318,7 @@
       const filename = "PLC_IO_List_A01_grouped.json";
       
       toggleLoading(true);
-      addLog('info', '正在加载动作配置文件...');
+      addLog('info', '正在加载动作配置文件...', currentTab);
       
       fetch(`/api/read_json_file?filename=${encodeURIComponent(filename)}`)
         .then(response => {
@@ -289,11 +330,11 @@
         .then(data => {
           actionData = data;
           processActionData();
-          addLog('success', '动作配置文件加载成功');
+          addLog('success', '动作配置文件加载成功', currentTab);
         })
         .catch(error => {
           console.error('Error loading action file:', error);
-          addLog('error', `加载失败: ${error.message}`);
+          addLog('error', `加载失败: ${error.message}`, currentTab);
         })
         .finally(() => {
           toggleLoading(false);
@@ -323,8 +364,36 @@
       const container = document.getElementById('controlActions');
       container.innerHTML = '';
       
+      // 先插入 connect_plc 卡片
+      const connectCol = document.createElement('div');
+      connectCol.className = 'col-md-4 col-sm-6 mb-3';
+      connectCol.innerHTML = `
+        <div class="action-card">
+          <div class="card-header">connect_plc</div>
+          <div class="card-body">
+            <p>连接PLC（默认192.168.1.11:502）</p>
+            <button class="btn btn-outline-success control-action-btn" onclick="connectPLC()">连接</button>
+          </div>
+        </div>
+      `;
+      container.appendChild(connectCol);
+      
+      // 插入 disconnect_plc 卡片
+      const disconnectCol = document.createElement('div');
+      disconnectCol.className = 'col-md-4 col-sm-6 mb-3';
+      disconnectCol.innerHTML = `
+        <div class="action-card">
+          <div class="card-header">disconnect_plc</div>
+          <div class="card-body">
+            <p>断开PLC连接</p>
+            <button class="btn btn-outline-danger control-action-btn" onclick="disconnectPLC()">断开</button>
+          </div>
+        </div>
+      `;
+      container.appendChild(disconnectCol);
+      
       if (controlActions.length === 0) {
-        container.innerHTML = '<div class="col-12 text-center p-5">没有可用的控制动作</div>';
+        container.innerHTML += '<div class="col-12 text-center p-5">没有可用的控制动作</div>';
         return;
       }
       
@@ -390,11 +459,11 @@
     
     // 执行动作
     function executeAction(actionName) {
-      addLog('info', `正在执行动作: ${actionName}`);
+      addLog('info', `正在执行动作: ${actionName}`, currentTab);
       toggleLoading(true);
       
       // 调用后端API执行动作
-      fetch('/PLC/Control/execute_command', {
+      fetch('/execute_command', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -406,23 +475,104 @@
       .then(response => response.json())
       .then(data => {
         if (data.Result) {
-          addLog('success', `动作 ${actionName} 执行成功: ${data.Message}`);
+          addLog('success', `动作 ${actionName} 执行成功: ${data.Message}`, currentTab);
         } else {
-          addLog('error', `动作 ${actionName} 执行失败: ${data.Message}`);
+          addLog('error', `动作 ${actionName} 执行失败: ${data.Message}`, currentTab);
         }
       })
       .catch(error => {
         console.error('Error executing action:', error);
-        addLog('error', `执行失败: ${error.message}`);
+        addLog('error', `执行失败: ${error.message}`, currentTab);
       })
       .finally(() => {
         toggleLoading(false);
       });
     }
     
+    // 新增连接/断开PLC的函数
+    function connectPLC() {
+      addLog('info', '正在连接PLC...', currentTab);
+      toggleLoading(true);
+      fetch('/connect_plc', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({}),
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.Result) {
+          addLog('success', '连接PLC成功: ' + data.Message, currentTab);
+        } else {
+          addLog('error', '连接PLC失败: ' + data.Message, currentTab);
+        }
+      })
+      .catch(error => {
+        addLog('error', '连接PLC异常: ' + error.message, currentTab);
+      })
+      .finally(() => {
+        toggleLoading(false);
+      });
+    }
+    function disconnectPLC() {
+      addLog('info', '正在断开PLC...', currentTab);
+      toggleLoading(true);
+      fetch('/disconnect_plc', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({}),
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.Result) {
+          addLog('success', '断开PLC成功: ' + data.Message, currentTab);
+        } else {
+          addLog('error', '断开PLC失败: ' + data.Message, currentTab);
+        }
+      })
+      .catch(error => {
+        addLog('error', '断开PLC异常: ' + error.message, currentTab);
+      })
+      .finally(() => {
+        toggleLoading(false);
+      });
+    }
+    
+    // 新增：批量执行所有状态动作
+    async function executeAllStatusActions() {
+      if (statusActions.length === 0) {
+        addLog('info', '没有可执行的状态动作', 'status');
+        return;
+      }
+      addLog('info', '正在批量执行所有状态动作...', 'status');
+      toggleLoading(true);
+      for (const action of statusActions) {
+        await new Promise(resolve => {
+          fetch('/execute_command', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: action.action }),
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.Result) {
+              addLog('success', `动作 ${action.action} 执行成功: ${data.Message}`, 'status');
+            } else {
+              addLog('error', `动作 ${action.action} 执行失败: ${data.Message}`, 'status');
+            }
+          })
+          .catch(error => {
+            addLog('error', `动作 ${action.action} 执行异常: ${error.message}`, 'status');
+          })
+          .finally(resolve);
+        });
+      }
+      toggleLoading(false);
+      addLog('info', '所有状态动作已执行完毕', 'status');
+    }
+    
     // 初始化
     window.addEventListener('load', function() {
-      addLog('info', 'BM UI 界面已加载');
+      addLog('info', 'BM UI 界面已加载', currentTab);
       loadActionFile();
     });
   </script>

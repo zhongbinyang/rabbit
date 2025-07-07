@@ -9,7 +9,7 @@ import json
 from flask_cors import CORS
 from config.version import *
 from typing import Dict, Any
-from config.settings import API_CONFIG
+from config.settings import API_CONFIG, PLC_CONFIG
 from utils.logger import logger
 from core.plc_controller import plc_controller
 
@@ -70,174 +70,174 @@ def api_documentation():
     # 构建API文档的结构化数据
     api_endpoints = [
         {
-            'URL': 'http://{host}:5000/PLC/Control/ConnectPLC',
-            'function': 'ConnectPLC',
-            'description': 'Connect PLC with host and port,default host 192.168.1.11,default port 502',
+            'URL': 'http://{host}:5000/connect_plc',
+            'function': 'connect_plc',
+            'description': 'Connect PLC with host and port, default host 192.168.1.11, default port 502',
             'params': '[str,int],Host,Port',
             'return': 'Result:True or False,Message:Connect message or error message',
-            'example': 'http://127.0.0.1:5000/PLC/Control/ConnectPLC?Host=192.168.1.11&Port=502',
+            'example': 'http://127.0.0.1:5000/connect_plc?Host=192.168.1.11&Port=502',
             'response': '{"Function":"ConnectPLC","Message":"Connect PLC Successful 192.168.1.11:502","Result":true,"timestamp":"2025-01-25 13:41:27_396084"}'
         },
         {
-            'URL': 'http://{host}:5000/PLC/Control/execute_command',
+            'URL': 'http://{host}:5000/execute_command',
             'function': 'execute_plc_command',
             'description': 'Execute PLC command with action parameter',
             'params': 'action',
             'return': 'Result:True or False,Message:Command result or error message',
-            'example': 'http://127.0.0.1:5000/PLC/Control/execute_command?action=sample_action',
+            'example': 'http://127.0.0.1:5000/execute_command?action=sample_action',
             'response': '{"Function":"execute_plc_command","Message":"sample_action command successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/PLC/Control/DisconnectPLC',
-            'function': 'DisconnectPLC',
+            'URL': 'http://{host}:5000/disconnect_plc',
+            'function': 'disconnect_plc',
             'description': 'Disconnect PLC',
             'params': '',
             'return': 'Result:True or False,Message:Disconnect message or error message',
-            'example': 'http://127.0.0.1:5000/PLC/Control/DisconnectPLC',
+            'example': 'http://127.0.0.1:5000/disconnect_plc',
             'response': '{"Function":"DisconnectPLC","Message":"Close Successful","Result":true,"timestamp":"2025-01-25 13:43:47_847322"}'
         },
         {
-            'URL': 'http://{host}:5000/PLC/Control/LifterUp',
-            'function': 'LifterUp',
-            'description': 'Control Lifter Up,if normal then Result is True,Message return Control Successful',
+            'URL': 'http://{host}:5000/lifter_up',
+            'function': 'lifter_up',
+            'description': 'Control Lifter Up',
             'params': '',
             'return': 'Result:True or False,Message:Set Lifter Up Successful or Error message',
-            'example': 'http://127.0.0.1:5000/PLC/Control/LifterUp',
+            'example': 'http://127.0.0.1:5000/lifter_up',
             'response': '{"Function":"LifterUp","Message":"Set Lifter Up Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/PLC/Control/LifterDown',
-            'function': 'LifterDown',
-            'description': 'Control Lifter Down,if normal then Result is True,Message return Control Successful',
+            'URL': 'http://{host}:5000/lifter_down',
+            'function': 'lifter_down',
+            'description': 'Control Lifter Down',
             'params': '',
             'return': 'Result:True or False,Message:Set Lifter Down Successful or Error message',
-            'example': 'http://127.0.0.1:5000/PLC/Control/LifterDown',
+            'example': 'http://127.0.0.1:5000/lifter_down',
             'response': '{"Function":"LifterDown","Message":"Set Lifter Down Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/PLC/Control/ClampX_Out',
-            'function': 'ClampX_Out',
-            'description': 'Control Clamp X Out,if normal then Result is True,Message return Control Successful',
+            'URL': 'http://{host}:5000/clampx_out',
+            'function': 'clamp_x_out',
+            'description': 'Control Clamp X Out',
             'params': '',
             'return': 'Result:True or False,Message:Set Clamp X Out Successful or Error message',
-            'example': 'http://127.0.0.1:5000/PLC/Control/ClampX_Out',
+            'example': 'http://127.0.0.1:5000/clampx_out',
             'response': '{"Function":"ClampX_Out","Message":"Set Clamp X Out Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/PLC/Control/ClampX_In',
-            'function': 'ClampX_In',
-            'description': 'Control Clamp X In,if normal then Result is True,Message return Control Successful',
+            'URL': 'http://{host}:5000/clampx_in',
+            'function': 'clamp_x_in',
+            'description': 'Control Clamp X In',
             'params': '',
             'return': 'Result:True or False,Message:Set Clamp X In Successful or Error message',
-            'example': 'http://127.0.0.1:5000/PLC/Control/ClampX_In',
+            'example': 'http://127.0.0.1:5000/clampx_in',
             'response': '{"Function":"ClampX_In","Message":"Set Clamp X In Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/PLC/Control/ClampY_Out',
-            'function': 'ClampY_Out',
-            'description': 'Control Clamp Y Out,if normal then Result is True,Message return Control Successful',
+            'URL': 'http://{host}:5000/clampy_out',
+            'function': 'clamp_y_out',
+            'description': 'Control Clamp Y Out',
             'params': '',
-            'return': 'Result:True or False,Message:Set ClampY_Out Successful or Error message',
-            'example': 'http://127.0.0.1:5000/PLC/Control/ClampY_Out',
+            'return': 'Result:True or False,Message:Set Clamp Y Out Successful or Error message',
+            'example': 'http://127.0.0.1:5000/clampy_out',
             'response': '{"Function":"ClampY_Out","Message":"Set Clamp Y Out Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/PLC/Control/ClampY_In',
-            'function': 'ClampY_In',
-            'description': 'Control Clamp Y In,if normal then Result is True,Message return Control Successful',
+            'URL': 'http://{host}:5000/clampy_in',
+            'function': 'clamp_y_in',
+            'description': 'Control Clamp Y In',
             'params': '',
             'return': 'Result:True or False,Message:Set Clamp Y In Successful or Error message',
-            'example': 'http://127.0.0.1:5000/PLC/Control/ClampY_In',
+            'example': 'http://127.0.0.1:5000/clampy_in',
             'response': '{"Function":"ClampY_In","Message":"Set Clamp Y In Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/PLC/Control/PowerOut',
-            'function': 'PowerOut',
-            'description': 'Control Power Out,if normal then Result is True,Message return Control Successful',
+            'URL': 'http://{host}:5000/power_out',
+            'function': 'power_out',
+            'description': 'Control Power Out',
             'params': '',
             'return': 'Result:True or False,Message:Set Power Out Successful or Error message',
-            'example': 'http://127.0.0.1:5000/PLC/Control/PowerOut',
+            'example': 'http://127.0.0.1:5000/power_out',
             'response': '{"Function":"PowerOut","Message":"Set Power Out Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/PLC/Control/PowerIn',
-            'function': 'PowerIn',
-            'description': 'Control Power In,if normal then Result is True,Message return Control Successful',
+            'URL': 'http://{host}:5000/power_in',
+            'function': 'power_in',
+            'description': 'Control Power In',
             'params': '',
             'return': 'Result:True or False,Message:Set Power In Successful or Error message',
-            'example': 'http://127.0.0.1:5000/PLC/Control/PowerIn',
+            'example': 'http://127.0.0.1:5000/power_in',
             'response': '{"Function":"PowerIn","Message":"Set Power In Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/PLC/Control/CommOut',
-            'function': 'CommOut',
-            'description': 'Control Comm Out,if normal then Result is True,Message return Control Successful',
+            'URL': 'http://{host}:5000/comm_out',
+            'function': 'comm_out',
+            'description': 'Control Comm Out',
             'params': '',
             'return': 'Result:True or False,Message:Set Comm Out Successful or Error message',
-            'example': 'http://127.0.0.1:5000/PLC/Control/CommOut',
+            'example': 'http://127.0.0.1:5000/comm_out',
             'response': '{"Function":"CommOut","Message":"Set Comm Out Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/PLC/Control/CommIn',
-            'function': 'CommIn',
-            'description': 'Control Comm In,if normal then Result is True,Message return Control Successful',
+            'URL': 'http://{host}:5000/comm_in',
+            'function': 'comm_in',
+            'description': 'Control Comm In',
             'params': '',
             'return': 'Result:True or False,Message:Set Comm In Successful or Error message',
-            'example': 'http://127.0.0.1:5000/PLC/Control/CommIn',
+            'example': 'http://127.0.0.1:5000/comm_in',
             'response': '{"Function":"CommIn","Message":"Set Comm In Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/PLC/Control/ResetOut',
-            'function': 'ResetOut',
-            'description': 'Control Reset Out,if normal then Result is True,Message return Control Successful',
+            'URL': 'http://{host}:5000/reset_out',
+            'function': 'reset_out',
+            'description': 'Control Reset Out',
             'params': '',
             'return': 'Result:True or False,Message:Set Reset Out Successful or Error message',
-            'example': 'http://127.0.0.1:5000/PLC/Control/ResetOut',
+            'example': 'http://127.0.0.1:5000/reset_out',
             'response': '{"Function":"ResetOut","Message":"Set Reset Out Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/PLC/Control/ResetIn',
-            'function': 'ResetIn',
-            'description': 'Control Reset In Work,if normal then Result is True,Message return Control Successful',
+            'URL': 'http://{host}:5000/reset_in',
+            'function': 'reset_in',
+            'description': 'Control Reset In',
             'params': '',
             'return': 'Result:True or False,Message:Set Reset In Successful or Error message',
-            'example': 'http://127.0.0.1:5000/PLC/Control/ResetIn',
+            'example': 'http://127.0.0.1:5000/reset_in',
             'response': '{"Function":"ResetIn","Message":"Set Reset In Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/PLC/Control/LANE_SELECT_Out',
-            'function': 'LANE_SELECT_Out',
-            'description': 'Control LANE_SELECT_Out,if normal then Result is True,Message return Control Successful',
+            'URL': 'http://{host}:5000/lane_select_out',
+            'function': 'lane_out',
+            'description': 'Control Lane Select Out',
             'params': '',
-            'return': 'Result:True or False,Message:Set LANE_SELECT_Out Successful or Error message',
-            'example': 'http://127.0.0.1:49900/PLC/Control/LANE_SELECT_Out',
+            'return': 'Result:True or False,Message:Set Lane Select Out Successful or Error message',
+            'example': 'http://127.0.0.1:5000/lane_select_out',
             'response': '{"Function":"LANE_SELECT_Out","Message":"Set LANE_SELECT_Out Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/PLC/Control/LANE_SELECT_In',
-            'function': 'LANE_SELECT_In',
-            'description': 'Control LANE_SELECT_In,if normal then Result is True,Message return Control Successful',
+            'URL': 'http://{host}:5000/lane_select_in',
+            'function': 'lane_in',
+            'description': 'Control Lane Select In',
             'params': '',
-            'return': 'Result:True or False,Message:Set LANE_SELECT_In Successful or Error message',
-            'example': 'http://127.0.0.1:5000/PLC/Control/LANE_SELECT_In',
+            'return': 'Result:True or False,Message:Set Lane Select In Successful or Error message',
+            'example': 'http://127.0.0.1:5000/lane_select_in',
             'response': '{"Function":"LANE_SELECT_In","Message":"Set LANE_SELECT_In Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/PLC/Control/CRADLE_INSERT',
-            'function': 'CRADLE_INSERT',
-            'description': 'Control CRADLE_INSERT,if normal then Result is True,Message return Control Successful',
+            'URL': 'http://{host}:5000/cradle_insert',
+            'function': 'cradle_insert',
+            'description': 'Control Cradle Insert',
             'params': '',
-            'return': 'Result:True or False,Message:Set CRADLE_INSERT Successful or Error message',
-            'example': 'http://127.0.0.1:5000/PLC/Control/CRADLE_INSERT',
+            'return': 'Result:True or False,Message:Set Cradle Insert Successful or Error message',
+            'example': 'http://127.0.0.1:5000/cradle_insert',
             'response': '{"Function":"CRADLE_INSERT","Message":"Set CRADLE_INSERT Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/PLC/Control/CRADLE_EXTRACT',
-            'function': 'CRADLE_EXTRACT',
-            'description': 'Control CRADLE EXTRACT,if normal then Result is True,Message return Control Successful',
+            'URL': 'http://{host}:5000/cradle_extract',
+            'function': 'cradle_extract',
+            'description': 'Control Cradle Extract',
             'params': '',
-            'return': 'Result:True or False,Message:Set CRADLE EXTRACT Successful or Error message',
-            'example': 'http://127.0.0.1:5000/PLC/Control/CRADLE_EXTRACT',
+            'return': 'Result:True or False,Message:Set Cradle Extract Successful or Error message',
+            'example': 'http://127.0.0.1:5000/cradle_extract',
             'response': '{"Function":"CRADLE_EXTRACT","Message":"Set CRADLE EXTRACT Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         }
     ]
@@ -261,11 +261,11 @@ def api_documentation():
 
 
 
-@plc_api.route('/PLC/Control/ConnectPLC', methods=['GET', 'POST'])
+@plc_api.route('/connect_plc', methods=['GET', 'POST'])
 def connect_plc():
     """连接PLC设备"""
-    host = request.args.get('Host', type=str, default=API_CONFIG.get('host', '192.168.1.11'))
-    port = request.args.get('Port', type=int, default=API_CONFIG.get('port', 502))
+    host = request.args.get('Host', type=str, default=PLC_CONFIG.get('host', '192.168.1.11'))
+    port = request.args.get('Port', type=int, default=PLC_CONFIG.get('port', 502))
     
     logger.info(f"API request: Connect PLC {host}:{port}")
     ret = plc_controller.connect_plc(host, port)
@@ -273,7 +273,7 @@ def connect_plc():
     return jsonify(create_response("ConnectPLC", ret[0], ret[1]))
 
 
-@plc_api.route('/PLC/Control/DisconnectPLC', methods=['GET', 'POST'])
+@plc_api.route('/disconnect_plc', methods=['GET', 'POST'])
 def disconnect_plc():
     """断开PLC连接"""
     logger.info("API request: Disconnect PLC")
@@ -283,7 +283,7 @@ def disconnect_plc():
 
 
 
-@plc_api.route('/PLC/Control/execute_command', methods=['GET', 'POST'])
+@plc_api.route('/execute_command', methods=['GET', 'POST'])
 def execute_plc_command():
     """执行PLC命令"""
     # 同时支持GET和POST请求参
@@ -304,7 +304,7 @@ def execute_plc_command():
         return jsonify(create_response("execute_plc_command", False, f"Error executing command: {str(e)}")), 500
 
 
-@plc_api.route('/PLC/Control/LifterUp', methods=['GET', 'POST'])
+@plc_api.route('/lifter_up', methods=['GET', 'POST'])
 def lifter_up():
     """升降台上升命令"""
     logger.info("API request: Lifter up")
@@ -313,7 +313,7 @@ def lifter_up():
     return jsonify(create_response("LifterUp", ret[0], ret[1]))
 
 
-@plc_api.route('/PLC/Control/LifterDown', methods=['GET', 'POST'])
+@plc_api.route('/lifter_down', methods=['GET', 'POST'])
 def lifter_down():
     """升降台下降命令"""
     logger.info("API request: Lifter down")
@@ -322,7 +322,7 @@ def lifter_down():
     return jsonify(create_response("LifterDown", ret[0], ret[1]))
 
 
-@plc_api.route('/PLC/Control/ClampX_Out', methods=['GET', 'POST'])
+@plc_api.route('/clampx_out', methods=['GET', 'POST'])
 def clamp_x_out():
     """X轴夹钳伸出命令"""
     logger.info("API request: Clamp x out")
@@ -331,7 +331,7 @@ def clamp_x_out():
     return jsonify(create_response("ClampX_Out", ret[0], ret[1]))
 
 
-@plc_api.route('/PLC/Control/ClampX_In', methods=['GET', 'POST'])
+@plc_api.route('/clampx_in', methods=['GET', 'POST'])
 def clamp_x_in():
     """X轴夹钳收回命令"""
     logger.info("API request: Clamp x in")
@@ -340,7 +340,7 @@ def clamp_x_in():
     return jsonify(create_response("ClampX_In", ret[0], ret[1]))
 
 
-@plc_api.route('/PLC/Control/ClampY_Out', methods=['GET', 'POST'])
+@plc_api.route('/clampy_out', methods=['GET', 'POST'])
 def clamp_y_out():
     """Y轴夹钳伸出命令"""
     logger.info("API request: Clamp y out")
@@ -349,7 +349,7 @@ def clamp_y_out():
     return jsonify(create_response("ClampY_Out", ret[0], ret[1]))
 
 
-@plc_api.route('/PLC/Control/ClampY_In', methods=['GET', 'POST'])
+@plc_api.route('/clampy_in', methods=['GET', 'POST'])
 def clamp_y_in():
     """Y轴夹钳收回命令"""
     logger.info("API request: Clamp y in")
@@ -358,7 +358,7 @@ def clamp_y_in():
     return jsonify(create_response("ClampY_In", ret[0], ret[1]))
 
 
-@plc_api.route('/PLC/Control/PowerOut', methods=['GET', 'POST'])
+@plc_api.route('/power_out', methods=['GET', 'POST'])
 def power_out():
     """电源拔出命令"""
     logger.info("API request: Power out")
@@ -367,7 +367,7 @@ def power_out():
     return jsonify(create_response("PowerOut", ret[0], ret[1]))
 
 
-@plc_api.route('/PLC/Control/PowerIn', methods=['GET', 'POST'])
+@plc_api.route('/power_in', methods=['GET', 'POST'])
 def power_in():
     """电源插入命令"""
     logger.info("API request: Power in")
@@ -376,7 +376,7 @@ def power_in():
     return jsonify(create_response("PowerIn", ret[0], ret[1]))
 
 
-@plc_api.route('/PLC/Control/CommOut', methods=['GET', 'POST'])
+@plc_api.route('/comm_out', methods=['GET', 'POST'])
 def comm_out():
     """通信口拔出命令"""
     logger.info("API request: Comm out")
@@ -385,7 +385,7 @@ def comm_out():
     return jsonify(create_response("CommOut", ret[0], ret[1]))
 
 
-@plc_api.route('/PLC/Control/CommIn', methods=['GET', 'POST'])
+@plc_api.route('/comm_in', methods=['GET', 'POST'])
 def comm_in():
     """通信口插入命令"""
     logger.info("API request: Comm in")
@@ -394,7 +394,7 @@ def comm_in():
     return jsonify(create_response("CommIn", ret[0], ret[1]))
 
 
-@plc_api.route('/PLC/Control/ResetOut', methods=['GET', 'POST'])
+@plc_api.route('/reset_out', methods=['GET', 'POST'])
 def reset_out():
     """重置按钮释放命令"""
     logger.info("API request: Reset out")
@@ -403,7 +403,7 @@ def reset_out():
     return jsonify(create_response("ResetOut", ret[0], ret[1]))
 
 
-@plc_api.route('/PLC/Control/ResetIn', methods=['GET', 'POST'])
+@plc_api.route('/reset_in', methods=['GET', 'POST'])
 def reset_in():
     """重置按钮按下命令"""
     logger.info("API request: Reset in")
@@ -412,7 +412,7 @@ def reset_in():
     return jsonify(create_response("ResetIn", ret[0], ret[1]))
 
 
-@plc_api.route('/PLC/Control/LANE_SELECT_Out', methods=['GET', 'POST'])
+@plc_api.route('/lane_select_out', methods=['GET', 'POST'])
 def lane_out():
     """通道选择释放命令"""
     logger.info("API request: Lane select out")
@@ -421,7 +421,7 @@ def lane_out():
     return jsonify(create_response("LANE_SELECT_Out", ret[0], ret[1]))
 
 
-@plc_api.route('/PLC/Control/LANE_SELECT_In', methods=['GET', 'POST'])
+@plc_api.route('/lane_select_in', methods=['GET', 'POST'])
 def lane_in():
     """通道选择按下命令"""
     logger.info("API request: Lane select in")
@@ -430,7 +430,7 @@ def lane_in():
     return jsonify(create_response("LANE_SELECT_In", ret[0], ret[1]))
 
 
-@plc_api.route('/PLC/Control/CRADLE_INSERT', methods=['GET', 'POST'])
+@plc_api.route('/cradle_insert', methods=['GET', 'POST'])
 def cradle_insert():
     """托架插入命令"""
     logger.info("API request: Cradle insert")
@@ -439,7 +439,7 @@ def cradle_insert():
     return jsonify(create_response("CRADLE_INSERT", ret[0], ret[1]))
 
 
-@plc_api.route('/PLC/Control/CRADLE_EXTRACT', methods=['GET', 'POST'])
+@plc_api.route('/cradle_extract', methods=['GET', 'POST'])
 def cradle_extract():
     """托架拔出命令"""
     logger.info("API request: Cradle extract")

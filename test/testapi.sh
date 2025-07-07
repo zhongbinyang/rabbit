@@ -1,23 +1,20 @@
 # GET request example
-curl -X GET "http://localhost:5001/PLC/Control/execute_command?command_addr=1000&parameters=1&status_addr=2000&expected_value=1&action_name=Test_Command"
+curl -X GET "http://localhost:5001/execute_command?action=Test_Command"
 
-# POST request example
-curl -X POST "http://localhost:5001/PLC/Control/execute_command" \
-  -d "command_addr=1000&parameters=1&status_addr=2000&expected_value=1&action_name=Test_Command"
+# POST request example (form)
+curl -X POST "http://localhost:5001/execute_command" \
+  -d "action=Test_Command"
 
-  curl -X POST "http://localhost:5001/PLC/Control/execute_command" \
+# POST request example (JSON)
+curl -X POST "http://localhost:5001/execute_command" \
   -H "Content-Type: application/json" \
   -d '{
-    "command_addr": "1000",
-    "parameters": "1",
-    "status_addr": "2000",
-    "expected_value": "1",
-    "action_name": "Test_Command"
+    "action": "Test_Command"
   }'
 
 # Minimal example with only required parameter
-curl "http://localhost:5001/PLC/Control/execute_command?command_addr=1000"
+curl "http://localhost:5001/execute_command?action=Test_Command"
 
 # Example to get JSON response
-curl -X GET "http://localhost:5001/PLC/Control/execute_command?command_addr=1000" \
+curl -X GET "http://localhost:5001/execute_command?action=Test_Command" \
   -H "Accept: application/json"
