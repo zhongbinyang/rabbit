@@ -1,5 +1,6 @@
 import os
 import datetime
+import sys
 
 from flask import Flask, render_template, session, request, copy_current_request_context, jsonify, send_from_directory, Blueprint, Response
 
@@ -20,11 +21,18 @@ class APIError(Exception):
 
 
 # 获取当前文件所在目录路径
-current_dir = os.path.dirname(os.path.abspath(__file__))
+if hasattr(sys, '_MEIPASS'):
+    # PyInstaller 打包后运行时
+    base_dir = os.path.dirname(sys.executable)
+    static_dir = os.path.abspath(os.path.join(base_dir, 'static'))
+    print(f"PyInstaller 打包后运行时: {base_dir}")
+else:
+    # 源码运行时
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    static_dir = os.path.abspath(os.path.join(base_dir, '..', 'static'))
 
 # 创建API应用
-api_app = Flask(__name__, 
-                template_folder=os.path.join(current_dir, 'templates'))
+api_app = Flask(__name__, static_folder=static_dir, template_folder=static_dir)
 api_app.config['JSON_SORT_KEYS'] = False
 
 # 创建蓝图
@@ -51,15 +59,15 @@ def create_response(function: str, result: bool, message: str) -> Dict[str, Any]
 
 @plc_api.route('/test')
 def serve_testapi():
-    return send_from_directory('static', 'testapi.html')
+    return send_from_directory(static_dir, 'testapi.html')
 
 @plc_api.route('/setting')
 def serve_plc_io_list_manager():
-    return send_from_directory('static', 'PLC_IO_List_Manager.html')
+    return send_from_directory(static_dir, 'PLC_IO_List_Manager.html')
 
 @plc_api.route('/control')
 def serve_bm_ui():
-    return send_from_directory('static', 'BM_UI.html')
+    return send_from_directory(static_dir, 'BM_UI.html')
 
 @plc_api.route('/')
 def api_documentation():
@@ -67,174 +75,174 @@ def api_documentation():
     # 构建API文档的结构化数据
     api_endpoints = [
         {
-            'URL': 'http://{host}:5000/connect_plc',
+            'URL': 'http://{host}:5001/connect_plc',
             'function': 'connect_plc',
             'description': 'Connect PLC with host and port, default host 192.168.1.11, default port 502',
             'params': '[str,int],Host,Port',
             'return': 'Result:True or False,Message:Connect message or error message',
-            'example': 'http://127.0.0.1:5000/connect_plc?Host=192.168.1.11&Port=502',
+            'example': 'http://127.0.0.1:5001/connect_plc?Host=192.168.1.11&Port=502',
             'response': '{"Function":"ConnectPLC","Message":"Connect PLC Successful 192.168.1.11:502","Result":true,"timestamp":"2025-01-25 13:41:27_396084"}'
         },
         {
-            'URL': 'http://{host}:5000/execute_command',
+            'URL': 'http://{host}:5001/execute_command',
             'function': 'execute_plc_command',
             'description': 'Execute PLC command with action parameter',
             'params': 'action',
             'return': 'Result:True or False,Message:Command result or error message',
-            'example': 'http://127.0.0.1:5000/execute_command?action=sample_action',
+            'example': 'http://127.0.0.1:5001/execute_command?action=sample_action',
             'response': '{"Function":"execute_plc_command","Message":"sample_action command successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/disconnect_plc',
+            'URL': 'http://{host}:5001/disconnect_plc',
             'function': 'disconnect_plc',
             'description': 'Disconnect PLC',
             'params': '',
             'return': 'Result:True or False,Message:Disconnect message or error message',
-            'example': 'http://127.0.0.1:5000/disconnect_plc',
+            'example': 'http://127.0.0.1:5001/disconnect_plc',
             'response': '{"Function":"DisconnectPLC","Message":"Close Successful","Result":true,"timestamp":"2025-01-25 13:43:47_847322"}'
         },
         {
-            'URL': 'http://{host}:5000/lifter_up',
+            'URL': 'http://{host}:5001/lifter_up',
             'function': 'lifter_up',
             'description': 'Control Lifter Up',
             'params': '',
             'return': 'Result:True or False,Message:Set Lifter Up Successful or Error message',
-            'example': 'http://127.0.0.1:5000/lifter_up',
+            'example': 'http://127.0.0.1:5001/lifter_up',
             'response': '{"Function":"LifterUp","Message":"Set Lifter Up Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/lifter_down',
+            'URL': 'http://{host}:5001/lifter_down',
             'function': 'lifter_down',
             'description': 'Control Lifter Down',
             'params': '',
             'return': 'Result:True or False,Message:Set Lifter Down Successful or Error message',
-            'example': 'http://127.0.0.1:5000/lifter_down',
+            'example': 'http://127.0.0.1:5001/lifter_down',
             'response': '{"Function":"LifterDown","Message":"Set Lifter Down Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/clampx_out',
+            'URL': 'http://{host}:5001/clampx_out',
             'function': 'clamp_x_out',
             'description': 'Control Clamp X Out',
             'params': '',
             'return': 'Result:True or False,Message:Set Clamp X Out Successful or Error message',
-            'example': 'http://127.0.0.1:5000/clampx_out',
+            'example': 'http://127.0.0.1:5001/clampx_out',
             'response': '{"Function":"ClampX_Out","Message":"Set Clamp X Out Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/clampx_in',
+            'URL': 'http://{host}:5001/clampx_in',
             'function': 'clamp_x_in',
             'description': 'Control Clamp X In',
             'params': '',
             'return': 'Result:True or False,Message:Set Clamp X In Successful or Error message',
-            'example': 'http://127.0.0.1:5000/clampx_in',
+            'example': 'http://127.0.0.1:5001/clampx_in',
             'response': '{"Function":"ClampX_In","Message":"Set Clamp X In Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/clampy_out',
+            'URL': 'http://{host}:5001/clampy_out',
             'function': 'clamp_y_out',
             'description': 'Control Clamp Y Out',
             'params': '',
             'return': 'Result:True or False,Message:Set Clamp Y Out Successful or Error message',
-            'example': 'http://127.0.0.1:5000/clampy_out',
+            'example': 'http://127.0.0.1:5001/clampy_out',
             'response': '{"Function":"ClampY_Out","Message":"Set Clamp Y Out Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/clampy_in',
+            'URL': 'http://{host}:5001/clampy_in',
             'function': 'clamp_y_in',
             'description': 'Control Clamp Y In',
             'params': '',
             'return': 'Result:True or False,Message:Set Clamp Y In Successful or Error message',
-            'example': 'http://127.0.0.1:5000/clampy_in',
+            'example': 'http://127.0.0.1:5001/clampy_in',
             'response': '{"Function":"ClampY_In","Message":"Set Clamp Y In Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/power_out',
+            'URL': 'http://{host}:5001/power_out',
             'function': 'power_out',
             'description': 'Control Power Out',
             'params': '',
             'return': 'Result:True or False,Message:Set Power Out Successful or Error message',
-            'example': 'http://127.0.0.1:5000/power_out',
+            'example': 'http://127.0.0.1:5001/power_out',
             'response': '{"Function":"PowerOut","Message":"Set Power Out Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/power_in',
+            'URL': 'http://{host}:5001/power_in',
             'function': 'power_in',
             'description': 'Control Power In',
             'params': '',
             'return': 'Result:True or False,Message:Set Power In Successful or Error message',
-            'example': 'http://127.0.0.1:5000/power_in',
+            'example': 'http://127.0.0.1:5001/power_in',
             'response': '{"Function":"PowerIn","Message":"Set Power In Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/comm_out',
+            'URL': 'http://{host}:5001/comm_out',
             'function': 'comm_out',
             'description': 'Control Comm Out',
             'params': '',
             'return': 'Result:True or False,Message:Set Comm Out Successful or Error message',
-            'example': 'http://127.0.0.1:5000/comm_out',
+            'example': 'http://127.0.0.1:5001/comm_out',
             'response': '{"Function":"CommOut","Message":"Set Comm Out Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/comm_in',
+            'URL': 'http://{host}:5001/comm_in',
             'function': 'comm_in',
             'description': 'Control Comm In',
             'params': '',
             'return': 'Result:True or False,Message:Set Comm In Successful or Error message',
-            'example': 'http://127.0.0.1:5000/comm_in',
+            'example': 'http://127.0.0.1:5001/comm_in',
             'response': '{"Function":"CommIn","Message":"Set Comm In Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/reset_out',
+            'URL': 'http://{host}:5001/reset_out',
             'function': 'reset_out',
             'description': 'Control Reset Out',
             'params': '',
             'return': 'Result:True or False,Message:Set Reset Out Successful or Error message',
-            'example': 'http://127.0.0.1:5000/reset_out',
+            'example': 'http://127.0.0.1:5001/reset_out',
             'response': '{"Function":"ResetOut","Message":"Set Reset Out Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/reset_in',
+            'URL': 'http://{host}:5001/reset_in',
             'function': 'reset_in',
             'description': 'Control Reset In',
             'params': '',
             'return': 'Result:True or False,Message:Set Reset In Successful or Error message',
-            'example': 'http://127.0.0.1:5000/reset_in',
+            'example': 'http://127.0.0.1:5001/reset_in',
             'response': '{"Function":"ResetIn","Message":"Set Reset In Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/lane_select_out',
+            'URL': 'http://{host}:5001/lane_select_out',
             'function': 'lane_out',
             'description': 'Control Lane Select Out',
             'params': '',
             'return': 'Result:True or False,Message:Set Lane Select Out Successful or Error message',
-            'example': 'http://127.0.0.1:5000/lane_select_out',
+            'example': 'http://127.0.0.1:5001/lane_select_out',
             'response': '{"Function":"LANE_SELECT_Out","Message":"Set LANE_SELECT_Out Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/lane_select_in',
+            'URL': 'http://{host}:5001/lane_select_in',
             'function': 'lane_in',
             'description': 'Control Lane Select In',
             'params': '',
             'return': 'Result:True or False,Message:Set Lane Select In Successful or Error message',
-            'example': 'http://127.0.0.1:5000/lane_select_in',
+            'example': 'http://127.0.0.1:5001/lane_select_in',
             'response': '{"Function":"LANE_SELECT_In","Message":"Set LANE_SELECT_In Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/cradle_insert',
+            'URL': 'http://{host}:5001/cradle_insert',
             'function': 'cradle_insert',
             'description': 'Control Cradle Insert',
             'params': '',
             'return': 'Result:True or False,Message:Set Cradle Insert Successful or Error message',
-            'example': 'http://127.0.0.1:5000/cradle_insert',
+            'example': 'http://127.0.0.1:5001/cradle_insert',
             'response': '{"Function":"CRADLE_INSERT","Message":"Set CRADLE_INSERT Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         },
         {
-            'URL': 'http://{host}:5000/cradle_extract',
+            'URL': 'http://{host}:5001/cradle_extract',
             'function': 'cradle_extract',
             'description': 'Control Cradle Extract',
             'params': '',
             'return': 'Result:True or False,Message:Set Cradle Extract Successful or Error message',
-            'example': 'http://127.0.0.1:5000/cradle_extract',
+            'example': 'http://127.0.0.1:5001/cradle_extract',
             'response': '{"Function":"CRADLE_EXTRACT","Message":"Set CRADLE EXTRACT Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         }
     ]
@@ -261,8 +269,8 @@ def api_documentation():
 @plc_api.route('/connect_plc', methods=['GET', 'POST'])
 def connect_plc():
     """连接PLC设备"""
-    host = request.args.get('Host', type=str, default=API_CONFIG.get('host', '192.168.1.11'))
-    port = request.args.get('Port', type=int, default=API_CONFIG.get('port', 502))
+    host = request.args.get('Host', type=str, default=PLC_CONFIG.get('host', '192.168.1.11'))
+    port = request.args.get('Port', type=int, default=PLC_CONFIG.get('port', 502))
     
     logger.info(f"API request: Connect PLC {host}:{port}")
     ret = plc_controller.connect_plc(host, port)
@@ -445,29 +453,29 @@ def cradle_extract():
     return jsonify(create_response("CRADLE_EXTRACT", ret[0], ret[1]))
 
 
-@plc_api.route('/PLC/Status/GetCradleState', methods=['GET', 'POST'])
-def get_cradle_state():
-    """获取托架状态"""
-    logger.info("API request: Get cradle state")
-    ret = plc_controller.get_cradle_state()
+# @plc_api.route('/PLC/Status/GetCradleState', methods=['GET', 'POST'])
+# def get_cradle_state():
+#     """获取托架状态"""
+#     logger.info("API request: Get cradle state")
+#     ret = plc_controller.get_cradle_state()
     
-    if ret[0]:
-        state = "插入" if ret[1] == 1 else "拔出"
-        return jsonify(create_response("GetCradleState", ret[0], f"Cradle state: {state} ({ret[1]})"))
-    else:
-        return jsonify(create_response("GetCradleState", ret[0], "Get cradle state failed"))
+#     if ret[0]:
+#         state = "插入" if ret[1] == 1 else "拔出"
+#         return jsonify(create_response("GetCradleState", ret[0], f"Cradle state: {state} ({ret[1]})"))
+#     else:
+#         return jsonify(create_response("GetCradleState", ret[0], "Get cradle state failed"))
 
 
-@plc_api.route('/PLC/Status/GetFirmware', methods=['GET', 'POST'])
-def get_firmware():
-    """获取固件版本"""
-    logger.info("API request: Get firmware")
-    ret = plc_controller.get_plc_firmware()
+# @plc_api.route('/PLC/Status/GetFirmware', methods=['GET', 'POST'])
+# def get_firmware():
+#     """获取固件版本"""
+#     logger.info("API request: Get firmware")
+#     ret = plc_controller.get_plc_firmware()
     
-    if ret[0]:
-        return jsonify(create_response("GetFirmware", ret[0], f"Firmware version: {ret[1]}"))
-    else:
-        return jsonify(create_response("GetFirmware", ret[0], "Get firmware failed"))
+#     if ret[0]:
+#         return jsonify(create_response("GetFirmware", ret[0], f"Firmware version: {ret[1]}"))
+#     else:
+#         return jsonify(create_response("GetFirmware", ret[0], "Get firmware failed"))
 
 
 @plc_api.route('/get_version', methods=['GET', 'POST'])
@@ -512,7 +520,7 @@ def write_json_file():
     
     try:
         # 构建完整的文件路径
-        file_path = os.path.join(current_dir, 'static', filename)
+        file_path = os.path.join(static_dir, filename)
         logger.info(f"Writing JSON to file: {file_path}")
         
         # 写入文件
@@ -547,7 +555,7 @@ def read_json_file():
     
     try:
         # 构建完整的文件路径
-        file_path = os.path.join(current_dir, 'static', filename)
+        file_path = os.path.join(static_dir, filename)
         logger.info(f"Reading JSON from file: {file_path}")
         
         # 读取文件
