@@ -29,29 +29,15 @@ class Ui_PLC(object):
 
         self.horizontalLayout_27.addWidget(self.label_21)
 
-        self.ip = QLineEdit(PLC)
-        self.ip.setObjectName(u"ip")
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.ip.sizePolicy().hasHeightForWidth())
-        self.ip.setSizePolicy(sizePolicy)
-        self.ip.setMinimumSize(QSize(0, 30))
-
-        self.horizontalLayout_27.addWidget(self.ip)
 
         self.label_24 = QLabel(PLC)
         self.label_24.setObjectName(u"label_24")
 
         self.horizontalLayout_27.addWidget(self.label_24)
 
-        self.port = QSpinBox(PLC)
-        self.port.setObjectName(u"port")
-        self.port.setMinimumSize(QSize(100, 30))
-        self.port.setMaximum(999999)
-        self.port.setValue(502)
-
-        self.horizontalLayout_27.addWidget(self.port)
 
         self.connectPLC = QWidget(PLC)
         self.connectPLC.setObjectName(u"connectPLC")
@@ -174,9 +160,6 @@ class Ui_PLC(object):
 
     def retranslateUi(self, PLC):
         PLC.setWindowTitle(QCoreApplication.translate("PLC", u"PLC", None))
-        self.label_21.setText(QCoreApplication.translate("PLC", u"IP:", None))
-        self.ip.setText(QCoreApplication.translate("PLC", u"192.168.6.6", None))
-        self.label_24.setText(QCoreApplication.translate("PLC", u"Port:", None))
         self.dutBox.setTitle(QCoreApplication.translate("PLC", u"Cylinder", None))
         self.sensorBox.setTitle(QCoreApplication.translate("PLC", u"Sensor", None))
     # retranslateUi

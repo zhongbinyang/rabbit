@@ -86,10 +86,8 @@ QLineEdit{  background-color: rgb(225, 225, 225);
         self.setAttribute(Qt.WA_DeleteOnClose, True)
         self.setWindowTitle("FT_V1.0.0.8")
         self.ui.labInformation.setText("Bojay PLC UI (Gorilla FT) (Moose FT)")
-        if os.path.exists(os.getcwd() + "/Config.json"):
-            file = open(os.getcwd() + "/Config.json", "r+")
-            Global.Config = json.load(file)
-            file.close()
+
+
         self.plcUI = PLCUI()
         self.ui.tabWidget.addTab(self.plcUI,"PLC")
         Global.setLogFunction(self.addLog)
@@ -109,12 +107,8 @@ QLineEdit{  background-color: rgb(225, 225, 225);
 
 
     def closeEvent(self, QCloseEvent ):
-        Global.Config["PLCIP"] = self.plcUI.ui.ip.text()
-        Global.Config["PLCPort"] = self.plcUI.ui.port.value()
-        path = os.getcwd() + "/Config.json"
-        file = open(path, "w+")
-        json.dump(Global.Config, file)
-        file.close()
+        
+        
         plc_controller.disconnect_plc()
         os.kill(os.getpid(), signal.SIGTERM)
     def initConnect(self):

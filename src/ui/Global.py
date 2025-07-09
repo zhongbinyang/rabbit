@@ -1,11 +1,12 @@
 from PyQt5.QtCore import pyqtSignal, QObject
+from config.settings import PLC_CONFIG
 
 class Global(QObject):
     logSignal = pyqtSignal(int, str)
     calSignal = pyqtSignal()
     accImageSignal = pyqtSignal(str)
     angImageSignal = pyqtSignal(str)
-    Config = {"PLCIP":"192.168.1.11","PLCPort":502}
+
     def __init__(self):
         super(Global, self).__init__()
 

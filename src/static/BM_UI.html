@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
   <meta charset="UTF-8">
-  <title>BM 控制界面</title>
+  <title>BM Control Interface</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="/static/bootstrap.min.css" rel="stylesheet">
   <style>
@@ -177,6 +177,35 @@
     .status-inactive {
       background-color: var(--danger-color);
     }
+    
+    .status-display-half {
+      display: flex;
+      width: 100%;
+    }
+    .status-half, .expected-value-half {
+      flex: 1 1 0;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      font-size: 1.1rem;
+      word-break: break-all;
+    }
+    .status-half {
+      justify-content: flex-start;
+    }
+    .expected-value-half {
+      justify-content: flex-end;
+      text-align: right;
+    }
+    .card-scroll-container {
+      max-height: 520px;
+      overflow-y: auto;
+      padding-right: 8px;
+      margin-bottom: 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      background: #fff;
+    }
   </style>
 </head>
 <body>
@@ -186,49 +215,53 @@
   
   <div class="container">
     <div class="tab-btns">
-      <button class="btn btn-primary" id="tab1Btn" onclick="switchTab(1)">控制</button>
-      <button class="btn btn-outline-primary" id="tab2Btn" onclick="switchTab(2)">状态</button>
+      <button class="btn btn-primary" id="tab1Btn" onclick="switchTab(1)">Control</button>
+      <button class="btn btn-outline-primary" id="tab2Btn" onclick="switchTab(2)">Status</button>
     </div>
     
     <!-- 控制页面 -->
     <div id="tab1" class="tab-content-area active">
-      <h2 class="page-title">控制功能</h2>
-      <div class="row" id="controlActions">
-        <!-- 控制动作将被动态添加到这里 -->
+      <h2 class="page-title">Control Functions</h2>
+      <div class="card-scroll-container">
+        <div class="row" id="controlActions">
+          <!-- Control action cards will be dynamically added here -->
+        </div>
       </div>
     </div>
     
     <!-- 状态页面 -->
     <div id="tab2" class="tab-content-area">
       <div class="d-flex align-items-center mb-3">
-        <h2 class="page-title mb-0">状态监控</h2>
+        <h2 class="page-title mb-0">Status Monitoring</h2>
         <button class="btn btn-outline-secondary ms-3" id="toggleAllStatusBtn" onclick="toggleAllStatusActions()">
-          <i class="bi bi-play-circle" id="toggleAllStatusBtnIcon"></i> <span id="toggleAllStatusBtnText">全部执行</span>
+          <i class="bi bi-play-circle" id="toggleAllStatusBtnIcon"></i> <span id="toggleAllStatusBtnText">Execute All</span>
         </button>
       </div>
-      <div class="row" id="statusActions">
-        <!-- 状态信息将被动态添加到这里 -->
+      <div class="card-scroll-container">
+        <div class="row" id="statusActions">
+          <!-- Status cards will be dynamically added here -->
+        </div>
       </div>
     </div>
     
     <!-- 日志区域 -->
     <div class="log-container">
       <div id="log-control" class="log-tab-area">
-        <h4>操作日志（控制）</h4>
+        <h4>Operation Log (Control)</h4>
         <div class="log-area" id="logAreaControl">
           <!-- 日志内容将被动态添加到这里 -->
         </div>
         <div class="mt-2">
-          <button class="btn btn-sm btn-outline-secondary" onclick="clearLog('control')">清空日志</button>
+          <button class="btn btn-sm btn-outline-secondary" onclick="clearLog('control')">Clear Log</button>
         </div>
       </div>
       <div id="log-status" class="log-tab-area" style="display:none;">
-        <h4>操作日志（状态）</h4>
+        <h4>Operation Log (Status)</h4>
         <div class="log-area" id="logAreaStatus">
           <!-- 日志内容将被动态添加到这里 -->
         </div>
         <div class="mt-2">
-          <button class="btn btn-sm btn-outline-secondary" onclick="clearLog('status')">清空日志</button>
+          <button class="btn btn-sm btn-outline-secondary" onclick="clearLog('status')">Clear Log</button>
         </div>
       </div>
     </div>
@@ -309,11 +342,11 @@
       if(tab === 'status') {
         logListStatus = [];
         renderLog('status');
-        addLog('info', '日志已清空', 'status');
+        addLog('info', 'Log cleared', 'status');
       } else {
         logListControl = [];
         renderLog('control');
-        addLog('info', '日志已清空', 'control');
+        addLog('info', 'Log cleared', 'control');
       }
     }
     
@@ -321,7 +354,7 @@
     async function loadActionFile() {
       const filename = "PLC_IO_List_A01_grouped.json";
       toggleLoading(true);
-      addLog('info', '正在加载动作配置文件...', currentTab);
+      addLog('info', 'Loading action configuration file...', currentTab);
       try {
         const response = await fetch(`/api/read_json_file?filename=${encodeURIComponent(filename)}`);
         if (!response.ok) {
@@ -330,10 +363,10 @@
         const data = await response.json();
         actionData = data;
         processActionData();
-        addLog('success', '动作配置文件加载成功', currentTab);
+        addLog('success', 'Action configuration file loaded successfully', currentTab);
       } catch (error) {
         console.error('Error loading action file:', error);
-        addLog('error', `加载失败: ${error.message}`, currentTab);
+        addLog('error', `Loading failed: ${error.message}`, currentTab);
       } finally {
         toggleLoading(false);
       }
@@ -369,8 +402,8 @@
         <div class="action-card">
           <div class="card-header">connect_plc</div>
           <div class="card-body">
-            <p>连接PLC（默认192.168.1.11:502）</p>
-            <button class="btn btn-outline-success control-action-btn" onclick="connectPLC()">连接</button>
+            <p>Connect to PLC (default 192.168.1.11:502)</p>
+            <button class="btn btn-outline-success control-action-btn" onclick="connectPLC()">Connect</button>
           </div>
         </div>
       `;
@@ -383,15 +416,15 @@
         <div class="action-card">
           <div class="card-header">disconnect_plc</div>
           <div class="card-body">
-            <p>断开PLC连接</p>
-            <button class="btn btn-outline-danger control-action-btn" onclick="disconnectPLC()">断开</button>
+            <p>Disconnect PLC</p>
+            <button class="btn btn-outline-danger control-action-btn" onclick="disconnectPLC()">Disconnect</button>
           </div>
         </div>
       `;
       container.appendChild(disconnectCol);
       
       if (controlActions.length === 0) {
-        container.innerHTML += '<div class="col-12 text-center p-5">没有可用的控制动作</div>';
+        container.innerHTML += '<div class="col-12 text-center p-5">No available control actions</div>';
         return;
       }
       
@@ -403,13 +436,13 @@
           <div class="action-card">
             <div class="card-header d-flex justify-content-between align-items-center">
               ${action.action}
-              <span class="badge bg-light text-dark">${action.commands ? action.commands.length : 0} 命令</span>
+              <span class="badge bg-light text-dark">${action.commands ? action.commands.length : 0} commands</span>
             </div>
             <div class="card-body">
-              <p>${action.description || '无描述'}</p>
+              <p>${action.description || 'No description'}</p>
               <button class="btn btn-outline-primary control-action-btn" 
                 onclick="executeAction('${action.action}')">
-                执行
+                Execute
               </button>
             </div>
           </div>
@@ -424,25 +457,33 @@
       const container = document.getElementById('statusActions');
       container.innerHTML = '';
       if (statusActions.length === 0) {
-        container.innerHTML = '<div class="col-12 text-center p-5">没有可用的状态信息</div>';
+        container.innerHTML = '<div class="col-12 text-center p-5">No available status information</div>';
         return;
       }
       statusActions.forEach(action => {
         const col = document.createElement('div');
         col.className = 'col-md-4 col-sm-6 mb-3';
+        // 处理expected_value显示
+        let expectedValueHtml = '';
+        if (action.commands && action.commands[0] && action.commands[0].expected_value !== undefined) {
+          expectedValueHtml = `<div class=\"expected-value-half\"><strong>Expected:</strong> <span class=\"text-primary\">${Array.isArray(action.commands[0].expected_value) ? action.commands[0].expected_value.join(', ') : action.commands[0].expected_value}</span></div>`;
+        }
         col.innerHTML = `
-          <div class="action-card">
-            <div class="card-header">
+          <div class=\"action-card\">
+            <div class=\"card-header\">
               ${action.action}
             </div>
-            <div class="card-body">
-              <p>${action.description || '无描述'}</p>
-              <div class="status-display mt-2">
-                <span class="status-badge status-inactive" id="status-badge-${action.action}"></span>
-                <span class="status-value" id="status-value-${action.action}">未知</span>
+            <div class=\"card-body\">
+              <p>${action.description || 'No description'}</p>
+              <div class=\"status-display-half mt-2\">
+                <div class=\"status-half\">
+                  <span class=\"status-badge status-inactive\" id=\"status-badge-${action.action}\"></span>
+                  <span class=\"status-value\" id=\"status-value-${action.action}\">Unknown</span>
+                </div>
+                ${expectedValueHtml}
               </div>
-              <div class="mt-3">
-                <button class="btn btn-sm btn-outline-success" onclick="toggleStatusActionPolling('${action.action}')" id="toggle-btn-${action.action}">开始监听</button>
+              <div class=\"mt-3\">
+                <button class=\"btn btn-sm btn-outline-success\" onclick=\"toggleStatusActionPolling('${action.action}')\" id=\"toggle-btn-${action.action}\">Start Listening</button>
               </div>
             </div>
           </div>
@@ -455,7 +496,7 @@
     
     // 执行动作
     async function executeAction(actionName) {
-      addLog('info', `正在执行动作: ${actionName}`, currentTab);
+      addLog('info', `Executing action: ${actionName}`, currentTab);
       toggleLoading(true);
       try {
         const response = await fetch('/execute_command', {
@@ -469,13 +510,13 @@
         });
         const data = await response.json();
         if (data.Result) {
-          addLog('success', `动作 ${actionName} 执行成功: ${data.Message}`, currentTab);
+          addLog('success', `Action ${actionName} executed successfully: ${data.Message}`, currentTab);
         } else {
-          addLog('error', `动作 ${actionName} 执行失败: ${data.Message}`, currentTab);
+          addLog('error', `Action ${actionName} execution failed: ${data.Message}`, currentTab);
         }
       } catch (error) {
         console.error('Error executing action:', error);
-        addLog('error', `执行失败: ${error.message}`, currentTab);
+        addLog('error', `Execution failed: ${error.message}`, currentTab);
       } finally {
         toggleLoading(false);
       }
@@ -483,7 +524,7 @@
     
     // 新增连接/断开PLC的函数
     async function connectPLC() {
-      addLog('info', '正在连接PLC...', currentTab);
+      addLog('info', 'Connecting to PLC...', currentTab);
       toggleLoading(true);
       try {
         const response = await fetch('/connect_plc', {
@@ -493,18 +534,18 @@
         });
         const data = await response.json();
         if (data.Result) {
-          addLog('success', '连接PLC成功: ' + data.Message, currentTab);
+          addLog('success', 'Connected to PLC: ' + data.Message, currentTab);
         } else {
-          addLog('error', '连接PLC失败: ' + data.Message, currentTab);
+          addLog('error', 'Failed to connect to PLC: ' + data.Message, currentTab);
         }
       } catch (error) {
-        addLog('error', '连接PLC异常: ' + error.message, currentTab);
+        addLog('error', 'PLC connection error: ' + error.message, currentTab);
       } finally {
         toggleLoading(false);
       }
     }
     async function disconnectPLC() {
-      addLog('info', '正在断开PLC...', currentTab);
+      addLog('info', 'Disconnecting PLC...', currentTab);
       toggleLoading(true);
       try {
         const response = await fetch('/disconnect_plc', {
@@ -514,12 +555,12 @@
         });
         const data = await response.json();
         if (data.Result) {
-          addLog('success', '断开PLC成功: ' + data.Message, currentTab);
+          addLog('success', 'PLC disconnected: ' + data.Message, currentTab);
         } else {
-          addLog('error', '断开PLC失败: ' + data.Message, currentTab);
+          addLog('error', 'Failed to disconnect PLC: ' + data.Message, currentTab);
         }
       } catch (error) {
-        addLog('error', '断开PLC异常: ' + error.message, currentTab);
+        addLog('error', 'PLC disconnection error: ' + error.message, currentTab);
       } finally {
         toggleLoading(false);
       }
@@ -528,10 +569,10 @@
     // 启动单个action的定时监听
     function startStatusActionPolling(actionName) {
       if (statusActionIntervalMap[actionName]) {
-        addLog('info', `[轮询] ${actionName} 已在监听中`, 'status');
+        addLog('info', `[Polling] ${actionName} is already being monitored`, 'status');
         return;
       }
-      addLog('info', `[轮询] ${actionName} 开始监听`, 'status');
+      addLog('info', `[Polling] Starting to monitor ${actionName}`, 'status');
       statusActionIntervalMap[actionName] = setInterval(async () => {
         try {
           const response = await fetch('/execute_command', {
@@ -540,17 +581,41 @@
             body: JSON.stringify({ action: actionName }),
           });
           const data = await response.json();
+          if (data.Result !== undefined) {
+            updateStatusCard(actionName, data.Result, data.Message);
+          }
           if (data.Result) {
-            addLog('success', `[轮询] ${actionName}: ${data.Message}`, 'status');
+            addLog('success', `[Polling] ${actionName}: ${data.Message}`, 'status');
           } else {
-            addLog('error', `[轮询] ${actionName}: ${data.Message}`, 'status');
+            addLog('error', `[Polling] ${actionName}: ${data.Message}`, 'status');
           }
         } catch (e) {
-          addLog('error', `[轮询] ${actionName}: 请求异常`, 'status');
+          addLog('error', `[Polling] ${actionName}: Request exception`, 'status');
         }
       }, 1000);
       updateAllStatusBtn();
       updateAllToggleBtns();
+    }
+
+    // 新增：根据后端Result动态更新状态卡片
+    function updateStatusCard(actionName, isOk, msg) {
+      const valueSpan = document.getElementById(`status-value-${actionName}`);
+      const badge = document.getElementById(`status-badge-${actionName}`);
+      if (!valueSpan || !badge) return;
+      if (isOk) {
+        valueSpan.textContent = 'Normal';
+        valueSpan.classList.remove('text-danger');
+        valueSpan.classList.add('text-success');
+        badge.classList.remove('status-inactive');
+        badge.classList.add('status-active');
+      } else {
+        valueSpan.textContent = 'Abnormal';
+        valueSpan.classList.remove('text-success');
+        valueSpan.classList.add('text-danger');
+        badge.classList.remove('status-active');
+        badge.classList.add('status-inactive');
+      }
+      valueSpan.title = msg || '';
     }
 
     // 停止单个action的定时监听
@@ -558,9 +623,9 @@
       if (statusActionIntervalMap[actionName]) {
         clearInterval(statusActionIntervalMap[actionName]);
         delete statusActionIntervalMap[actionName];
-        addLog('info', `[轮询] ${actionName} 已停止监听`, 'status');
+        addLog('info', `[Polling] ${actionName} stopped monitoring`, 'status');
       } else {
-        addLog('info', `[轮询] ${actionName} 未在监听中`, 'status');
+        addLog('info', `[Polling] ${actionName} is not being monitored`, 'status');
       }
       updateAllStatusBtn();
       updateAllToggleBtns();
@@ -586,10 +651,10 @@
     }
     function executeAllStatusActions() {
       if (statusActions.length === 0) {
-        addLog('info', '没有可执行的状态动作', 'status');
+        addLog('info', 'No status actions available to execute', 'status');
         return;
       }
-      addLog('info', '正在批量轮询监听所有状态动作...', 'status');
+      addLog('info', 'Batch polling to monitor all status actions...', 'status');
       toggleLoading(false);
       statusActions.forEach(action => {
         if (!statusActionIntervalMap[action.action]) {
@@ -608,9 +673,9 @@
         }
       });
       if (stopped) {
-        addLog('info', '已全部停止所有状态动作监听', 'status');
+        addLog('info', 'All status action monitoring stopped', 'status');
       } else {
-        addLog('info', '当前无正在监听的状态动作', 'status');
+        addLog('info', 'No status actions currently being monitored', 'status');
       }
       updateAllStatusBtn();
       updateAllToggleBtns();
@@ -625,12 +690,12 @@
       if (allListening) {
         btn.classList.remove('btn-outline-secondary');
         btn.classList.add('btn-outline-danger');
-        btnText.textContent = '全部停止';
+        btnText.textContent = 'Stop All';
         btnIcon.className = 'bi bi-stop-circle';
       } else {
         btn.classList.remove('btn-outline-danger');
         btn.classList.add('btn-outline-secondary');
-        btnText.textContent = '全部执行';
+        btnText.textContent = 'Execute All';
         btnIcon.className = 'bi bi-play-circle';
       }
     }
@@ -639,11 +704,11 @@
         const btn = document.getElementById(`toggle-btn-${action.action}`);
         if (!btn) return;
         if (statusActionIntervalMap[action.action]) {
-          btn.textContent = '停止监听';
+          btn.textContent = 'Stop Listening';
           btn.classList.remove('btn-outline-success');
           btn.classList.add('btn-outline-danger');
         } else {
-          btn.textContent = '开始监听';
+          btn.textContent = 'Start Listening';
           btn.classList.remove('btn-outline-danger');
           btn.classList.add('btn-outline-success');
         }
@@ -652,7 +717,7 @@
     
     // 初始化
     window.addEventListener('load', function() {
-      addLog('info', 'BM UI 界面已加载', currentTab);
+      addLog('info', 'BM UI loaded', currentTab);
       loadActionFile();
     });
   </script>

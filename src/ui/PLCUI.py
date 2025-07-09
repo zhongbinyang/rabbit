@@ -117,10 +117,8 @@ class PLCUI(QWidget):
         self.isRefresh = False
         self.isRUnThread = False
         self.thread = None
-        if "PLCIP" in Global.Config:
-            self.ui.ip.setText(Global.Config["PLCIP"])
-        if "PLCPort" in Global.Config:
-            self.ui.port.setValue(Global.Config["PLCPort"])
+        
+        
         self.refreshSensor.connect(self.refreshSensored)
         uithread = threading.Thread(target=self.autoStart)
         uithread.start()
@@ -303,9 +301,7 @@ class PLCUI(QWidget):
     def connectPLC(self,value,text):
         ret = None
         if value == True:
-            ip = self.ui.ip.text()
-            port = self.ui.port.value()
-            ret = plc_controller.connect_plc(ip,port)
+            ret = plc_controller.connect_plc()
         else:
             ret = plc_controller.disconnect_plc()
         if ret[0] == True:

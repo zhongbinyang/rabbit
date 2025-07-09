@@ -12,6 +12,8 @@ from utils.logger import logger
 from utils.exceptions import handle_exception
 from typing import Tuple, Any, List, Dict, Optional, Union
 import threading
+import json
+from config.settings import PLC_IO_LIST_A01_GROUPED_PATH
 
 class AddressMap:
     """PLC地址映射，将名称映射到地址"""
@@ -166,9 +168,17 @@ class PLCController:
     def get_plc_address_from_name(self, command_addr: str) -> int:
         # 如果是以字母开头，去掉字母前缀
         if command_addr[0].isalpha():
-            return int(command_addr[1:])
+            if command_addr[0] == "M":
+                return int(command_addr[1:])
+            elif command_addr[0] == "H" and command_addr[1] == "D":
+                return int(command_addr[2:])+41088
+            elif command_addr[0] == "D":
+                return int(command_addr[1:])
+            else:
+                return -1
         else:
             return int(command_addr)
+
         
     @handle_exception
     def _execute_plc_command(self, action: str) -> Tuple[bool, str]:
@@ -190,7 +200,7 @@ class PLCController:
         # 读取动作配置
         logger.info("Reading action configuration file...")
         try:
-            with open(os.path.join(os.path.dirname(__file__), '..', 'api', 'static', 'PLC_IO_List_A01_grouped.json'), 'r') as f:
+            with open(PLC_IO_LIST_A01_GROUPED_PATH, 'r') as f:
                 action_config = json.load(f)
                 logger.info("Action configuration file read successfully")
         except Exception as e:
@@ -205,7 +215,7 @@ class PLCController:
             return False, f"Action '{action}' not found in action_config"
         else:
             logger.info(f"Configuration for action '{action}' found successfully")
-            logger.debug(f"Action '{action}' configuration details: {action_config}")
+            logger.info(f"Action '{action}' configuration details: {action_config}")
 
         # 存储每个命令的执行结果
         results = []
@@ -222,7 +232,7 @@ class PLCController:
             logger.info(f"[{index}/{total_commands}] Executing command: {type} - Address: {command_addr}, Expected value: {expected_value}")
         
             addr = self.get_plc_address_from_name(command_addr)
-            logger.debug(f"Address parsed: {command_addr} -> {addr}")
+            logger.info(f"Address parsed: {command_addr} -> {addr}")
                     
             # 执行命令前记录
             logger.info(f"Starting command execution: {type} to address {addr}")
@@ -230,19 +240,19 @@ class PLCController:
             if type == 'write_multiple_coil':
                 with self.lock:
                     ret = self.modbus.write_multiple_coil(addr, expected_value)
-                    logger.debug(f"write_multiple_coil result: {ret}")
+                    logger.info(f"write_multiple_coil result: {ret}")
             elif type == 'write_single_coil':
                 with self.lock:
                     ret = self.modbus.write_single_coil(addr, expected_value)
-                    logger.debug(f"write_single_coil result: {ret}")
+                    logger.info(f"write_single_coil result: {ret}")
             elif type == 'read_multiple_coil':
                 with self.lock:
                     ret = self.modbus.read_multiple_coil(addr, 2)
-                    logger.debug(f"read_multiple_coil result: {ret}")
+                    logger.info(f"read_multiple_coil result: {ret}")
             elif type == 'read_single_coil':
                 with self.lock:
-                    ret = self.modbus.read_single_coil(addr, 2)
-                    logger.debug(f"read_single_coil result: {ret}")
+                    ret = self.modbus.read_single_coil(addr)
+                    logger.info(f"read_single_coil result: {ret}")
             else:
                 logger.error(f"Unknown command type: {type}")
                 results.append((False, f"Unknown command type: {type}"))
@@ -260,7 +270,7 @@ class PLCController:
             time.sleep(delayseconds)
             logger.info(f"Delay completed")
             
-            if ret[1] != expected_value:
+            if list(ret[1]) != list(expected_value):
                     error_msg = f"{action} command failed: Actual value {ret[1]} does not match expected value {expected_value}"
                     logger.error(error_msg)
                     results.append((False, error_msg))
@@ -323,7 +333,7 @@ class PLCController:
             return False, f"Action '{action}' not found in action_config"
         else:
             logger.info(f"Configuration for action '{action}' found successfully")
-            logger.debug(f"Action '{action}' configuration details: {action_config}")
+            logger.info(f"Action '{action}' configuration details: {action_config}")
 
         # 存储每个命令的执行结果
         results = []
@@ -340,7 +350,7 @@ class PLCController:
             logger.info(f"[{index}/{total_commands}] Executing command: {type} - Address: {command_addr}, Expected value: {expected_value}")
         
             addr = self.get_plc_address_from_name(command_addr)
-            logger.debug(f"Address parsed: {command_addr} -> {addr}")
+            logger.info(f"Address parsed: {command_addr} -> {addr}")
                     
             # 执行命令前记录
             logger.info(f"Starting command execution: {type} to address {addr}")
@@ -348,19 +358,19 @@ class PLCController:
             if type == 'write_multiple_coil':
                 with self.lock:
                     ret = self.modbus.write_multiple_coil(addr, expected_value)
-                    logger.debug(f"write_multiple_coil result: {ret}")
+                    logger.info(f"write_multiple_coil result: {ret}")
             elif type == 'write_single_coil':
                 with self.lock:
                     ret = self.modbus.write_single_coil(addr, expected_value)
-                    logger.debug(f"write_single_coil result: {ret}")
+                    logger.info(f"write_single_coil result: {ret}")
             elif type == 'read_multiple_coil':
                 with self.lock:
                     ret = self.modbus.read_multiple_coil(addr, 2)
-                    logger.debug(f"read_multiple_coil result: {ret}")
+                    logger.info(f"read_multiple_coil result: {ret}")
             elif type == 'read_single_coil':
                 with self.lock:
                     ret = self.modbus.read_single_coil(addr, 2)
-                    logger.debug(f"read_single_coil result: {ret}")
+                    logger.info(f"read_single_coil result: {ret}")
             else:
                 logger.error(f"Unknown command type: {type}")
                 results.append((False, f"Unknown command type: {type}"))

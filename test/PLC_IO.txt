@@ -1,0 +1,33 @@
+上位机---PLC	对应控制气缸功能（备注）
+M10000	Clamp X in
+M10001	Clamp X out
+M10002	Clamp Y in
+M10003	Clamp Y out
+M10004	Busbar Cylinder
+M10005	JTAG Cylinder
+M10006	
+M10007	
+M10008	
+M10009	
+M10010	
+M10020	proximity switch1
+M10021	proximity switch2
+M10022	proximity switch3
+M10023	Clamp X1 out
+M10024	Clamp X1 in 
+M10025	Clamp X2 out
+M10026	Clamp X2 in
+M10027	Clamp Y1 out
+M10028	Clamp Y1 in 
+M10029	Clamp Y2 out
+M10030	Clamp Y2 in 
+M10031	Busbar out
+M10032	Busbar in
+M10033	JTAG out
+M10034	JTAG in
+M10035	safety Light Grid
+M10050	Clamp X in
+M10051	Clamp X out
+M10052	Clamp Y in
+M10053	Clamp Y out
+M10054	Testing ready

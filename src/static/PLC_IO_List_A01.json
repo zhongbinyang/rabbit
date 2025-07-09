@@ -89,19 +89,23 @@
   },
   {
     "PLC": "M10031",
-    "description": "Busbar home"
+    "description": "Busbar out"
   },
   {
     "PLC": "M10032",
-    "description": "Busbar work"
+    "description": "Busbar in"
   },
   {
     "PLC": "M10033",
-    "description": "JTAG home"
+    "description": "JTAG out"
   },
   {
     "PLC": "M10034",
-    "description": "JTAG work"
+    "description": "JTAG in"
+  },
+  {
+    "PLC": "M10035",
+    "description": "safety Light Grid"
   },
   {
     "PLC": "M10050",
@@ -122,9 +126,5 @@
   {
     "PLC": "M10054",
     "description": "Testing ready"
-  },
-  {
-    "PLC": "M50",
-    "description": "firmware version"
   }
 ]
