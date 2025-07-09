@@ -21,5 +21,8 @@
     "default_theme": "light",
     "font_family": "Microsoft YaHei UI",
     "font_size": 10
-  }
+  },
+  "IO_LIST_FILE_PATH": "static/PLC_IO_List_A01.json",
+  "ACTION_LIST_FILE_PATH": "static/PLC_IO_List_A01_group.json",
+  "IO_LIST_TYPE_FILE_PATH": "static/PLC_IO_List_A01_type.json"
 }

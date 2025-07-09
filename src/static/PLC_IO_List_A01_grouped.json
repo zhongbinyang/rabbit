@@ -1,82 +1,122 @@
 [
   {
-    "action": "M10000",
+    "action": "M10000_0",
     "commands": [
       {
-        "command": "M10000"
+        "command": "M10000",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          0
+        ]
       }
     ],
     "description": "Clamp X in",
     "readonly": false
   },
   {
-    "action": "M10001",
+    "action": "M10000_1",
     "commands": [
       {
-        "command": "M10001"
+        "command": "M10000",
+        "expected_value": [
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
       }
     ],
     "description": "Clamp X out",
     "readonly": false
   },
   {
-    "action": "M10002",
+    "action": "M10001_0",
     "commands": [
       {
-        "command": "M10002"
+        "command": "M10001",
+        "expected_value": [
+          0
+        ],
+        "type": "write_single_coil",
+        "delayseconds": 1
       }
     ],
     "description": "Clamp Y in",
     "readonly": false
   },
   {
-    "action": "M10003",
+    "action": "M10001_1",
     "commands": [
       {
-        "command": "M10003"
+        "command": "M10002",
+        "type": "write_single_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1
+        ]
       }
     ],
     "description": "Clamp Y out",
     "readonly": false
   },
   {
-    "action": "M10004",
+    "action": "M10004_0",
     "commands": [
       {
-        "command": "M10004"
+        "command": "M10004",
+        "type": "write_single_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          0
+        ]
       }
     ],
     "description": "Busbar Cylinder",
     "readonly": false
   },
   {
-    "action": "M10005",
+    "action": "M10004_1",
     "commands": [
       {
-        "command": "M10005"
+        "command": "M10004",
+        "type": "write_single_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "Busbar Cylinder",
+    "readonly": false
+  },
+  {
+    "action": "M10005_0",
+    "commands": [
+      {
+        "command": "M10005",
+        "type": "write_single_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          0
+        ]
       }
     ],
     "description": "JTAG Cylinder",
     "readonly": false
   },
   {
-    "action": "M10006",
+    "action": "M10005_1",
     "commands": [
       {
-        "command": "M10006"
+        "command": "M10005",
+        "type": "write_single_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1
+        ]
       }
     ],
-    "description": "",
-    "readonly": false
-  },
-  {
-    "action": "M10007",
-    "commands": [
-      {
-        "command": "M10007"
-      }
-    ],
-    "description": "",
+    "description": "JTAG Cylinder",
     "readonly": false
   },
   {
@@ -270,31 +310,30 @@
     "readonly": false
   },
   {
-    "action": "M10050_00",
+    "action": "M10050",
     "commands": [
       {
         "command": "M10050",
-        "type": "read_multiple_coil",
         "expected_value": [
-          0,
           0
-        ]
+        ],
+        "type": "read_single_coil",
+        "delayseconds": 1
       }
     ],
     "description": "Clamp X in",
     "readonly": true
   },
   {
-    "action": "M10050_11",
+    "action": "M10051",
     "commands": [
       {
-        "command": "M10050",
-        "type": "read_multiple_coil",
+        "command": "M10051",
         "delayseconds": 1,
         "expected_value": [
-          1,
-          1
-        ]
+          0
+        ],
+        "type": "read_single_coil"
       }
     ],
     "description": "Clamp X out",
@@ -305,12 +344,12 @@
     "commands": [
       {
         "command": "M10052",
-        "type": "read_multiple_coil",
         "delayseconds": 1,
         "expected_value": [
           0,
           0
-        ]
+        ],
+        "type": "read_multiple_coil"
       }
     ],
     "description": "Clamp Y in",
@@ -321,12 +360,12 @@
     "commands": [
       {
         "command": "M10052",
-        "type": "read_multiple_coil",
         "delayseconds": 1,
         "expected_value": [
           1,
           1
-        ]
+        ],
+        "type": "read_multiple_coil"
       }
     ],
     "description": "Clamp Y out",
@@ -337,11 +376,11 @@
     "commands": [
       {
         "command": "M10054",
-        "type": "read_single_coil",
         "delayseconds": 1,
         "expected_value": [
           0
-        ]
+        ],
+        "type": "read_single_coil"
       }
     ],
     "description": "Testing ready",
@@ -349,19 +388,19 @@
   },
   {
     "action": "M10054_1",
-    "description": "Testing ready",
-    "expected": "1",
-    "timeout": 10,
-    "readonly": true,
     "commands": [
       {
         "command": "M10054",
-        "type": "read_single_coil",
         "delayseconds": 1,
         "expected_value": [
           1
-        ]
+        ],
+        "type": "read_single_coil"
       }
-    ]
+    ],
+    "description": "Testing ready",
+    "expected": "1",
+    "readonly": true,
+    "timeout": 10
   }
 ]

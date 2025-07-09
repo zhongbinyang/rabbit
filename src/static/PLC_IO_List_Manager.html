@@ -219,45 +219,39 @@
   
   <div class="container">
     <div class="tab-btns">
-      <button class="btn btn-primary" id="tab1Btn" onclick="switchTab(1)">分组管理</button>
-      <button class="btn btn-outline-primary" id="tab2Btn" onclick="switchTab(2)">PLC IO List 管理</button>
+      <button class="btn btn-primary" id="tab1Btn" onclick="switchTab(1)">Action List Management</button>
+      <button class="btn btn-outline-primary" id="tab2Btn" onclick="switchTab(2)">IO List Management</button>
     </div>
     
     <!-- 分组管理区 -->
     <div id="tab1" class="tab-content-area active">
-      <h2 class="page-title">JSON 分组增删改查工具</h2>
+      <h2 class="page-title">Action List Management</h2>
       <div class="card mb-4">
         <div class="card-body">
           <div class="mb-3 row">
             <div class="col-md-4 mb-2">
-              <label class="form-label">分组文件名</label>
+              <label class="form-label">Group Filename</label>
               <div class="input-group">
                 <input type="text" id="groupFilename" value="PLC_IO_List_A01_grouped.json" class="form-control" />
-                <button class="btn btn-outline-primary" onclick="loadGroupFile()">加载</button>
+                <button class="btn btn-outline-primary" onclick="loadGroupFile()">Load</button>
               </div>
             </div>
             <div class="col-md-4 mb-2">
-              <label class="form-label">PLC列表文件名</label>
+              <label class="form-label">PLC List Filename</label>
               <div class="input-group">
                 <input type="text" id="itemFilename" value="PLC_IO_List_A01.json" class="form-control" />
-                <button class="btn btn-outline-primary" onclick="loadItemFile()">加载</button>
+                <button class="btn btn-outline-primary" onclick="loadItemFile()">Load</button>
               </div>
             </div>
             <div class="col-md-4 mb-2">
-              <label class="form-label">命令类型文件名</label>
+              <label class="form-label">Command Type Filename</label>
               <div class="input-group">
                 <input type="text" id="typeFilename" value="PLC_IO_List_Type.json" class="form-control" />
-                <button class="btn btn-outline-primary" onclick="loadTypeFile()">加载</button>
+                <button class="btn btn-outline-primary" onclick="loadTypeFile()">Load</button>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      
-      <div class="mb-3">
-        <button class="btn btn-success btn-action" onclick="addGroup()">
-          <i class="bi bi-plus-circle"></i> 添加分组
-        </button>
       </div>
       
       <div class="table-responsive">
@@ -265,20 +259,20 @@
       </div>
       
       <div class="action-buttons">
-        <button class="btn btn-primary btn-action" onclick="saveGroupFile()">保存分组JSON</button>
+        <button class="btn btn-primary btn-action" onclick="saveGroupFile()">Save Group JSON</button>
       </div>
     </div>
     
     <!-- PLC IO List 管理区 -->
     <div id="tab2" class="tab-content-area">
-      <h2 class="page-title">PLC IO List 管理</h2>
+      <h2 class="page-title">IO List Management</h2>
       <div class="card mb-4">
         <div class="card-body">
           <div class="mb-3">
-            <label class="form-label">PLC列表文件名</label>
+            <label class="form-label">PLC List Filename</label>
             <div class="input-group">
               <input type="text" id="ioFilename" value="PLC_IO_List_A01.json" class="form-control" />
-              <button class="btn btn-outline-primary" onclick="loadIOFile()">加载</button>
+              <button class="btn btn-outline-primary" onclick="loadIOFile()">Load</button>
             </div>
           </div>
         </div>
@@ -290,8 +284,8 @@
             <tr>
               <th width="40"></th>
               <th width="120">PLC</th>
-              <th>描述</th>
-              <th width="100">操作</th>
+              <th>Description</th>
+              <th width="100">Actions</th>
             </tr>
           </thead>
           <tbody></tbody>
@@ -299,22 +293,22 @@
             <tr>
               <td></td>
               <td><input type="text" id="newPLC" placeholder="PLC" class="form-control"></td>
-              <td><input type="text" id="newDesc" placeholder="描述" class="form-control"></td>
-              <td><button class="btn btn-success" onclick="addRow()">新增</button></td>
+              <td><input type="text" id="newDesc" placeholder="Description" class="form-control"></td>
+              <td><button class="btn btn-success" onclick="addRow()">Add</button></td>
             </tr>
           </tfoot>
         </table>
       </div>
       
       <div class="action-buttons">
-        <button class="btn btn-primary btn-action" onclick="saveIOFile()">保存IO列表JSON</button>
+        <button class="btn btn-primary btn-action" onclick="saveIOFile()">Save IO List JSON</button>
       </div>
     </div>
   </div>
 
   <!-- 消息提示 -->
-  <div class="alert alert-success" id="successAlert">操作成功</div>
-  <div class="alert alert-danger" id="errorAlert">操作失败</div>
+  <div class="alert alert-success" id="successAlert">Operation successful</div>
+  <div class="alert alert-danger" id="errorAlert">Operation failed</div>
 
   <script>
     // 全局变量，用于加载状态管理
@@ -365,7 +359,7 @@
     function loadGroupFile() {
       const filename = document.getElementById('groupFilename').value.trim();
       if (!filename) {
-        showAlert(false, '文件名不能为空');
+        showAlert(false, 'Filename cannot be empty');
         return;
       }
 
@@ -380,11 +374,11 @@
         .then(data => {
           jsonData = data;
           renderTable();
-          showAlert(true, '分组文件加载成功');
+          showAlert(true, 'Group file loaded successfully');
         })
         .catch(error => {
           console.error('Error loading group file:', error);
-          showAlert(false, `加载失败: ${error.message}`);
+          showAlert(false, `Load failed: ${error.message}`);
         })
         .finally(() => {
           toggleLoading(false);
@@ -395,7 +389,7 @@
     function loadItemFile() {
       const filename = document.getElementById('itemFilename').value.trim();
       if (!filename) {
-        showAlert(false, '文件名不能为空');
+        showAlert(false, 'Filename cannot be empty');
         return;
       }
 
@@ -414,11 +408,11 @@
             if (item.PLC) plcMap[item.PLC] = item;
           });
           renderTable();
-          showAlert(true, 'PLC列表文件加载成功');
+          showAlert(true, 'PLC list file loaded successfully');
         })
         .catch(error => {
           console.error('Error loading item file:', error);
-          showAlert(false, `加载失败: ${error.message}`);
+          showAlert(false, `Load failed: ${error.message}`);
         })
         .finally(() => {
           toggleLoading(false);
@@ -429,7 +423,7 @@
     function loadTypeFile() {
       const filename = document.getElementById('typeFilename').value.trim();
       if (!filename) {
-        showAlert(false, '文件名不能为空');
+        showAlert(false, 'Filename cannot be empty');
         return;
       }
 
@@ -444,11 +438,11 @@
         .then(data => {
           commandTypes = data;
           renderTable();
-          showAlert(true, '命令类型文件加载成功');
+          showAlert(true, 'Command type file loaded successfully');
         })
         .catch(error => {
           console.error('Error loading type file:', error);
-          showAlert(false, `加载失败: ${error.message}`);
+          showAlert(false, `Load failed: ${error.message}`);
         })
         .finally(() => {
           toggleLoading(false);
@@ -465,23 +459,25 @@
       table.innerHTML = `
         <thead>
           <tr>
-            <th>分组名 (action)</th>
-            <th>描述</th>
-            <th>只读</th>
-            <th>命令列表</th>
-            <th>操作</th>
+            <th style="width:40px">#</th>
+            <th>Action Name</th>
+            <th>Description</th>
+            <th>Readonly</th>
+            <th>Command List</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          ${jsonData.length === 0 ? `<tr><td colspan="5" class="text-center py-4">没有数据，请添加分组或加载文件</td></tr>` : 
+          ${jsonData.length === 0 ? `<tr><td colspan="6" class="text-center py-4">No data, please add a group or load a file</td></tr>` : 
           jsonData.map((group, gi) => `
             <tr>
+              <td>${gi + 1}</td>
               <td>
                 <input class="form-control" value="${group.action || ''}" onchange="updateGroup(${gi}, 'action', this.value)">
               </td>
               <td>
                 <input class="form-control" value="${group.description || ''}" onchange="updateGroup(${gi}, 'description', this.value)">
-                <!-- 隐藏字段，仍然保留数据 -->
+                <!-- Hidden fields -->
                 <input type="hidden" value="${group.expected || '1'}" id="group-${gi}-expected">
                 <input type="hidden" value="${group.timeout || '10'}" id="group-${gi}-timeout">
               </td>
@@ -498,10 +494,10 @@
                     <thead>
                       <tr>
                         <th class="plc-col">PLC</th>
-                        <th class="type-col">类型</th>
-                        <th class="delay-col">延迟(秒)</th>
-                        <th class="expected-col">预期值</th>
-                        <th class="del-col">操作</th>
+                        <th class="type-col">Type</th>
+                        <th class="delay-col">Delay(s)</th>
+                        <th class="expected-col">Expected</th>
+                        <th class="del-col">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -515,13 +511,13 @@
                           <tr>
                             <td>
                               <select class="form-select" onchange="updateCommand(${gi}, ${ci}, 'command', this.value)">
-                                <option value="">请选择</option>
+                                <option value="">Please select</option>
                                 ${plcOptions.replace(`value="${plcValue}"`, `value="${plcValue}" selected`)}
                               </select>
                             </td>
                             <td>
                               <select class="form-select" onchange="updateCommand(${gi}, ${ci}, 'type', this.value)">
-                                <option value="">请选择</option>
+                                <option value="">Please select</option>
                                 ${typeOptions.replace(`value="${typeValue}"`, `value="${typeValue}" selected`)}
                               </select>
                             </td>
@@ -529,17 +525,17 @@
                               <input type="number" class="form-control" value="${delayValue}" onchange="updateCommand(${gi}, ${ci}, 'delayseconds', this.value)">
                             </td>
                             <td>
-                              <input class="form-control" value="${expectedValue}" placeholder="以逗号分隔，如0,1" onchange="updateCommandExpected(${gi}, ${ci}, this.value)">
+                              <input class="form-control" value="${expectedValue}" placeholder="Comma separated, e.g. 0,1" onchange="updateCommandExpected(${gi}, ${ci}, this.value)">
                             </td>
                             <td class="del-col">
-                              <button class="btn btn-danger btn-sm" onclick="deleteCommand(${gi}, ${ci})">删除</button>
+                              <button class="btn btn-danger btn-sm" onclick="deleteCommand(${gi}, ${ci})">Delete</button>
                             </td>
                           </tr>
                         `;
-                      }).join('') : `<tr><td colspan="5" class="text-center py-3">没有命令，请添加命令</td></tr>`}
+                      }).join('') : `<tr><td colspan="5" class="text-center py-3">No command, please add command</td></tr>`}
                       <tr>
                         <td colspan="5">
-                          <button class="btn btn-success btn-sm" onclick="addCommand(${gi})">添加命令</button>
+                          <button class="btn btn-success btn-sm" onclick="addCommand(${gi})">Add Command</button>
                         </td>
                       </tr>
                     </tbody>
@@ -547,7 +543,10 @@
                 </div>
               </td>
               <td>
-                <button class="btn btn-danger btn-sm" style="width:80px" onclick="deleteGroup(${gi})">删除分组</button>
+                <div class="d-flex flex-column gap-1 align-items-stretch">
+                  <button class="btn btn-danger btn-sm" onclick="deleteGroup(${gi})">Delete Group</button>
+                  <button class="btn btn-success btn-sm" onclick="copyGroupBelow(${gi})">Copy Group</button>
+                </div>
               </td>
             </tr>
           `).join('')}
@@ -590,14 +589,26 @@
         commands: [] 
       });
       renderTable();
-      showAlert(true, '添加分组成功');
+      showAlert(true, 'Group added successfully');
+    }
+
+    // Copy the current group and insert below
+    function copyGroupBelow(index) {
+      const group = jsonData[index];
+      // Deep copy the group (including commands)
+      const newGroup = JSON.parse(JSON.stringify(group));
+      // Clear the action field in the copied group
+      newGroup.action = '';
+      jsonData.splice(index + 1, 0, newGroup);
+      renderTable();
+      showAlert(true, 'Group copied below successfully');
     }
 
     function deleteGroup(gi) {
-      if (confirm('确定删除该分组？')) {
+      if (confirm('Are you sure you want to delete this group?')) {
         jsonData.splice(gi, 1);
         renderTable();
-        showAlert(true, '删除分组成功');
+        showAlert(true, 'Group deleted successfully');
       }
     }
 
@@ -630,7 +641,7 @@
     function saveGroupFile() {
       const filename = document.getElementById('groupFilename').value.trim();
       if (!filename) {
-        showAlert(false, '文件名不能为空');
+        showAlert(false, 'Filename cannot be empty');
         return;
       }
 
@@ -648,14 +659,14 @@
       .then(response => response.json())
       .then(data => {
         if (data.Result) {
-          showAlert(true, '分组文件保存成功');
+          showAlert(true, 'Group file saved successfully');
         } else {
-          showAlert(false, `保存失败: ${data.Message}`);
+          showAlert(false, `Save failed: ${data.Message}`);
         }
       })
       .catch(error => {
         console.error('Error saving file:', error);
-        showAlert(false, `保存失败: ${error.message}`);
+        showAlert(false, `Save failed: ${error.message}`);
       })
       .finally(() => {
         toggleLoading(false);
@@ -669,7 +680,7 @@
     function loadIOFile() {
       const filename = document.getElementById('ioFilename').value.trim();
       if (!filename) {
-        showAlert(false, '文件名不能为空');
+        showAlert(false, 'Filename cannot be empty');
         return;
       }
 
@@ -684,11 +695,11 @@
         .then(result => {
           data = result;
           renderIOTable();
-          showAlert(true, 'IO列表文件加载成功');
+          showAlert(true, 'IO list file loaded successfully');
         })
         .catch(error => {
           console.error('Error loading IO file:', error);
-          showAlert(false, `加载失败: ${error.message}`);
+          showAlert(false, `Load failed: ${error.message}`);
         })
         .finally(() => {
           toggleLoading(false);
@@ -700,7 +711,7 @@
       tbody.innerHTML = '';
       
       if (data.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="4" class="text-center py-4">没有数据，请添加PLC或加载文件</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="4" class="text-center py-4">No data, please add PLC or load file</td></tr>';
         return;
       }
       
@@ -709,10 +720,10 @@
         tr.setAttribute('draggable', 'true');
         tr.setAttribute('data-idx', idx);
         tr.innerHTML = `
-          <td class="drag-handle" title="拖动排序">☰</td>
+          <td class="drag-handle" title="Drag to reorder">☰</td>
           <td><input type="text" class="form-control" value="${row.PLC || ''}" onchange="editCell(${idx}, 'PLC', this.value)"></td>
           <td><input type="text" class="form-control" value="${row.description || ''}" onchange="editCell(${idx}, 'description', this.value)"></td>
-          <td><button class="btn btn-danger btn-sm" onclick="deleteRow(${idx})">删除</button></td>
+          <td><button class="btn btn-danger btn-sm" onclick="deleteRow(${idx})">Delete</button></td>
         `;
         // 拖动事件
         tr.addEventListener('dragstart', function(e) {
@@ -747,28 +758,28 @@
       const plc = document.getElementById('newPLC').value.trim();
       const desc = document.getElementById('newDesc').value.trim();
       if (!plc) { 
-        showAlert(false, 'PLC 不能为空');
+        showAlert(false, 'PLC cannot be empty');
         return; 
       }
       data.push({ PLC: plc, description: desc });
       renderIOTable();
       document.getElementById('newPLC').value = '';
       document.getElementById('newDesc').value = '';
-      showAlert(true, '添加PLC成功');
+      showAlert(true, 'PLC added successfully');
     }
 
     function deleteRow(idx) {
-      if (confirm('确定要删除这行吗？')) {
+      if (confirm('Are you sure you want to delete this row?')) {
         data.splice(idx, 1);
         renderIOTable();
-        showAlert(true, '删除PLC成功');
+        showAlert(true, 'PLC deleted successfully');
       }
     }
 
     function saveIOFile() {
       const filename = document.getElementById('ioFilename').value.trim();
       if (!filename) {
-        showAlert(false, '文件名不能为空');
+        showAlert(false, 'Filename cannot be empty');
         return;
       }
 
@@ -786,14 +797,14 @@
       .then(response => response.json())
       .then(result => {
         if (result.Result) {
-          showAlert(true, 'IO列表文件保存成功');
+          showAlert(true, 'IO list file saved successfully');
         } else {
-          showAlert(false, `保存失败: ${result.Message}`);
+          showAlert(false, `Save failed: ${result.Message}`);
         }
       })
       .catch(error => {
         console.error('Error saving file:', error);
-        showAlert(false, `保存失败: ${error.message}`);
+        showAlert(false, `Save failed: ${error.message}`);
       })
       .finally(() => {
         toggleLoading(false);
