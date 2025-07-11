@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/bootstrap.min.css" rel="stylesheet">
+
     <title>{{ title }}</title>
     <style>
         body {
@@ -78,13 +80,19 @@
     </style>
 </head>
 <body>
-    <h1>{{ title }}</h1>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="page-title mb-0">{{ title }}</h2>
+        <div class="d-flex align-items-center gap-3">
+          <div class="d-flex gap-2">
+            <a href="io_setting" class="btn btn-outline-primary btn-sm">IO Setting</a>
+            <a href="action_setting" class="btn btn-outline-primary btn-sm">Action Setting</a>
+            <a href="action_control" class="btn btn-outline-primary btn-sm">Action Control</a>
+            <a href="action_status" class="btn btn-outline-primary btn-sm">Action Status</a>
+          </div>
+        </div>
+      </div>
     <div class="version">API Version: {{ api_version }}</div>
-    
-    <a href="/setting" class="json-btn" style="margin-right:10px;">配置平台</a>
-    <a href="/control" class="json-btn" style="margin-right:10px;">控制平台</a>
-    <!-- <a href="/test" class="json-btn">测试页面</a> -->
-    
+        
     <div class="note">
         <strong>Note:</strong> All endpoints can use either POST or GET methods.
     </div>

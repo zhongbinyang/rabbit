@@ -13,7 +13,7 @@ from utils.exceptions import handle_exception
 from typing import Tuple, Any, List, Dict, Optional, Union
 import threading
 import json
-from config.settings import PLC_IO_LIST_A01_GROUPED_PATH
+from config.settings import IO_SETTING_FILE_PATH, ACTION_SETTING_FILE_PATH, IO_TYPE_FILE_PATH
 
 class PLCController:
     """PLC控制器，提供高级控制功能"""
@@ -26,47 +26,16 @@ class PLCController:
         self.port = PLC_CONFIG["port"]
         self.lock = threading.RLock()  # 添加线程锁以保护Modbus通信
         self.delay_time = 1.0  # 操作之间的延迟时间，与PLCAPI一致
+        # 读取动作配置
+        logger.info("Reading action configuration file in __init__...")
+        try:
+            with open(ACTION_SETTING_FILE_PATH, 'r') as f:
+                self.action_config = json.load(f)
+                logger.info("Action configuration file read successfully in __init__")
+        except Exception as e:
+            logger.error(f"Failed to read action configuration file in __init__: {e}")
+            self.action_config = None
     
-
-    def wait_action_complete(self, address_name: str, expected_value: tuple, 
-                            action_name: str, timeout: int = 15) -> Tuple[bool, str]:
-        """
-        等待PLC动作完成
-        
-        Args:
-            address_name: 地址名称
-            expected_value: 期望的值元组 (如(0,1)或(1,0))
-            action_name: 动作名称(用于日志)
-            timeout: 超时时间(秒)
-            
-        Returns:
-            操作结果(True/False, 消息)
-            
-        Raises:
-            PLCTimeoutError: 操作超时
-        """
-        start_time = time.time()
-        addr = self.address_map.get_plc_address(address_name)
-        
-        while True:
-            if time.time() - start_time > timeout:
-                error_msg = f"{action_name} Operation timeout"
-                logger.error(error_msg)
-                return False, error_msg
-            
-            with self.lock:
-                ret = self.modbus.read_multiple_coil(addr, 2)  # 读取两个连续的线圈状态
-            
-            if not ret[0]:
-                logger.warning(f"Read {action_name} status failed: {ret[1]}")
-                time.sleep(0.1)
-                continue
-                
-            if ret[1] == expected_value:
-                logger.info(f"{action_name} Operation successful")
-                return True, f"{action_name} Operation successful"
-            
-            time.sleep(0.1)
 
     @handle_exception
     def connect_plc(self, host: Optional[str] = None, port: Optional[int] = None) -> Tuple[bool, str]:
@@ -149,19 +118,14 @@ class PLCController:
             logger.error("Not connected to PLC, cannot execute command")
             return False, "Not connected to PLC"
         
-        # 读取动作配置
-        logger.info("Reading action configuration file...")
-        try:
-            with open(PLC_IO_LIST_A01_GROUPED_PATH, 'r') as f:
-                action_config = json.load(f)
-                logger.info("Action configuration file read successfully")
-        except Exception as e:
-            logger.error(f"Failed to read action configuration file: {e}")
-            return False, f"Failed to read action config: {str(e)}"
-            
+        # 读取动作配置（已移至__init__）
+        if self.action_config is None:
+            logger.error("Action configuration not loaded.")
+            return False, "Action configuration not loaded."
+        
         # 根据动作名称查找配置
         logger.info(f"Looking for configuration of action '{action}'...")
-        action_config = next((item for item in action_config if item['action'] == action), None)
+        action_config = next((item for item in self.action_config if item['action'] == action), None)
         if not action_config:
             logger.error(f"Configuration for action '{action}' not found")
             return False, f"Action '{action}' not found in action_config"
@@ -189,7 +153,7 @@ class PLCController:
             # 执行命令前记录
             logger.info(f"Starting command execution: {type} to address {addr}")
 
-            checkvalue = False
+            is_check_value = False
             if type == 'write_multiple_coil':
                 with self.lock:
                     ret = self.modbus.write_multiple_coil(addr, expected_value)
@@ -199,12 +163,12 @@ class PLCController:
                     ret = self.modbus.write_single_coil(addr, expected_value)
                     logger.info(f"write_single_coil result: {ret}")
             elif type == 'read_multiple_coil':
-                checkvalue = True
+                is_check_value = True
                 with self.lock:
                     ret = self.modbus.read_multiple_coil(addr, 2)
                     logger.info(f"read_multiple_coil result: {ret}")
             elif type == 'read_single_coil':
-                checkvalue = True
+                is_check_value = True
                 with self.lock:
                     ret = self.modbus.read_single_coil(addr)
                     logger.info(f"read_single_coil result: {ret}")
@@ -217,20 +181,50 @@ class PLCController:
                 error_msg = f"{action} command failed: {ret[1]}"
                 logger.error(error_msg)
                 results.append((False, error_msg))
-                continue
+                break
             
-            # 等待操作完成
-            if delayseconds > 0:
-                    logger.info(f"Waiting for operation to complete, delay: {delayseconds} seconds")
-            time.sleep(delayseconds)
-            logger.info(f"Delay completed")
-            
-            if checkvalue and list(ret[1]) != list(expected_value):
-                    error_msg = f"{action} command failed: Actual value {ret[1]} does not match expected value {expected_value}"
+            # is_check_value 为真时，循环读直到一致或超时
+            if is_check_value:
+                # 新增：对于读操作且checkvalue为真且值不一致时，循环读直到一致或超时
+                if list(ret[1]) != list(expected_value):
+                    start_time = time.time()
+                    while True:
+                        time.sleep(0.2)
+                        # 超时，退出循环
+                        if time.time() - start_time >= delayseconds:
+                            break
+                        # 读取值
+                        with self.lock:
+                            if type == "read_multiple_coil":
+                                ret = self.modbus.read_multiple_coil(addr, 2)
+                            elif type == "read_single_coil":
+                                ret = self.modbus.read_single_coil(addr)
+                        logger.info(f"Re-read {type} result: {ret}")
+                        # 读取失败，退出循环
+                        if not ret[0]:
+                            logger.error(f"Command {command_addr} executed failed during re-read: {ret[1]}")
+                            break
+                        # 读取值与期望值一致，退出循环
+                        if list(ret[1]) == list(expected_value):
+                            logger.info(f"{type} value matches expected value after re-read.")
+                            break
+                        # 读取值与期望值不一致，继续循环
+                        else:
+                            continue
+
+                    # 超时，退出循环
+                    logger.info(f"Loop read completed or timeout.")
+                    error_msg = f"Command {command_addr} executed failed: Actual value {ret[1]} does not match expected value {expected_value}"
                     logger.error(error_msg)
                     results.append((False, error_msg))
-                    # continue
                     break
+                else:
+                    # 读取值与期望值一致，不等待
+                    logger.info(f"{type} value matches expected value after re-read.")
+            # 非读操作，等待delayseconds秒
+            else:
+                time.sleep(delayseconds)
+
                 
             success_msg = f"Command {command_addr} executed successfully"    
             logger.info(success_msg)

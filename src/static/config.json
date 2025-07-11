@@ -22,7 +22,7 @@
     "font_family": "Microsoft YaHei UI",
     "font_size": 10
   },
-  "IO_LIST_FILE_PATH": "static/PLC_IO_List_A01.json",
-  "ACTION_LIST_FILE_PATH": "static/PLC_IO_List_A01_group.json",
-  "IO_LIST_TYPE_FILE_PATH": "static/PLC_IO_List_A01_type.json"
+  "IO_SETTING_FILE_PATH": "static/io_setting.json",
+  "ACTION_SETTING_FILE_PATH": "static/action_setting.json",
+  "IO_TYPE_FILE_PATH": "static/io_type.json"
 }

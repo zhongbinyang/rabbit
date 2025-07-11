@@ -10,6 +10,7 @@ from typing import Dict, Any
 from config.settings import API_CONFIG, PLC_CONFIG
 from utils.logger import logger
 from core.plc_controller import plc_controller
+from config.settings import BASE_DIR, STATIC_DIR
 
 
 # 自定义API异常类
@@ -20,19 +21,8 @@ class APIError(Exception):
         super().__init__(self.message)
 
 
-# 获取当前文件所在目录路径
-if hasattr(sys, '_MEIPASS'):
-    # PyInstaller 打包后运行时
-    base_dir = os.path.dirname(sys.executable)
-    static_dir = os.path.abspath(os.path.join(base_dir, 'static'))
-    print(f"PyInstaller 打包后运行时: {base_dir}")
-else:
-    # 源码运行时
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    static_dir = os.path.abspath(os.path.join(base_dir, '..', 'static'))
-
 # 创建API应用
-api_app = Flask(__name__, static_folder=static_dir, template_folder=static_dir)
+api_app = Flask(__name__, static_folder=STATIC_DIR, template_folder=STATIC_DIR)
 api_app.config['JSON_SORT_KEYS'] = False
 
 # 创建蓝图
@@ -59,15 +49,23 @@ def create_response(function: str, result: bool, message: str) -> Dict[str, Any]
 
 @plc_api.route('/test')
 def serve_testapi():
-    return send_from_directory(static_dir, 'testapi.html')
+    return send_from_directory(STATIC_DIR, 'testapi.html')
 
-@plc_api.route('/setting')
+@plc_api.route('/io_setting')
 def serve_plc_io_list_manager():
-    return send_from_directory(static_dir, 'PLC_IO_List_Manager.html')
+    return send_from_directory(STATIC_DIR, 'io_setting.html')
 
-@plc_api.route('/control')
+@plc_api.route('/action_setting')
+def serve_plc_action_list_manager():
+    return send_from_directory(STATIC_DIR, 'action_setting.html')
+
+@plc_api.route('/action_control')
 def serve_bm_ui():
-    return send_from_directory(static_dir, 'BM_UI.html')
+    return send_from_directory(STATIC_DIR, 'action_control.html')
+
+@plc_api.route('/action_status')
+def serve_action_status():
+    return send_from_directory(STATIC_DIR, 'action_status.html')
 
 @plc_api.route('/')
 def api_documentation():
@@ -100,150 +98,6 @@ def api_documentation():
             'return': 'Result:True or False,Message:Disconnect message or error message',
             'example': 'http://127.0.0.1:5001/disconnect_plc',
             'response': '{"Function":"DisconnectPLC","Message":"Close Successful","Result":true,"timestamp":"2025-01-25 13:43:47_847322"}'
-        },
-        {
-            'URL': 'http://{host}:5001/lifter_up',
-            'function': 'lifter_up',
-            'description': 'Control Lifter Up',
-            'params': '',
-            'return': 'Result:True or False,Message:Set Lifter Up Successful or Error message',
-            'example': 'http://127.0.0.1:5001/lifter_up',
-            'response': '{"Function":"LifterUp","Message":"Set Lifter Up Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
-        },
-        {
-            'URL': 'http://{host}:5001/lifter_down',
-            'function': 'lifter_down',
-            'description': 'Control Lifter Down',
-            'params': '',
-            'return': 'Result:True or False,Message:Set Lifter Down Successful or Error message',
-            'example': 'http://127.0.0.1:5001/lifter_down',
-            'response': '{"Function":"LifterDown","Message":"Set Lifter Down Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
-        },
-        {
-            'URL': 'http://{host}:5001/clampx_out',
-            'function': 'clamp_x_out',
-            'description': 'Control Clamp X Out',
-            'params': '',
-            'return': 'Result:True or False,Message:Set Clamp X Out Successful or Error message',
-            'example': 'http://127.0.0.1:5001/clampx_out',
-            'response': '{"Function":"ClampX_Out","Message":"Set Clamp X Out Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
-        },
-        {
-            'URL': 'http://{host}:5001/clampx_in',
-            'function': 'clamp_x_in',
-            'description': 'Control Clamp X In',
-            'params': '',
-            'return': 'Result:True or False,Message:Set Clamp X In Successful or Error message',
-            'example': 'http://127.0.0.1:5001/clampx_in',
-            'response': '{"Function":"ClampX_In","Message":"Set Clamp X In Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
-        },
-        {
-            'URL': 'http://{host}:5001/clampy_out',
-            'function': 'clamp_y_out',
-            'description': 'Control Clamp Y Out',
-            'params': '',
-            'return': 'Result:True or False,Message:Set Clamp Y Out Successful or Error message',
-            'example': 'http://127.0.0.1:5001/clampy_out',
-            'response': '{"Function":"ClampY_Out","Message":"Set Clamp Y Out Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
-        },
-        {
-            'URL': 'http://{host}:5001/clampy_in',
-            'function': 'clamp_y_in',
-            'description': 'Control Clamp Y In',
-            'params': '',
-            'return': 'Result:True or False,Message:Set Clamp Y In Successful or Error message',
-            'example': 'http://127.0.0.1:5001/clampy_in',
-            'response': '{"Function":"ClampY_In","Message":"Set Clamp Y In Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
-        },
-        {
-            'URL': 'http://{host}:5001/power_out',
-            'function': 'power_out',
-            'description': 'Control Power Out',
-            'params': '',
-            'return': 'Result:True or False,Message:Set Power Out Successful or Error message',
-            'example': 'http://127.0.0.1:5001/power_out',
-            'response': '{"Function":"PowerOut","Message":"Set Power Out Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
-        },
-        {
-            'URL': 'http://{host}:5001/power_in',
-            'function': 'power_in',
-            'description': 'Control Power In',
-            'params': '',
-            'return': 'Result:True or False,Message:Set Power In Successful or Error message',
-            'example': 'http://127.0.0.1:5001/power_in',
-            'response': '{"Function":"PowerIn","Message":"Set Power In Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
-        },
-        {
-            'URL': 'http://{host}:5001/comm_out',
-            'function': 'comm_out',
-            'description': 'Control Comm Out',
-            'params': '',
-            'return': 'Result:True or False,Message:Set Comm Out Successful or Error message',
-            'example': 'http://127.0.0.1:5001/comm_out',
-            'response': '{"Function":"CommOut","Message":"Set Comm Out Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
-        },
-        {
-            'URL': 'http://{host}:5001/comm_in',
-            'function': 'comm_in',
-            'description': 'Control Comm In',
-            'params': '',
-            'return': 'Result:True or False,Message:Set Comm In Successful or Error message',
-            'example': 'http://127.0.0.1:5001/comm_in',
-            'response': '{"Function":"CommIn","Message":"Set Comm In Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
-        },
-        {
-            'URL': 'http://{host}:5001/reset_out',
-            'function': 'reset_out',
-            'description': 'Control Reset Out',
-            'params': '',
-            'return': 'Result:True or False,Message:Set Reset Out Successful or Error message',
-            'example': 'http://127.0.0.1:5001/reset_out',
-            'response': '{"Function":"ResetOut","Message":"Set Reset Out Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
-        },
-        {
-            'URL': 'http://{host}:5001/reset_in',
-            'function': 'reset_in',
-            'description': 'Control Reset In',
-            'params': '',
-            'return': 'Result:True or False,Message:Set Reset In Successful or Error message',
-            'example': 'http://127.0.0.1:5001/reset_in',
-            'response': '{"Function":"ResetIn","Message":"Set Reset In Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
-        },
-        {
-            'URL': 'http://{host}:5001/lane_select_out',
-            'function': 'lane_out',
-            'description': 'Control Lane Select Out',
-            'params': '',
-            'return': 'Result:True or False,Message:Set Lane Select Out Successful or Error message',
-            'example': 'http://127.0.0.1:5001/lane_select_out',
-            'response': '{"Function":"LANE_SELECT_Out","Message":"Set LANE_SELECT_Out Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
-        },
-        {
-            'URL': 'http://{host}:5001/lane_select_in',
-            'function': 'lane_in',
-            'description': 'Control Lane Select In',
-            'params': '',
-            'return': 'Result:True or False,Message:Set Lane Select In Successful or Error message',
-            'example': 'http://127.0.0.1:5001/lane_select_in',
-            'response': '{"Function":"LANE_SELECT_In","Message":"Set LANE_SELECT_In Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
-        },
-        {
-            'URL': 'http://{host}:5001/cradle_insert',
-            'function': 'cradle_insert',
-            'description': 'Control Cradle Insert',
-            'params': '',
-            'return': 'Result:True or False,Message:Set Cradle Insert Successful or Error message',
-            'example': 'http://127.0.0.1:5001/cradle_insert',
-            'response': '{"Function":"CRADLE_INSERT","Message":"Set CRADLE_INSERT Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
-        },
-        {
-            'URL': 'http://{host}:5001/cradle_extract',
-            'function': 'cradle_extract',
-            'description': 'Control Cradle Extract',
-            'params': '',
-            'return': 'Result:True or False,Message:Set Cradle Extract Successful or Error message',
-            'example': 'http://127.0.0.1:5001/cradle_extract',
-            'response': '{"Function":"CRADLE_EXTRACT","Message":"Set CRADLE EXTRACT Successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
         }
     ]
     
@@ -259,7 +113,7 @@ def api_documentation():
         })
     else:
         # 返回HTML格式的API文档
-        return render_template('api_documentation.html', 
+        return render_template('doc.html', 
                                api_version=API_VERSION,
                                title='PLC Control API Documentation',
                                endpoints=api_endpoints)
@@ -337,7 +191,7 @@ def write_json_file():
     
     try:
         # 构建完整的文件路径
-        file_path = os.path.join(static_dir, filename)
+        file_path = os.path.join(BASE_DIR, filename)
         logger.info(f"Writing JSON to file: {file_path}")
         
         # 写入文件
@@ -348,48 +202,6 @@ def write_json_file():
     except Exception as e:
         logger.error(f"Error writing JSON file: {str(e)}")
         return jsonify(create_response("write_json_file", False, f"Error writing file: {str(e)}")), 500
-
-
-@plc_api.route('/api/read_json_file', methods=['GET', 'POST'])
-def read_json_file():
-    """从static目录读取JSON文件"""
-    # 支持GET和POST方法
-    if request.method == 'POST' and request.is_json:
-        filename = request.json.get('filename')
-    else:
-        filename = request.args.get('filename')
-    
-    if not filename:
-        return jsonify(create_response("read_json_file", False, "Missing required parameter: filename")), 400
-    
-    # 安全检查：确保文件名是安全的（不包含路径遍历）
-    if '..' in filename or filename.startswith('/'):
-        return jsonify(create_response("read_json_file", False, "Invalid filename")), 400
-    
-    # 确保文件扩展名是.json
-    if not filename.endswith('.json'):
-        filename += '.json'
-    
-    try:
-        # 构建完整的文件路径
-        file_path = os.path.join(static_dir, filename)
-        logger.info(f"Reading JSON from file: {file_path}")
-        
-        # 读取文件
-        with open(file_path, 'r', encoding='utf-8') as f:
-            content = json.load(f)
-        
-        # 直接返回JSON内容，而不是包装在content字段中
-        # 这样前端可以直接访问数据
-        return jsonify(content), 200
-    except FileNotFoundError:
-        return jsonify(create_response("read_json_file", False, f"File not found: {filename}")), 404
-    except json.JSONDecodeError:
-        return jsonify(create_response("read_json_file", False, f"Invalid JSON in file: {filename}")), 400
-    except Exception as e:
-        logger.error(f"Error reading JSON file: {str(e)}")
-        return jsonify(create_response("read_json_file", False, f"Error reading file: {str(e)}")), 500
-
 # 注册蓝图
 api_app.register_blueprint(plc_api)
 
