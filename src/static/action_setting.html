@@ -173,7 +173,7 @@
       <div class="d-flex align-items-center gap-3">
         <button class="btn btn-primary btn-action" onclick="saveGroupFile()">Save Action Setting</button>
         <div class="d-flex gap-2">
-          <a href="" class="btn btn-outline-primary btn-sm">Document</a>
+          <a href="/" class="btn btn-outline-primary btn-sm">Document</a>
           <a href="io_setting" class="btn btn-outline-primary btn-sm">IO Setting</a>
           <a href="action_control" class="btn btn-outline-primary btn-sm">Action Control</a>
           <a href="action_status" class="btn btn-primary btn-sm">Action Status</a>
@@ -400,7 +400,7 @@
     }
     function addCommand(gi) {
       if (!Array.isArray(jsonData[gi].commands)) jsonData[gi].commands = [];
-      jsonData[gi].commands.push({ command: '', type: '', delayseconds: 1, expected_value: [0] });
+      jsonData[gi].commands.push({ command: '', type: '', delayseconds: 1, expected_value: [-1] });
       renderTable();
     }
     function deleteCommand(gi, ci) {

@@ -1,33 +1,31 @@
-上位机---PLC	对应控制气缸功能（备注）
-M10000	Clamp X in
-M10001	Clamp X out
-M10002	Clamp Y in
-M10003	Clamp Y out
-M10004	Busbar Cylinder
-M10005	JTAG Cylinder
-M10006	
-M10007	
-M10008	
-M10009	
-M10010	
-M10020	proximity switch1
-M10021	proximity switch2
-M10022	proximity switch3
-M10023	Clamp X1 out
-M10024	Clamp X1 in 
-M10025	Clamp X2 out
-M10026	Clamp X2 in
-M10027	Clamp Y1 out
-M10028	Clamp Y1 in 
-M10029	Clamp Y2 out
-M10030	Clamp Y2 in 
-M10031	Busbar out
-M10032	Busbar in
-M10033	JTAG out
-M10034	JTAG in
-M10035	safety Light Grid
-M10050	Clamp X in
-M10051	Clamp X out
-M10052	Clamp Y in
-M10053	Clamp Y out
-M10054	Testing ready
+上位机---PLC(Write)	对应控制气缸功能（备注）
+M2000	Write_Holder_in
+M2001	Write_Holder_out
+M2002	Write_Fix_in
+M2003	Write_Fix_out
+M2004	Write_OpticalModule_in
+M2005	Write_OpticalModule_out
+M2006	Write_DebugModule_in
+M2007	Write_DebugModule_out
+M2008	Write_Mcio124Module_in
+M2009	Write_Mcio124Module_out
+M2010	Write_RFModule_in
+M2011	Write_RFModule_out
+M2012	Write_Load
+M2013	Write_Unload
+M1000	Read_Holder_Work
+M1001	Read_Holder_Origin
+M1002	Read_Fix_Work
+M1003	Read_Fix_Origin
+M1004	Read_OpticalModule_Work
+M1005	Read_OpticalModule_Origin
+M1006	Read_DebugModule_Work
+M1007	Read_DebugModule_Origin
+M1008	Read_Mcio124Module_Work
+M1009	Read_Mcio124Module_Origin
+M1010	Read_RFmodule_Work
+M1011	Read_RFmodule_Origin
+M1012	Read_SafeDoor_Front
+M1013	Read_SafeDoor_Rear
+M1014	Read_SafeDoor_Top（only top slot）
+M1015	Read_TesterStatus

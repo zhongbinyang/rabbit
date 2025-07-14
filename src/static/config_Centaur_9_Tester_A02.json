@@ -1,0 +1,28 @@
+{
+  "PLC_CONFIG": {
+    "host": "192.168.1.11",
+    "port": 502,
+    "timeout": 3.0,
+    "retry_attempts": 3
+  },
+  "API_CONFIG": {
+    "host": "0.0.0.0",
+    "port": 5001,
+    "debug": false
+  },
+  "LOGGING_CONFIG": {
+    "log_level": "INFO",
+    "log_file": "Log/application.log",
+    "max_log_size": 10485760,
+    "backup_count": 5
+  },
+  "UI_CONFIG": {
+    "window_title": "BM Control System",
+    "default_theme": "light",
+    "font_family": "Microsoft YaHei UI",
+    "font_size": 10
+  },
+  "IO_SETTING_FILE_PATH": "static/io_setting_Centaur_9_Tester_A02.json",
+  "ACTION_SETTING_FILE_PATH": "static/action_setting_Centaur_9_Tester_A02.json",
+  "IO_TYPE_FILE_PATH": "static/io_type.json"
+}

@@ -1,0 +1,180 @@
+C:\Users\xiaobai>Z:\git\rabbit\test\testcommand.bat
+
+C:\Users\xiaobai>curl -X POST --url http://192.168.137.175:5001/connect_plc
+{"Function":"ConnectPLC","Message":"Connected to PLC 192.168.1.31:502","Result":true,"timestamp":"2025-07-13 16:31:22_868427"}
+
+C:\Users\xiaobai>echo.
+
+
+C:\Users\xiaobai>timeout /t 2  1>nul
+
+C:\Users\xiaobai>curl -X POST --url http://192.168.137.175:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_x\", \"control_state\": \"in\"}"
+{"state": "in", "result": true, "status": ""}
+C:\Users\xiaobai>echo.
+
+
+C:\Users\xiaobai>timeout /t 2  1>nul
+
+C:\Users\xiaobai>curl -X POST --url http://192.168.137.175:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_x\", \"control_state\": \"out\"}"
+{"state": "out", "result": true, "status": ""}
+C:\Users\xiaobai>echo.
+
+
+C:\Users\xiaobai>timeout /t 2  1>nul
+
+C:\Users\xiaobai>curl -X POST --url http://192.168.137.175:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_y\", \"control_state\": \"in\"}"
+{"state": "in", "result": true, "status": ""}
+C:\Users\xiaobai>echo.
+
+
+C:\Users\xiaobai>timeout /t 2  1>nul
+
+C:\Users\xiaobai>curl -X POST --url http://192.168.137.175:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_y\", \"control_state\": \"out\"}"
+{"state": "out", "result": true, "status": ""}
+C:\Users\xiaobai>echo.
+
+
+C:\Users\xiaobai>timeout /t 2  1>nul
+
+C:\Users\xiaobai>curl -X POST --url http://192.168.137.175:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"power\", \"control_state\": \"in\"}"
+{"state": "in", "result": true, "status": ""}
+C:\Users\xiaobai>echo.
+
+
+C:\Users\xiaobai>timeout /t 2  1>nul
+
+C:\Users\xiaobai>curl -X POST --url http://192.168.137.175:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"power\", \"control_state\": \"out\"}"
+{"state": "out", "result": true, "status": ""}
+C:\Users\xiaobai>echo.
+
+
+C:\Users\xiaobai>timeout /t 2  1>nul
+
+C:\Users\xiaobai>curl -X POST --url http://192.168.137.175:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"jtag\", \"control_state\": \"in\"}"
+{"state": "in", "result": true, "status": ""}
+C:\Users\xiaobai>echo.
+
+
+C:\Users\xiaobai>timeout /t 2  1>nul
+
+C:\Users\xiaobai>curl -X POST --url http://192.168.137.175:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"jtag\", \"control_state\": \"out\"}"
+{"state": "out", "result": true, "status": ""}
+C:\Users\xiaobai>echo.
+
+
+C:\Users\xiaobai>timeout /t 2  1>nul
+
+C:\Users\xiaobai>curl -X POST --url http://192.168.137.175:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"proximity_switch1\"}"
+{"state": "on", "result": true, "status": ""}
+C:\Users\xiaobai>echo.
+
+
+C:\Users\xiaobai>timeout /t 2  1>nul
+
+C:\Users\xiaobai>curl -X POST --url http://192.168.137.175:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"proximity_switch2\"}"
+{"state": "on", "result": true, "status": ""}
+C:\Users\xiaobai>echo.
+
+
+C:\Users\xiaobai>timeout /t 2  1>nul
+
+C:\Users\xiaobai>curl -X POST --url http://192.168.137.175:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"proximity_switch3\"}"
+{"state": "on", "result": true, "status": ""}
+C:\Users\xiaobai>echo.
+
+
+C:\Users\xiaobai>timeout /t 2  1>nul
+
+C:\Users\xiaobai>curl -X POST --url http://192.168.137.175:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_x1_out\"}"
+{"state": "on", "result": true, "status": ""}
+C:\Users\xiaobai>echo.
+
+
+C:\Users\xiaobai>timeout /t 2  1>nul
+
+C:\Users\xiaobai>curl -X POST --url http://192.168.137.175:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_x1_in\"}"
+{"state": "off", "result": false, "status": "Command M10024 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\xiaobai>echo.
+
+
+C:\Users\xiaobai>timeout /t 2  1>nul
+
+C:\Users\xiaobai>curl -X POST --url http://192.168.137.175:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_x2_out\"}"
+{"state": "on", "result": true, "status": ""}
+C:\Users\xiaobai>echo.
+
+
+C:\Users\xiaobai>timeout /t 2  1>nul
+
+C:\Users\xiaobai>curl -X POST --url http://192.168.137.175:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_x2_in\"}"
+{"state": "off", "result": false, "status": "Command M10026 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\xiaobai>echo.
+
+
+C:\Users\xiaobai>timeout /t 2  1>nul
+
+C:\Users\xiaobai>curl -X POST --url http://192.168.137.175:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_y1_out\"}"
+{"state": "on", "result": true, "status": ""}
+C:\Users\xiaobai>echo.
+
+
+C:\Users\xiaobai>timeout /t 2  1>nul
+
+C:\Users\xiaobai>curl -X POST --url http://192.168.137.175:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_y1_in\"}"
+{"state": "off", "result": false, "status": "Command M10028 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\xiaobai>echo.
+
+
+C:\Users\xiaobai>timeout /t 2  1>nul
+
+C:\Users\xiaobai>curl -X POST --url http://192.168.137.175:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_y2_out\"}"
+{"state": "on", "result": true, "status": ""}
+C:\Users\xiaobai>echo.
+
+
+C:\Users\xiaobai>timeout /t 2  1>nul
+
+C:\Users\xiaobai>curl -X POST --url http://192.168.137.175:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_y2_in\"}"
+{"state": "off", "result": false, "status": "Command M10030 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\xiaobai>echo.
+
+
+C:\Users\xiaobai>timeout /t 2  1>nul
+
+C:\Users\xiaobai>curl -X POST --url http://192.168.137.175:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"power_in\"}"
+{"state": "on", "result": true, "status": ""}
+C:\Users\xiaobai>echo.
+
+
+C:\Users\xiaobai>timeout /t 2  1>nul
+
+C:\Users\xiaobai>curl -X POST --url http://192.168.137.175:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"power_out\"}"
+{"state": "off", "result": false, "status": "Command M10032 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\xiaobai>echo.
+
+
+C:\Users\xiaobai>timeout /t 2  1>nul
+
+C:\Users\xiaobai>curl -X POST --url http://192.168.137.175:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"jtag_out\"}"
+{"state": "on", "result": true, "status": ""}
+C:\Users\xiaobai>echo.
+
+
+C:\Users\xiaobai>timeout /t 2  1>nul
+
+C:\Users\xiaobai>curl -X POST --url http://192.168.137.175:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"jtag_in\"}"
+{"state": "off", "result": false, "status": "Command M10034 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\xiaobai>echo.
+
+
+C:\Users\xiaobai>timeout /t 2  1>nul
+
+C:\Users\xiaobai>curl -X POST --url http://192.168.137.175:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"safety_light_grid\"}"
+{"state": "off", "result": false, "status": "Command M10035 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\xiaobai>echo.
+
+
+C:\Users\xiaobai>timeout /t 2  1>nul
+
+C:\Users\xiaobai>curl -X POST --url http://192.168.137.175:5001/disconnect_plc
+{"Function":"DisconnectPLC","Message":"Disconnect PLC successfully","Result":true,"timestamp":"2025-07-13 16:32:09_247179"}

@@ -1,0 +1,343 @@
+[
+  {
+    "action": "clamp_x_in",
+    "commands": [
+      {
+        "command": "M10000",
+        "type": "write_multiple_coil",
+        "expected_value": [
+          1,
+          0
+        ]
+      }
+    ],
+    "description": "M10000",
+    "readonly": false
+  },
+  {
+    "action": "clamp_x_out",
+    "commands": [
+      {
+        "command": "M10000",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil"
+      }
+    ],
+    "description": "M10000",
+    "readonly": false
+  },
+  {
+    "action": "clamp_y_in",
+    "commands": [
+      {
+        "command": "M10002",
+        "expected_value": [
+          1,
+          0
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      }
+    ],
+    "description": "M10002",
+    "readonly": false
+  },
+  {
+    "action": "clamp_y_out",
+    "commands": [
+      {
+        "command": "M10002",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil"
+      }
+    ],
+    "description": "M10002",
+    "readonly": false
+  },
+  {
+    "action": "power_in",
+    "commands": [
+      {
+        "command": "M10004",
+        "expected_value": [
+          1
+        ],
+        "type": "write_multiple_coil"
+      }
+    ],
+    "description": "M10004",
+    "readonly": false
+  },
+  {
+    "action": "power_out",
+    "commands": [
+      {
+        "command": "M10004",
+        "expected_value": [
+          0
+        ],
+        "type": "write_multiple_coil"
+      }
+    ],
+    "description": "M10004",
+    "readonly": false
+  },
+  {
+    "action": "jtag_in",
+    "commands": [
+      {
+        "command": "M10005",
+        "expected_value": [
+          1
+        ],
+        "type": "write_multiple_coil"
+      }
+    ],
+    "description": "M10005",
+    "readonly": false
+  },
+  {
+    "action": "jtag_out",
+    "commands": [
+      {
+        "command": "M10005",
+        "expected_value": [
+          0
+        ],
+        "type": "write_multiple_coil"
+      }
+    ],
+    "description": "M10005",
+    "readonly": false
+  },
+  {
+    "action": "proximity_switch1_state",
+    "commands": [
+      {
+        "command": "M10020",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "proximity_switch2_state",
+    "commands": [
+      {
+        "command": "M10021",
+        "expected_value": [
+          1
+        ],
+        "type": "read_single_coil"
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "proximity_switch3_state",
+    "commands": [
+      {
+        "command": "M10022",
+        "expected_value": [
+          1
+        ],
+        "type": "read_single_coil"
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "clamp_x1_out_state",
+    "commands": [
+      {
+        "command": "M10023",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "clamp_x1_in_state",
+    "commands": [
+      {
+        "command": "M10024",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "clamp_x2_out_state",
+    "commands": [
+      {
+        "command": "M10025",
+        "expected_value": [
+          1
+        ],
+        "type": "read_single_coil"
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "clamp_x2_in_state",
+    "commands": [
+      {
+        "command": "M10026",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "clamp_y1_out_state",
+    "commands": [
+      {
+        "command": "M10027",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "clamp_y1_in_state",
+    "commands": [
+      {
+        "command": "M10028",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "clamp_y2_out_state",
+    "commands": [
+      {
+        "command": "M10029",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "clamp_y2_in_state",
+    "commands": [
+      {
+        "command": "M10030",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "power_in_state",
+    "commands": [
+      {
+        "command": "M10031",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "power_out_state",
+    "commands": [
+      {
+        "command": "M10032",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "jtag_out_state",
+    "commands": [
+      {
+        "command": "M10033",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "jtag_in_state",
+    "commands": [
+      {
+        "command": "M10034",
+        "expected_value": [
+          1
+        ],
+        "type": "read_single_coil"
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "safety_light_grid_state",
+    "commands": [
+      {
+        "command": "M10035",
+        "expected_value": [
+          1
+        ],
+        "type": "read_single_coil"
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  }
+]

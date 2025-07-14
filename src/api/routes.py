@@ -162,6 +162,88 @@ def execute_plc_command():
     except Exception as e:
         return jsonify(create_response("execute_plc_command", False, f"Error executing command: {str(e)}")), 500
 
+
+@plc_api.route('/set_control', methods=['GET', 'POST'])
+def set_control():
+    """设置PLC控制"""
+    # 同时支持GET和POST请求参
+    if request.method == 'POST' and request.is_json:
+        control_name = request.get_json().get('control_name',  None)
+        control_state = request.get_json().get('control_state',  None)
+    else:
+        control_name = request.args.get('control_name', type=str, default=None)
+        control_state = request.args.get('control_state', type=str, default=None)
+    
+    if not control_name or not control_state:
+        return jsonify(create_response("set_control", False, "control_name and control_state parameter is required")), 400
+    
+    logger.info(f"API request: Set PLC control with control_name '{control_name}' and control_state '{control_state}'")
+    
+    try:
+        ret = plc_controller._set_control(control_name, control_state)
+
+        response_data = {
+            "state": control_state if ret[0] else "",
+            "result": ret[0],
+            "status": "" if ret[0] else ret[1]
+        }
+
+        # Return response
+        return Response(
+            json.dumps(response_data, ensure_ascii=False, indent=None),
+            mimetype='application/json'
+        )
+    except Exception as e:
+        response_data = {
+            "state": "",
+            "result": False,
+            "status": "Error setting control: " + str(e)
+        }
+
+        # Return response
+        return Response(
+            json.dumps(response_data, ensure_ascii=False, indent=None),
+            mimetype='application/json'
+        )
+    
+@plc_api.route('/get_control', methods=['GET', 'POST'])
+def get_control():
+    """获取PLC控制"""
+    # 同时支持GET和POST请求参
+    if request.method == 'POST' and request.is_json:
+        control_name = request.get_json().get('control_name',  None)
+    else:
+        control_name = request.args.get('control_name', type=str, default=None)
+    
+    if not control_name:
+        return jsonify(create_response("set_control", False, "control_name parameter is required")), 400
+    
+    logger.info(f"API request: Get PLC control with control_name '{control_name}'")
+    
+    try:
+        ret = plc_controller._get_control(control_name)
+        response_data = {
+            "state": ret[2],
+            "result": ret[0],
+            "status": "" if ret[0] else ret[1]
+        }
+        # Return response
+        return Response(
+            json.dumps(response_data, ensure_ascii=False, indent=None),
+            mimetype='application/json'
+        )
+    except Exception as e:
+        response_data = {
+            "state": ret[2],
+            "result": False,
+            "status": "Error getting control: " + str(e)
+        }
+        # Return response
+        return Response(
+            json.dumps(response_data, ensure_ascii=False, indent=None),
+            mimetype='application/json'
+        )
+    
 @plc_api.route('/get_version', methods=['GET', 'POST'])
 def get_version():
     return jsonify({'Function':"get_api_version",'Result': True, 'Message': API_VERSION,

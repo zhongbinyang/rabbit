@@ -1,0 +1,122 @@
+[
+  {
+    "PLC": "M2000",
+    "description": "write_holder_in"
+  },
+  {
+    "PLC": "M2001",
+    "description": "write_holder_out"
+  },
+  {
+    "PLC": "M2002",
+    "description": "write_fix_in"
+  },
+  {
+    "PLC": "M2003",
+    "description": "write_fix_out"
+  },
+  {
+    "PLC": "M2004",
+    "description": "write_opticalmodule_in"
+  },
+  {
+    "PLC": "M2005",
+    "description": "write_opticalmodule_out"
+  },
+  {
+    "PLC": "M2006",
+    "description": "write_debugmodule_in"
+  },
+  {
+    "PLC": "M2007",
+    "description": "write_debugmodule_out"
+  },
+  {
+    "PLC": "M2008",
+    "description": "write_mcio124module_in"
+  },
+  {
+    "PLC": "M2009",
+    "description": "write_mcio124module_out"
+  },
+  {
+    "PLC": "M2010",
+    "description": "write_rfmodule_in"
+  },
+  {
+    "PLC": "M2011",
+    "description": "write_rfmodule_out"
+  },
+  {
+    "PLC": "M2012",
+    "description": "write_load"
+  },
+  {
+    "PLC": "M2013",
+    "description": "write_unload"
+  },
+  {
+    "PLC": "M1000",
+    "description": "read_holder_work"
+  },
+  {
+    "PLC": "M1001",
+    "description": "read_holder_origin"
+  },
+  {
+    "PLC": "M1002",
+    "description": "read_fix_work"
+  },
+  {
+    "PLC": "M1003",
+    "description": "read_fix_origin"
+  },
+  {
+    "PLC": "M1004",
+    "description": "read_opticalmodule_work"
+  },
+  {
+    "PLC": "M1005",
+    "description": "read_opticalmodule_origin"
+  },
+  {
+    "PLC": "M1006",
+    "description": "read_debugmodule_work"
+  },
+  {
+    "PLC": "M1007",
+    "description": "read_debugmodule_origin"
+  },
+  {
+    "PLC": "M1008",
+    "description": "read_mcio124module_work"
+  },
+  {
+    "PLC": "M1009",
+    "description": "read_mcio124module_origin"
+  },
+  {
+    "PLC": "M1010",
+    "description": "read_rfmodule_work"
+  },
+  {
+    "PLC": "M1011",
+    "description": "read_rfmodule_origin"
+  },
+  {
+    "PLC": "M1012",
+    "description": "read_safedoor_front"
+  },
+  {
+    "PLC": "M1013",
+    "description": "read_safedoor_rear"
+  },
+  {
+    "PLC": "M1014",
+    "description": "read_safedoor_top_only_top_slot_"
+  },
+  {
+    "PLC": "M1015",
+    "description": "read_testerstatus"
+  }
+]

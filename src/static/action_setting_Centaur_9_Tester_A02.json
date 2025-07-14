@@ -1,0 +1,302 @@
+[
+  {
+    "action": "write_holder_in",
+    "commands": [
+      {
+        "command": "M2000"
+      }
+    ],
+    "description": "M2000",
+    "readonly": false
+  },
+  {
+    "action": "write_holder_out",
+    "commands": [
+      {
+        "command": "M2001"
+      }
+    ],
+    "description": "M2001",
+    "readonly": false
+  },
+  {
+    "action": "write_fix_in",
+    "commands": [
+      {
+        "command": "M2002"
+      }
+    ],
+    "description": "M2002",
+    "readonly": false
+  },
+  {
+    "action": "write_fix_out",
+    "commands": [
+      {
+        "command": "M2003"
+      }
+    ],
+    "description": "M2003",
+    "readonly": false
+  },
+  {
+    "action": "write_opticalmodule_in",
+    "commands": [
+      {
+        "command": "M2004"
+      }
+    ],
+    "description": "M2004",
+    "readonly": false
+  },
+  {
+    "action": "write_opticalmodule_out",
+    "commands": [
+      {
+        "command": "M2005"
+      }
+    ],
+    "description": "M2005",
+    "readonly": false
+  },
+  {
+    "action": "write_debugmodule_in",
+    "commands": [
+      {
+        "command": "M2006"
+      }
+    ],
+    "description": "M2006",
+    "readonly": false
+  },
+  {
+    "action": "write_debugmodule_out",
+    "commands": [
+      {
+        "command": "M2007"
+      }
+    ],
+    "description": "M2007",
+    "readonly": false
+  },
+  {
+    "action": "write_mcio124module_in",
+    "commands": [
+      {
+        "command": "M2008"
+      }
+    ],
+    "description": "M2008",
+    "readonly": false
+  },
+  {
+    "action": "write_mcio124module_out",
+    "commands": [
+      {
+        "command": "M2009"
+      }
+    ],
+    "description": "M2009",
+    "readonly": false
+  },
+  {
+    "action": "write_rfmodule_in",
+    "commands": [
+      {
+        "command": "M2010"
+      }
+    ],
+    "description": "M2010",
+    "readonly": false
+  },
+  {
+    "action": "write_rfmodule_out",
+    "commands": [
+      {
+        "command": "M2011"
+      }
+    ],
+    "description": "M2011",
+    "readonly": false
+  },
+  {
+    "action": "write_load",
+    "commands": [
+      {
+        "command": "M2012"
+      }
+    ],
+    "description": "M2012",
+    "readonly": false
+  },
+  {
+    "action": "write_unload",
+    "commands": [
+      {
+        "command": "M2013"
+      }
+    ],
+    "description": "M2013",
+    "readonly": false
+  },
+  {
+    "action": "read_holder_work_state",
+    "commands": [
+      {
+        "command": "M1000"
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "read_holder_origin_state",
+    "commands": [
+      {
+        "command": "M1001"
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "read_fix_work_state",
+    "commands": [
+      {
+        "command": "M1002"
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "read_fix_origin_state",
+    "commands": [
+      {
+        "command": "M1003"
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "read_opticalmodule_work_state",
+    "commands": [
+      {
+        "command": "M1004"
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "read_opticalmodule_origin_state",
+    "commands": [
+      {
+        "command": "M1005"
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "read_debugmodule_work_state",
+    "commands": [
+      {
+        "command": "M1006"
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "read_debugmodule_origin_state",
+    "commands": [
+      {
+        "command": "M1007"
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "read_mcio124module_work_state",
+    "commands": [
+      {
+        "command": "M1008"
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "read_mcio124module_origin_state",
+    "commands": [
+      {
+        "command": "M1009"
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "read_rfmodule_work_state",
+    "commands": [
+      {
+        "command": "M1010"
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "read_rfmodule_origin_state",
+    "commands": [
+      {
+        "command": "M1011"
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "read_safedoor_front_state",
+    "commands": [
+      {
+        "command": "M1012"
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "read_safedoor_rear_state",
+    "commands": [
+      {
+        "command": "M1013"
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "read_safedoor_top_state",
+    "commands": [
+      {
+        "command": "M1014"
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "read_testerstatus_state",
+    "commands": [
+      {
+        "command": "M1015"
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  }
+]

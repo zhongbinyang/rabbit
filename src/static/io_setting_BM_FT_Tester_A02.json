@@ -1,0 +1,434 @@
+[
+  {
+    "PLC": "M10100",
+    "description": "clamp X IN"
+  },
+  {
+    "PLC": "M10106",
+    "description": "clamp X out"
+  },
+  {
+    "PLC": "M10110",
+    "description": "clamp Y IN"
+  },
+  {
+    "PLC": "M10116",
+    "description": "clamp Y out"
+  },
+  {
+    "PLC": "M10120",
+    "description": "lifter up"
+  },
+  {
+    "PLC": "M10126",
+    "description": "lifter down"
+  },
+  {
+    "PLC": "M10130",
+    "description": "POWER  IN"
+  },
+  {
+    "PLC": "M10136",
+    "description": "POWER out"
+  },
+  {
+    "PLC": "M10140",
+    "description": "OSFP1 IN"
+  },
+  {
+    "PLC": "M10146",
+    "description": "OSFP1 out"
+  },
+  {
+    "PLC": "M10150",
+    "description": "OSFP1 speediness"
+  },
+  {
+    "PLC": "M10156",
+    "description": "OSFP2 speediness"
+  },
+  {
+    "PLC": "M10160",
+    "description": "OSFP2 IN"
+  },
+  {
+    "PLC": "M10166",
+    "description": "OSFP2 out"
+  },
+  {
+    "PLC": "M10170",
+    "description": "OSFP3  IN"
+  },
+  {
+    "PLC": "M10176",
+    "description": "OSFP3  out"
+  },
+  {
+    "PLC": "M10180",
+    "description": "OSFP3  speediness"
+  },
+  {
+    "PLC": "M10186",
+    "description": "OSFP4  IN"
+  },
+  {
+    "PLC": "M10190",
+    "description": "OSFP4  out"
+  },
+  {
+    "PLC": "M10196",
+    "description": "OSFP4 speediness"
+  },
+  {
+    "PLC": "M10200",
+    "description": "OSFP5  IN"
+  },
+  {
+    "PLC": "M10206",
+    "description": "OSFP5  out"
+  },
+  {
+    "PLC": "M10210",
+    "description": "OSFP5  speediness"
+  },
+  {
+    "PLC": "M10216",
+    "description": "OSFP6  IN"
+  },
+  {
+    "PLC": "M10220",
+    "description": "OSFP6  out"
+  },
+  {
+    "PLC": "M10226",
+    "description": "OSFP6  speediness"
+  },
+  {
+    "PLC": "M10230",
+    "description": "OSFP7  IN"
+  },
+  {
+    "PLC": "M10236",
+    "description": "OSFP7  out"
+  },
+  {
+    "PLC": "M10240",
+    "description": "OSFP7  speediness"
+  },
+  {
+    "PLC": "M10246",
+    "description": "OSFP8  IN"
+  },
+  {
+    "PLC": "M10250",
+    "description": "OSFP8  out"
+  },
+  {
+    "PLC": "M10256",
+    "description": "OSFP8  speediness"
+  },
+  {
+    "PLC": "M10260",
+    "description": "OSFP9  IN"
+  },
+  {
+    "PLC": "M10266",
+    "description": "OSFP9  out"
+  },
+  {
+    "PLC": "M10270",
+    "description": "OSFP9  speediness"
+  },
+  {
+    "PLC": "M10276",
+    "description": "ETH/USB  IN"
+  },
+  {
+    "PLC": "M10280",
+    "description": "ETH/USB  out"
+  },
+  {
+    "PLC": "M10286",
+    "description": "FNM  IN"
+  },
+  {
+    "PLC": "M10290",
+    "description": "FNM  out"
+  },
+  {
+    "PLC": "M10295",
+    "description": "ETH/USB LED  IN"
+  },
+  {
+    "PLC": "M10296",
+    "description": "FNM LED  IN"
+  },
+  {
+    "PLC": "M10050",
+    "description": "Manual/AUTO"
+  },
+  {
+    "PLC": "M10063",
+    "description": "Auto mode"
+  },
+  {
+    "PLC": "M10065",
+    "description": "Reset completed"
+  },
+  {
+    "PLC": "M10066",
+    "description": "start"
+  },
+  {
+    "PLC": "M10068",
+    "description": "stop"
+  },
+  {
+    "PLC": "M10600",
+    "description": "BUZZER"
+  },
+  {
+    "PLC": "M10611",
+    "description": " error"
+  },
+  {
+    "PLC": "M10612",
+    "description": "\"UUT In place，"
+  },
+  {
+    "PLC": "Please proceed to the next step.\"",
+    "description": ""
+  },
+  {
+    "PLC": "M10613",
+    "description": "Testing ready"
+  },
+  {
+    "PLC": "M10614",
+    "description": "test is finish"
+  },
+  {
+    "PLC": "D6",
+    "description": "Record"
+  },
+  {
+    "PLC": "D7",
+    "description": "Reset flow"
+  },
+  {
+    "PLC": "D8",
+    "description": "Auto flow"
+  },
+  {
+    "PLC": "D150",
+    "description": "Alarm"
+  },
+  {
+    "PLC": "D200",
+    "description": "OK"
+  },
+  {
+    "PLC": "D202",
+    "description": "NG"
+  },
+  {
+    "PLC": "M11000",
+    "description": ""
+  },
+  {
+    "PLC": "M11001",
+    "description": "tray in 1"
+  },
+  {
+    "PLC": "M11002",
+    "description": "tray in 2"
+  },
+  {
+    "PLC": "M11003",
+    "description": "clamp x1 home"
+  },
+  {
+    "PLC": "M11004",
+    "description": "clamp x1 in place"
+  },
+  {
+    "PLC": "M11005",
+    "description": "clamp x2 home"
+  },
+  {
+    "PLC": "M11006",
+    "description": "clamp x2 in place"
+  },
+  {
+    "PLC": "M11007",
+    "description": "clamp y1 home"
+  },
+  {
+    "PLC": "M11008",
+    "description": "clamp y1 in place"
+  },
+  {
+    "PLC": "M11009",
+    "description": "clamp y2 home"
+  },
+  {
+    "PLC": "M11010",
+    "description": "clamp y2 in place"
+  },
+  {
+    "PLC": "M11011",
+    "description": "lifter home"
+  },
+  {
+    "PLC": "M11012",
+    "description": "lifter in place"
+  },
+  {
+    "PLC": "M11013",
+    "description": "power home"
+  },
+  {
+    "PLC": "M11014",
+    "description": "power in place"
+  },
+  {
+    "PLC": "M11015",
+    "description": "OSFP 1 home"
+  },
+  {
+    "PLC": "M11016",
+    "description": "OSFP 1 mediate point"
+  },
+  {
+    "PLC": "M11017",
+    "description": "OSFP 1 in place"
+  },
+  {
+    "PLC": "M11018",
+    "description": "OSFP 2 home"
+  },
+  {
+    "PLC": "M11019",
+    "description": "OSFP 2 mediate point"
+  },
+  {
+    "PLC": "M11020",
+    "description": "OSFP 2 in place"
+  },
+  {
+    "PLC": "M11021",
+    "description": "OSFP 3 home"
+  },
+  {
+    "PLC": "M11022",
+    "description": "OSFP 3 mediate point"
+  },
+  {
+    "PLC": "M11023",
+    "description": "OSFP 3 in place"
+  },
+  {
+    "PLC": "M11024",
+    "description": "OSFP 4 home"
+  },
+  {
+    "PLC": "M11025",
+    "description": "OSFP 4 mediate point"
+  },
+  {
+    "PLC": "M11026",
+    "description": "OSFP 4 in place"
+  },
+  {
+    "PLC": "M11027",
+    "description": "OSFP 5 home"
+  },
+  {
+    "PLC": "M11028",
+    "description": "OSFP 5 mediate point"
+  },
+  {
+    "PLC": "M11029",
+    "description": "OSFP 5 in place"
+  },
+  {
+    "PLC": "M11030",
+    "description": "OSFP 6 home"
+  },
+  {
+    "PLC": "M11031",
+    "description": "OSFP 6 mediate point"
+  },
+  {
+    "PLC": "M11032",
+    "description": "OSFP 6 in place"
+  },
+  {
+    "PLC": "M11033",
+    "description": "OSFP 7 home"
+  },
+  {
+    "PLC": "M11034",
+    "description": "OSFP 7 mediate point"
+  },
+  {
+    "PLC": "M11035",
+    "description": "OSFP 7 in place"
+  },
+  {
+    "PLC": "M11036",
+    "description": "OSFP 8 home"
+  },
+  {
+    "PLC": "M11037",
+    "description": "OSFP 8 mediate point"
+  },
+  {
+    "PLC": "M11038",
+    "description": "OSFP 8 in place"
+  },
+  {
+    "PLC": "M11039",
+    "description": "OSFP 9 home"
+  },
+  {
+    "PLC": "M11040",
+    "description": "OSFP 9 mediate point"
+  },
+  {
+    "PLC": "M11041",
+    "description": "OSFP 9 in place"
+  },
+  {
+    "PLC": "M11042",
+    "description": "ETH/USB home"
+  },
+  {
+    "PLC": "M11043",
+    "description": "ETH/USB in place"
+  },
+  {
+    "PLC": "M11044",
+    "description": "FNM home"
+  },
+  {
+    "PLC": "M11045",
+    "description": "FNM in place"
+  },
+  {
+    "PLC": "M11046",
+    "description": "ETH/USB LED home"
+  },
+  {
+    "PLC": "M11047",
+    "description": "ETH/USB LED in place"
+  },
+  {
+    "PLC": "M11048",
+    "description": "FNM LED home"
+  },
+  {
+    "PLC": "M11049",
+    "description": "FNM LED in place"
+  }
+]

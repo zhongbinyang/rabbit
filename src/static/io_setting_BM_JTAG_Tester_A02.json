@@ -1,0 +1,130 @@
+[
+  {
+    "PLC": "M10000",
+    "description": "clamp_x_in"
+  },
+  {
+    "PLC": "M10001",
+    "description": "clamp_x_out"
+  },
+  {
+    "PLC": "M10002",
+    "description": "clamp_y_in"
+  },
+  {
+    "PLC": "M10003",
+    "description": "clamp_x_out"
+  },
+  {
+    "PLC": "M10004",
+    "description": "jtag_in"
+  },
+  {
+    "PLC": "M10005",
+    "description": "jtag_out"
+  },
+  {
+    "PLC": "M10006",
+    "description": "io_in"
+  },
+  {
+    "PLC": "M10007",
+    "description": "io_out"
+  },
+  {
+    "PLC": "M10008",
+    "description": "power_in"
+  },
+  {
+    "PLC": "M10009",
+    "description": "power_out"
+  },
+  {
+    "PLC": "M10020",
+    "description": "proximity_switch1"
+  },
+  {
+    "PLC": "M10021",
+    "description": "proximity_switch2"
+  },
+  {
+    "PLC": "M10022",
+    "description": "clamp_x1_in"
+  },
+  {
+    "PLC": "M10023",
+    "description": "clamp_x1_out"
+  },
+  {
+    "PLC": "M10024",
+    "description": "clamp_x2_in"
+  },
+  {
+    "PLC": "M10025",
+    "description": "clamp_x2_out"
+  },
+  {
+    "PLC": "M10026",
+    "description": "clamp_y1_in"
+  },
+  {
+    "PLC": "M10027",
+    "description": "clamp_y1_out"
+  },
+  {
+    "PLC": "M10028",
+    "description": "clamp_y2_in"
+  },
+  {
+    "PLC": "M10029",
+    "description": "clamp_y2_out"
+  },
+  {
+    "PLC": "M10030",
+    "description": "jatg_out"
+  },
+  {
+    "PLC": "M10031",
+    "description": "jtag_in"
+  },
+  {
+    "PLC": "M10032",
+    "description": "io_out"
+  },
+  {
+    "PLC": "M10033",
+    "description": "io_in"
+  },
+  {
+    "PLC": "M10034",
+    "description": "power_out"
+  },
+  {
+    "PLC": "M10035",
+    "description": "power_in"
+  },
+  {
+    "PLC": "M10036",
+    "description": "safety_light_grid"
+  },
+  {
+    "PLC": "M10050",
+    "description": "clamp_x_out"
+  },
+  {
+    "PLC": "M10051",
+    "description": "clamp_x_in"
+  },
+  {
+    "PLC": "M10052",
+    "description": "clamp_y_out"
+  },
+  {
+    "PLC": "M10053",
+    "description": "clamp_y_in"
+  },
+  {
+    "PLC": "M10054",
+    "description": "testing_ready"
+  }
+]

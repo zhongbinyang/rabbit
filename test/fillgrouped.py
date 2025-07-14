@@ -3,7 +3,7 @@ import os
 
 # 路径
 base_dir = os.path.dirname(__file__)
-json_path = os.path.join(base_dir, '../src/static/PLC_IO_List_A01.json')
+json_path = os.path.join(base_dir, '../src/static/io_setting_Centaur_9_Tester.json')
 grouped_path = os.path.join(base_dir, '../src/static/PLC_IO_List_A01_grouped.json')
 
 # 读取PLC_IO_List_A01.json
@@ -15,13 +15,13 @@ for item in plc_list:
     plc = item['PLC']
     desc = item['description']
     grouped.append({
-        "action": plc,
+        "action": desc,
         "commands": [
             {
                 "command": plc
             }
         ],
-        "description": desc,
+        "description": plc,
         "readonly": False
     })
 

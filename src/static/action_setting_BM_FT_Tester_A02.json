@@ -1,0 +1,1852 @@
+[
+  {
+    "action": "clamp_x_in",
+    "commands": [
+      {
+        "command": "M10106",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      },
+      {
+        "command": "M10100",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1,
+          0
+        ]
+      }
+    ],
+    "description": "M10100",
+    "readonly": false
+  },
+  {
+    "action": "clamp_x_out",
+    "commands": [
+      {
+        "command": "M10100",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          0,
+          1
+        ]
+      },
+      {
+        "command": "M10106",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1,
+          0
+        ]
+      }
+    ],
+    "description": "M10106",
+    "readonly": false
+  },
+  {
+    "action": "clamp_y_in",
+    "commands": [
+      {
+        "command": "M10116",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      },
+      {
+        "command": "M10110",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1,
+          0
+        ]
+      }
+    ],
+    "description": "M10110",
+    "readonly": false
+  },
+  {
+    "action": "clamp_y_out",
+    "commands": [
+      {
+        "command": "M10110",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      },
+      {
+        "command": "M10116",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1,
+          0
+        ]
+      }
+    ],
+    "description": "M10116",
+    "readonly": false
+  },
+  {
+    "action": "lifter_up",
+    "commands": [
+      {
+        "command": "M10126",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil"
+      },
+      {
+        "command": "M10120",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1,
+          0
+        ]
+      }
+    ],
+    "description": "M10120",
+    "readonly": false
+  },
+  {
+    "action": "lifter_down",
+    "commands": [
+      {
+        "command": "M10120",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      },
+      {
+        "command": "M10126",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1,
+          0
+        ]
+      }
+    ],
+    "description": "M10126",
+    "readonly": false
+  },
+  {
+    "action": "power_in",
+    "commands": [
+      {
+        "command": "M10136",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      },
+      {
+        "command": "M10130",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1,
+          0
+        ]
+      }
+    ],
+    "description": "M10130",
+    "readonly": false
+  },
+  {
+    "action": "power_out",
+    "commands": [
+      {
+        "command": "M10130",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      },
+      {
+        "command": "M10136",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1,
+          0
+        ]
+      }
+    ],
+    "description": "M10136",
+    "readonly": false
+  },
+  {
+    "action": "osfp1_in",
+    "commands": [
+      {
+        "command": "M10146",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      },
+      {
+        "command": "M10140",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1,
+          0
+        ]
+      }
+    ],
+    "description": "M10140",
+    "readonly": false
+  },
+  {
+    "action": "osfp1_out",
+    "commands": [
+      {
+        "command": "M10140",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      },
+      {
+        "command": "M10146",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1,
+          0
+        ]
+      }
+    ],
+    "description": "M10146",
+    "readonly": false
+  },
+  {
+    "action": "osfp1_speediness_disable",
+    "commands": [
+      {
+        "command": "M10150",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      }
+    ],
+    "description": "M10150",
+    "readonly": false
+  },
+  {
+    "action": "osfp1_speediness_enable",
+    "commands": [
+      {
+        "command": "M10150",
+        "expected_value": [
+          1,
+          0
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      }
+    ],
+    "description": "M10150",
+    "readonly": false
+  },
+  {
+    "action": "osfp2_speediness_disable",
+    "commands": [
+      {
+        "command": "M10156",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      }
+    ],
+    "description": "M10156",
+    "readonly": false
+  },
+  {
+    "action": "osfp2_speediness_enable",
+    "commands": [
+      {
+        "command": "M10156",
+        "expected_value": [
+          1,
+          0
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      }
+    ],
+    "description": "M10156",
+    "readonly": false
+  },
+  {
+    "action": "osfp2_in",
+    "commands": [
+      {
+        "command": "M10166",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      },
+      {
+        "command": "M10160",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1,
+          0
+        ]
+      }
+    ],
+    "description": "M10160",
+    "readonly": false
+  },
+  {
+    "action": "osfp2_out",
+    "commands": [
+      {
+        "command": "M10160",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      },
+      {
+        "command": "M10166",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1,
+          0
+        ]
+      }
+    ],
+    "description": "M10166",
+    "readonly": false
+  },
+  {
+    "action": "osfp3_in",
+    "commands": [
+      {
+        "command": "M10176",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      },
+      {
+        "command": "M10170",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1,
+          0
+        ]
+      }
+    ],
+    "description": "M10170",
+    "readonly": false
+  },
+  {
+    "action": "osfp3_out",
+    "commands": [
+      {
+        "command": "M10170",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      },
+      {
+        "command": "M10176",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1,
+          0
+        ]
+      }
+    ],
+    "description": "M10176",
+    "readonly": false
+  },
+  {
+    "action": "osfp3_speediness_disable",
+    "commands": [
+      {
+        "command": "M10180",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      }
+    ],
+    "description": "M10180",
+    "readonly": false
+  },
+  {
+    "action": "osfp3_speediness_enable",
+    "commands": [
+      {
+        "command": "M10180",
+        "expected_value": [
+          1,
+          0
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      }
+    ],
+    "description": "M10180",
+    "readonly": false
+  },
+  {
+    "action": "osfp4_in",
+    "commands": [
+      {
+        "command": "M10190",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      },
+      {
+        "command": "M10186",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1,
+          0
+        ]
+      }
+    ],
+    "description": "M10186",
+    "readonly": false
+  },
+  {
+    "action": "osfp4_out",
+    "commands": [
+      {
+        "command": "M10186",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      },
+      {
+        "command": "M10190",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1,
+          0
+        ]
+      }
+    ],
+    "description": "M10190",
+    "readonly": false
+  },
+  {
+    "action": "osfp4_speediness_disable",
+    "commands": [
+      {
+        "command": "M10196",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      }
+    ],
+    "description": "M10196",
+    "readonly": false
+  },
+  {
+    "action": "osfp4_speediness_enable",
+    "commands": [
+      {
+        "command": "M10196",
+        "expected_value": [
+          1,
+          0
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      }
+    ],
+    "description": "M10196",
+    "readonly": false
+  },
+  {
+    "action": "osfp5_in",
+    "commands": [
+      {
+        "command": "M10206",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      },
+      {
+        "command": "M10200",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1,
+          0
+        ]
+      }
+    ],
+    "description": "M10200",
+    "readonly": false
+  },
+  {
+    "action": "osfp5_out",
+    "commands": [
+      {
+        "command": "M10200",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      },
+      {
+        "command": "M10206",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1,
+          0
+        ]
+      }
+    ],
+    "description": "M10206",
+    "readonly": false
+  },
+  {
+    "action": "osfp5_speediness_disable",
+    "commands": [
+      {
+        "command": "M10210",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      }
+    ],
+    "description": "M10210",
+    "readonly": false
+  },
+  {
+    "action": "osfp5_speediness_enable",
+    "commands": [
+      {
+        "command": "M10210",
+        "expected_value": [
+          1,
+          0
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      }
+    ],
+    "description": "M10210",
+    "readonly": false
+  },
+  {
+    "action": "osfp6_in",
+    "commands": [
+      {
+        "command": "M10220",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      },
+      {
+        "command": "M10216",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1,
+          0
+        ]
+      }
+    ],
+    "description": "M10216",
+    "readonly": false
+  },
+  {
+    "action": "osfp6_out",
+    "commands": [
+      {
+        "command": "M10216",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      },
+      {
+        "command": "M10220",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1,
+          0
+        ]
+      }
+    ],
+    "description": "M10220",
+    "readonly": false
+  },
+  {
+    "action": "osfp6_speediness_disable",
+    "commands": [
+      {
+        "command": "M10226",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil"
+      }
+    ],
+    "description": "M10226",
+    "readonly": false
+  },
+  {
+    "action": "osfp6_speediness_enable",
+    "commands": [
+      {
+        "command": "M10226",
+        "expected_value": [
+          1,
+          0
+        ],
+        "type": "write_multiple_coil"
+      }
+    ],
+    "description": "M10226",
+    "readonly": false
+  },
+  {
+    "action": "osfp7_in",
+    "commands": [
+      {
+        "command": "M10236",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      },
+      {
+        "command": "M10230",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1,
+          0
+        ]
+      }
+    ],
+    "description": "M10230",
+    "readonly": false
+  },
+  {
+    "action": "osfp7_out",
+    "commands": [
+      {
+        "command": "M10230",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      },
+      {
+        "command": "M10236",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1,
+          0
+        ]
+      }
+    ],
+    "description": "M10236",
+    "readonly": false
+  },
+  {
+    "action": "osfp7_speediness_disable",
+    "commands": [
+      {
+        "command": "M10240",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      }
+    ],
+    "description": "M10240",
+    "readonly": false
+  },
+  {
+    "action": "osfp7_speediness_enable",
+    "commands": [
+      {
+        "command": "M10240",
+        "expected_value": [
+          1,
+          0
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      }
+    ],
+    "description": "M10240",
+    "readonly": false
+  },
+  {
+    "action": "osfp8_in",
+    "commands": [
+      {
+        "command": "M10250",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      },
+      {
+        "command": "M10246",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1,
+          0
+        ]
+      }
+    ],
+    "description": "M10246",
+    "readonly": false
+  },
+  {
+    "action": "osfp8_out",
+    "commands": [
+      {
+        "command": "M10246",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      },
+      {
+        "command": "M10250",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1,
+          0
+        ]
+      }
+    ],
+    "description": "M10250",
+    "readonly": false
+  },
+  {
+    "action": "osfp8_speediness_disable",
+    "commands": [
+      {
+        "command": "M10256",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      }
+    ],
+    "description": "M10256",
+    "readonly": false
+  },
+  {
+    "action": "osfp8_speediness_enable",
+    "commands": [
+      {
+        "command": "M10256",
+        "expected_value": [
+          1,
+          0
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      }
+    ],
+    "description": "M10256",
+    "readonly": false
+  },
+  {
+    "action": "osfp9_in",
+    "commands": [
+      {
+        "command": "M10266",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      },
+      {
+        "command": "M10260",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1,
+          0
+        ]
+      }
+    ],
+    "description": "M10260",
+    "readonly": false
+  },
+  {
+    "action": "osfp9_out",
+    "commands": [
+      {
+        "command": "M10260",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      },
+      {
+        "command": "M10266",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1,
+          0
+        ]
+      }
+    ],
+    "description": "M10266",
+    "readonly": false
+  },
+  {
+    "action": "osfp9_speediness_disable",
+    "commands": [
+      {
+        "command": "M10270",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      }
+    ],
+    "description": "M10270",
+    "readonly": false
+  },
+  {
+    "action": "osfp9_speediness_enable",
+    "commands": [
+      {
+        "command": "M10270",
+        "expected_value": [
+          1,
+          0
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      }
+    ],
+    "description": "M10270",
+    "readonly": false
+  },
+  {
+    "action": "eth_usb_in",
+    "commands": [
+      {
+        "command": "M10280",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      },
+      {
+        "command": "M10276",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1,
+          0
+        ]
+      }
+    ],
+    "description": "M10276",
+    "readonly": false
+  },
+  {
+    "action": "eth_usb_out",
+    "commands": [
+      {
+        "command": "M10276",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      },
+      {
+        "command": "M10280",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1,
+          0
+        ]
+      }
+    ],
+    "description": "M10280",
+    "readonly": false
+  },
+  {
+    "action": "fnm_in",
+    "commands": [
+      {
+        "command": "M10290",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      },
+      {
+        "command": "M10286",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1,
+          0
+        ]
+      }
+    ],
+    "description": "M10286",
+    "readonly": false
+  },
+  {
+    "action": "fnm_out",
+    "commands": [
+      {
+        "command": "M10286",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "write_multiple_coil",
+        "delayseconds": 1
+      },
+      {
+        "command": "M10290",
+        "type": "write_multiple_coil",
+        "delayseconds": 1,
+        "expected_value": [
+          1,
+          0
+        ]
+      }
+    ],
+    "description": "M10290",
+    "readonly": false
+  },
+  {
+    "action": "eth_usb_led_in",
+    "commands": [
+      {
+        "command": "M10295",
+        "expected_value": [
+          0,
+          1
+        ],
+        "type": "read_multiple_coil"
+      }
+    ],
+    "description": "M10295",
+    "readonly": false
+  },
+  {
+    "action": "manual_auto_state",
+    "commands": [
+      {
+        "command": "M10050",
+        "expected_value": [
+          0
+        ],
+        "type": "read_single_coil"
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "start_on",
+    "commands": [
+      {
+        "command": "D6",
+        "type": "read_holding_registers",
+        "delayseconds": 10,
+        "expected_value": [
+          1
+        ]
+      },
+      {
+        "command": "M10066",
+        "type": "write_multiple_coil",
+        "delayseconds": 0.2,
+        "expected_value": [
+          1,
+          0
+        ]
+      },
+      {
+        "command": "M10066",
+        "type": "write_multiple_coil",
+        "delayseconds": 20,
+        "expected_value": [
+          0,
+          1
+        ]
+      }
+    ],
+    "description": "D6",
+    "readonly": false
+  },
+  {
+    "action": "stop_on",
+    "commands": [
+      {
+        "command": "M10068",
+        "type": "write_multiple_coil",
+        "expected_value": [
+          1,
+          0
+        ],
+        "delayseconds": 0.2
+      },
+      {
+        "command": "M10068",
+        "type": "write_multiple_coil",
+        "delayseconds": 2,
+        "expected_value": [
+          0,
+          1
+        ]
+      }
+    ],
+    "description": "M10068",
+    "readonly": false
+  },
+  {
+    "action": "buzzer_enable",
+    "commands": [
+      {
+        "command": "M10600",
+        "type": "write_single_coil",
+        "expected_value": [
+          0
+        ]
+      }
+    ],
+    "description": "M10600",
+    "readonly": false
+  },
+  {
+    "action": "buzzer_disable",
+    "commands": [
+      {
+        "command": "M10600",
+        "type": "write_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "M10600",
+    "readonly": false
+  },
+  {
+    "action": "test_ready_state",
+    "commands": [
+      {
+        "command": "M10613",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "device_status_state",
+    "commands": [
+      {
+        "command": "D6",
+        "type": "read_holding_registers",
+        "expected_value": [
+          -1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "reset_flow_state",
+    "commands": [
+      {
+        "command": "D7",
+        "type": "read_single_coil",
+        "expected_value": [
+          -1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "auto_flow_state",
+    "commands": [
+      {
+        "command": "D8",
+        "type": "read_single_coil",
+        "expected_value": [
+          -1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "alarm_state",
+    "commands": [
+      {
+        "command": "D150",
+        "type": "read_single_coil",
+        "expected_value": [
+          -1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "tray_in_1_state",
+    "commands": [
+      {
+        "command": "M11001",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "tray_in_2_state",
+    "commands": [
+      {
+        "command": "M11002",
+        "expected_value": [
+          1
+        ],
+        "type": "read_single_coil"
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "clamp_x1_home_state",
+    "commands": [
+      {
+        "command": "M11003",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "clamp_x1_in_place_state",
+    "commands": [
+      {
+        "command": "M11004",
+        "expected_value": [
+          1
+        ],
+        "type": "read_single_coil"
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "clamp_x2_home_state",
+    "commands": [
+      {
+        "command": "M11005",
+        "expected_value": [
+          1
+        ],
+        "type": "read_single_coil"
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "clamp_x2_in_place_state",
+    "commands": [
+      {
+        "command": "M11006",
+        "expected_value": [
+          1
+        ],
+        "type": "read_single_coil"
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "clamp_y1_home_state",
+    "commands": [
+      {
+        "command": "M11007",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "clamp_y1_in_place_state",
+    "commands": [
+      {
+        "command": "M11008",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "clamp_y2_home_state",
+    "commands": [
+      {
+        "command": "M11009",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "clamp_y2_in_place_state",
+    "commands": [
+      {
+        "command": "M11010",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "lifter_home_state",
+    "commands": [
+      {
+        "command": "M11011",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "lifter_in_place_state",
+    "commands": [
+      {
+        "command": "M11012",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "power_home_state",
+    "commands": [
+      {
+        "command": "M11013",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "power_in_place_state",
+    "commands": [
+      {
+        "command": "M11014",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "osfp_1_home_state",
+    "commands": [
+      {
+        "command": "M11015",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "osfp_1_mediate_point_state",
+    "commands": [
+      {
+        "command": "M11016",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "osfp_1_in_place_state",
+    "commands": [
+      {
+        "command": "M11017",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "osfp_2_home_state",
+    "commands": [
+      {
+        "command": "M11018",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "osfp_2_mediate_point_state",
+    "commands": [
+      {
+        "command": "M11019",
+        "type": "read_multiple_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "osfp_2_in_place_state",
+    "commands": [
+      {
+        "command": "M11020",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "osfp_3_home_state",
+    "commands": [
+      {
+        "command": "M11021",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "osfp_3_mediate_point_state",
+    "commands": [
+      {
+        "command": "M11022",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "osfp_3_in_place_state",
+    "commands": [
+      {
+        "command": "M11023",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "osfp_4_home_state",
+    "commands": [
+      {
+        "command": "M11024",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "osfp_4_mediate_point_state",
+    "commands": [
+      {
+        "command": "M11025",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "osfp_4_in_place_state",
+    "commands": [
+      {
+        "command": "M11026",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "osfp_5_home_state",
+    "commands": [
+      {
+        "command": "M11027",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "osfp_5_mediate_point_state",
+    "commands": [
+      {
+        "command": "M11028",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "osfp_5_in_place_state",
+    "commands": [
+      {
+        "command": "M11029",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "osfp_6_home_state",
+    "commands": [
+      {
+        "command": "M11030",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "osfp_6_mediate_point_state",
+    "commands": [
+      {
+        "command": "M11031",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "osfp_6_in_place_state",
+    "commands": [
+      {
+        "command": "M11032",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "osfp_7_home_state",
+    "commands": [
+      {
+        "command": "M11033",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "osfp_7_mediate_point_state",
+    "commands": [
+      {
+        "command": "M11034",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "osfp_7_in_place_state",
+    "commands": [
+      {
+        "command": "M11035",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "osfp_8_home_state",
+    "commands": [
+      {
+        "command": "M11036",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "osfp_8_mediate_point_state",
+    "commands": [
+      {
+        "command": "M11037",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "osfp_8_in_place_state",
+    "commands": [
+      {
+        "command": "M11038",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "osfp_9_home_state",
+    "commands": [
+      {
+        "command": "M11039",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "osfp_9_mediate_point_state",
+    "commands": [
+      {
+        "command": "M11040",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "osfp_9_in_place_state",
+    "commands": [
+      {
+        "command": "M11041",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "eth_usb_home_state",
+    "commands": [
+      {
+        "command": "M11042",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "eth_usb_in_place_state",
+    "commands": [
+      {
+        "command": "M11043",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "fnm_home_state",
+    "commands": [
+      {
+        "command": "M11044",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  },
+  {
+    "action": "fnm_in_place_state",
+    "commands": [
+      {
+        "command": "M11045",
+        "type": "read_single_coil",
+        "expected_value": [
+          1
+        ]
+      }
+    ],
+    "description": "on_off",
+    "readonly": true
+  }
+]
