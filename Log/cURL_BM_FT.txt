@@ -1,0 +1,761 @@
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/connect_plc
+{"Function":"ConnectPLC","Message":"Connected to PLC 192.168.1.11:502","Result":true,"timestamp":"2025-07-13 20:05:52_140954"}
+
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"clamp_x\", \"control_state\": \"in\"}"
+{"state": "in", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"clamp_y\", \"control_state\": \"in\"}"
+{"state": "in", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"lifter\", \"control_state\": \"up\"}"
+{"state": "up", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"power\", \"control_state\": \"in\"}"
+{"state": "in", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"power\", \"control_state\": \"out\"}"
+{"state": "out", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp1\", \"control_state\": \"in\"}"
+{"state": "in", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp1\", \"control_state\": \"out\"}"
+{"state": "out", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp1_speediness\", \"control_state\": \"disable\"}"
+{"state": "disable", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp1_speediness\", \"control_state\": \"enable\"}"
+{"state": "enable", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp2_speediness\", \"control_state\": \"disable\"}"
+{"state": "disable", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp2_speediness\", \"control_state\": \"enable\"}"
+{"state": "enable", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp2\", \"control_state\": \"in\"}"
+{"state": "in", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp2\", \"control_state\": \"out\"}"
+{"state": "out", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp3\", \"control_state\": \"in\"}"
+{"state": "in", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp3\", \"control_state\": \"out\"}"
+{"state": "out", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp3_speediness\", \"control_state\": \"disable\"}"
+{"state": "disable", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp3_speediness\", \"control_state\": \"enable\"}"
+{"state": "enable", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp4\", \"control_state\": \"in\"}"
+{"state": "in", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp4\", \"control_state\": \"out\"}"
+{"state": "out", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp4_speediness\", \"control_state\": \"disable\"}"
+{"state": "disable", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp4_speediness\", \"control_state\": \"enable\"}"
+{"state": "enable", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp5\", \"control_state\": \"in\"}"
+{"state": "in", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp5\", \"control_state\": \"out\"}"
+{"state": "out", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp5_speediness\", \"control_state\": \"disable\"}"
+{"state": "disable", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp5_speediness\", \"control_state\": \"enable\"}"
+{"state": "enable", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp6\", \"control_state\": \"in\"}"
+{"state": "in", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp6\", \"control_state\": \"out\"}"
+{"state": "out", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp6_speediness\", \"control_state\": \"disable\"}"
+{"state": "disable", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp6_speediness\", \"control_state\": \"enable\"}"
+{"state": "enable", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp7\", \"control_state\": \"in\"}"
+{"state": "in", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp7\", \"control_state\": \"out\"}"
+{"state": "out", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp7_speediness\", \"control_state\": \"disable\"}"
+{"state": "disable", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp7_speediness\", \"control_state\": \"enable\"}"
+{"state": "enable", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp8\", \"control_state\": \"in\"}"
+{"state": "in", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp8\", \"control_state\": \"out\"}"
+{"state": "out", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp8_speediness\", \"control_state\": \"disable\"}"
+{"state": "disable", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp8_speediness\", \"control_state\": \"enable\"}"
+{"state": "enable", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp9\", \"control_state\": \"in\"}"
+{"state": "in", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp9\", \"control_state\": \"out\"}"
+{"state": "out", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp9_speediness\", \"control_state\": \"disable\"}"
+{"state": "disable", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp9_speediness\", \"control_state\": \"enable\"}"
+{"state": "enable", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"eth_usb\", \"control_state\": \"in\"}"
+{"state": "in", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"eth_usb\", \"control_state\": \"out\"}"
+{"state": "out", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"fnm\", \"control_state\": \"in\"}"
+{"state": "in", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"fnm\", \"control_state\": \"out\"}"
+{"state": "out", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"eth_usb_led\", \"control_state\": \"in\"}"
+{"state": "", "result": false, "status": "Command M10295 executed failed: Actual value (0, 0) does not match expected value [0, 1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"manual_auto\"}"
+{"state": "on", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"plc\", \"control_state\": \"start\"}"
+{"state": "start", "result": false, "status": "Command D6 executed failed: Actual value (4,) does not match expected value [1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"plc\", \"control_state\": \"stop\"}"
+{"state": "stop", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"dut\", \"control_state\": \"engage\"}"
+{"state": "engage", "result": ture, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"dut\", \"control_state\": \"disengage\"}"
+{"state": "disengage", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"buzzer\", \"control_state\": \"enable\"}"
+{"state": "enable", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"buzzer\", \"control_state\": \"disable\"}"
+{"state": "disable", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"test_ready\"}"
+{"state": "off", "result": false, "status": "Command M10613 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"device_status\"}"
+{"state": "off", "result": false, "status": "Command D6 executed failed: Actual value (4,) does not match expected value [-1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"reset_flow\"}"
+{"state": "off", "result": false, "status": "Command D7 executed failed: Actual value (0,) does not match expected value [-1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"auto_flow\"}"
+{"state": "off", "result": false, "status": "Command D8 executed failed: Actual value (1,) does not match expected value [-1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"alarm\"}"
+{"state": "off", "result": false, "status": "Command D150 executed failed: Actual value (0,) does not match expected value [-1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"tray_in_1\"}"
+{"state": "on", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"tray_in_2\"}"
+{"state": "on", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"clamp_x1_home\"}"
+{"state": "off", "result": false, "status": "Command M11003 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"clamp_x1_in_place\"}"
+{"state": "on", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"clamp_x2_home\"}"
+{"state": "off", "result": false, "status": "Command M11005 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"clamp_x2_in_place\"}"
+{"state": "on", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"clamp_y1_home\"}"
+{"state": "off", "result": false, "status": "Command M11007 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"clamp_y1_in_place\"}"
+{"state": "on", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"clamp_y2_home\"}"
+{"state": "off", "result": false, "status": "Command M11009 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"clamp_y2_in_place\"}"
+{"state": "on", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"lifter_home\"}"
+{"state": "off", "result": false, "status": "Command M11011 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"lifter_in_place\"}"
+{"state": "on", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"power_home\"}"
+{"state": "on", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"power_in_place\"}"
+{"state": "off", "result": false, "status": "Command M11014 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_1_home\"}"
+{"state": "on", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_1_mediate_point\"}"
+{"state": "off", "result": false, "status": "Command M11016 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_1_in_place\"}"
+{"state": "off", "result": false, "status": "Command M11017 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_2_home\"}"
+{"state": "on", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_2_mediate_point\"}"
+{"state": "off", "result": false, "status": "Command M11019 executed failed: Actual value (0, 0) does not match expected value [1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_2_in_place\"}"
+{"state": "off", "result": false, "status": "Command M11020 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_3_home\"}"
+{"state": "on", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_3_mediate_point\"}"
+{"state": "off", "result": false, "status": "Command M11022 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_3_in_place\"}"
+{"state": "off", "result": false, "status": "Command M11023 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_4_home\"}"
+{"state": "on", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_4_mediate_point\"}"
+{"state": "off", "result": false, "status": "Command M11025 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_4_in_place\"}"
+{"state": "off", "result": false, "status": "Command M11026 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_5_home\"}"
+{"state": "on", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_5_mediate_point\"}"
+{"state": "off", "result": false, "status": "Command M11028 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_5_in_place\"}"
+{"state": "off", "result": false, "status": "Command M11029 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_6_home\"}"
+{"state": "on", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_6_mediate_point\"}"
+{"state": "off", "result": false, "status": "Command M11031 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_6_in_place\"}"
+{"state": "off", "result": false, "status": "Command M11032 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_7_home\"}"
+{"state": "on", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_7_mediate_point\"}"
+{"state": "off", "result": false, "status": "Command M11034 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_7_in_place\"}"
+{"state": "off", "result": false, "status": "Command M11035 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_8_home\"}"
+{"state": "on", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_8_mediate_point\"}"
+{"state": "off", "result": false, "status": "Command M11037 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_8_in_place\"}"
+{"state": "off", "result": false, "status": "Command M11038 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_9_home\"}"
+{"state": "on", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_9_mediate_point\"}"
+{"state": "off", "result": false, "status": "Command M11040 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_9_in_place\"}"
+{"state": "off", "result": false, "status": "Command M11041 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"eth_usb_home\"}"
+{"state": "on", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"eth_usb_in_place\"}"
+{"state": "off", "result": false, "status": "Command M11043 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"fnm_home\"}"
+{"state": "on", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"fnm_in_place\"}"
+{"state": "off", "result": false, "status": "Command M11045 executed failed: Actual value (0,) does not match expected value [1]"}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"lifter\", \"control_state\": \"down\"}"
+{"state": "down", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"clamp_x\", \"control_state\": \"out\"}"
+{"state": "out", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"clamp_y\", \"control_state\": \"out\"}"
+{"state": "out", "result": true, "status": ""}
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>curl -X POST --url http://192.168.1.30:5001/disconnect_plc
+{"Function":"DisconnectPLC","Message":"Disconnect PLC successfully","Result":true,"timestamp":"2025-07-13 20:10:49_240618"}
+
+C:\Users\admin\Documents\FT>echo.
+
+
+C:\Users\admin\Documents\FT>timeout /t 2  1>nul
+
+C:\Users\admin\Documents\FT>pause
+Press any key to continue . . .

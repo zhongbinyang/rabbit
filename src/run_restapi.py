@@ -3,7 +3,10 @@ from config.settings import API_CONFIG
 import webbrowser
 import threading
 
+from config.version import API_VERSION
+
 if __name__ == '__main__':
+    print(f"API_VERSION: {API_VERSION}")
     def open_browser():
         import time
         time.sleep(1)  # 等待服务启动

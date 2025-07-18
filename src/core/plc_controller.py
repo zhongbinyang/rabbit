@@ -138,6 +138,9 @@ class PLCController:
 
         # 获取动作配置中的readonly参数
         # 如果readonly为True，则不等待
+        readonly = action_config.get('readonly', False)
+        
+        
         #
         # 存储每个命令的执行结果
         results = []
@@ -150,6 +153,7 @@ class PLCController:
             expected_value = command['expected_value']
             delayseconds = command.get('delayseconds', 0)
             type = command['type']
+
             
             logger.info(f"[{index}/{total_commands}] Executing command: {type} - Address: {command_addr}, Expected value: {expected_value}")
         
@@ -196,20 +200,54 @@ class PLCController:
                 results.append((False, error_msg))
                 break
             
-            if expected_value is None or expected_value == -1:
+            if expected_value is None or expected_value == -1 or expected_value == [-1]:
                 is_check_value = False
                 
             # is_check_value 为真时，循环读直到一致或超时
             if is_check_value:
                 # 新增：对于读操作且checkvalue为真且值不一致时，循环读直到一致或超时
                 if list(ret[1]) != list(expected_value):
-                    error_msg = f"Command {command_addr} executed failed: Actual value {ret[1]} does not match expected value {expected_value}"
-                    logger.error(error_msg)
-                    results.append((False, error_msg))
-                    break
+
+                    isPass = False
+                    if not readonly:
+                        start_time = time.time()
+                        while True:
+                            time.sleep(0.2)
+                            # 超时，退出循环
+                            if time.time() - start_time >= delayseconds:
+                                break
+                            # 读取值
+                            with self.lock:
+                                if type == "read_multiple_coil":
+                                    ret = self.modbus.read_multiple_coil(addr, 2)
+                                elif type == "read_single_coil":
+                                    ret = self.modbus.read_single_coil(addr)
+                                elif type == "read_holding_registers":
+                                    ret = self.modbus.read_holding_registers(addr, 1)
+                                logger.info(f"Re-read {type} result: {ret}")
+                                if not ret[0]:
+                                    logger.error(f"Command {command_addr} executed failed during re-read: {ret[1]}")
+                                    break
+                                if list(ret[1]) == list(expected_value):
+                                    logger.info(f"{type} value matches expected value after re-read.")
+                                    isPass = True
+                                    break
+                                else:
+                                    continue
+                        if not isPass:
+                            error_msg = f"Command {command_addr} executed failed: Actual value {ret[1]} does not match expected value {expected_value}"
+                            logger.error(error_msg)
+                            results.append((False, error_msg))
+                            break
+                           
+                    else:
+                        error_msg = f"Command {command_addr} executed failed: Actual value {ret[1]} does not match expected value {expected_value}"
+                        logger.error(error_msg)
+                        results.append((False, error_msg))
+                        break
                 else:
                     # 读取值与期望值一致，不等待
-                    logger.info(f"{type} value matches expected value after re-read.")
+                    logger.info(f"Command {command_addr} executed successfully: Actual value {ret[1]} match expected value {expected_value}")
             # 非读操作，等待delayseconds秒
             else:
                 time.sleep(delayseconds)
@@ -335,6 +373,9 @@ class PLCController:
                 logger.error(error_msg)
                 results.append((False, error_msg))
                 break
+
+            if expected_value is None or expected_value == -1 or expected_value == [-1]:
+                is_check_value = False
 
             # is_check_value 为真时，循环读直到一致或超时
             if is_check_value:
@@ -494,7 +535,7 @@ class PLCController:
                 results.append((False, error_msg))
                 break
             
-            if expected_value is None or expected_value == -1:
+            if expected_value is None or expected_value == -1 or expected_value == [-1]:
                 is_check_value = False
                 
             # is_check_value 为真时，循环读直到一致或超时

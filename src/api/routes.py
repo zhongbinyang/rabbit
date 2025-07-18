@@ -47,76 +47,25 @@ def create_response(function: str, result: bool, message: str) -> Dict[str, Any]
         'timestamp': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S_%f")
     }
 
-@plc_api.route('/test')
-def serve_testapi():
-    return send_from_directory(STATIC_DIR, 'testapi.html')
-
 @plc_api.route('/io_setting')
 def serve_plc_io_list_manager():
-    return send_from_directory(STATIC_DIR, 'io_setting.html')
+    return send_from_directory(STATIC_DIR, 'index/io_setting.html')
 
 @plc_api.route('/action_setting')
 def serve_plc_action_list_manager():
-    return send_from_directory(STATIC_DIR, 'action_setting.html')
+    return send_from_directory(STATIC_DIR, 'index/action_setting.html')
 
 @plc_api.route('/action_control')
 def serve_bm_ui():
-    return send_from_directory(STATIC_DIR, 'action_control.html')
+    return send_from_directory(STATIC_DIR, 'index/action_control.html')
 
 @plc_api.route('/action_status')
 def serve_action_status():
-    return send_from_directory(STATIC_DIR, 'action_status.html')
+    return send_from_directory(STATIC_DIR, 'index/action_status.html')
 
 @plc_api.route('/')
 def api_documentation():
-    """API文档页面"""
-    # 构建API文档的结构化数据
-    api_endpoints = [
-        {
-            'URL': 'http://{host}:5001/connect_plc',
-            'function': 'connect_plc',
-            'description': 'Connect PLC with host and port, default host 192.168.1.11, default port 502',
-            'params': '[str,int],Host,Port',
-            'return': 'Result:True or False,Message:Connect message or error message',
-            'example': 'http://127.0.0.1:5001/connect_plc?Host=192.168.1.11&Port=502',
-            'response': '{"Function":"ConnectPLC","Message":"Connect PLC Successful 192.168.1.11:502","Result":true,"timestamp":"2025-01-25 13:41:27_396084"}'
-        },
-        {
-            'URL': 'http://{host}:5001/execute_command',
-            'function': 'execute_plc_command',
-            'description': 'Execute PLC command with action parameter',
-            'params': 'action',
-            'return': 'Result:True or False,Message:Command result or error message',
-            'example': 'http://127.0.0.1:5001/execute_command?action=sample_action',
-            'response': '{"Function":"execute_plc_command","Message":"sample_action command successful","Result":true,"timestamp":"2025-01-25 13:44:32_943210"}'
-        },
-        {
-            'URL': 'http://{host}:5001/disconnect_plc',
-            'function': 'disconnect_plc',
-            'description': 'Disconnect PLC',
-            'params': '',
-            'return': 'Result:True or False,Message:Disconnect message or error message',
-            'example': 'http://127.0.0.1:5001/disconnect_plc',
-            'response': '{"Function":"DisconnectPLC","Message":"Close Successful","Result":true,"timestamp":"2025-01-25 13:43:47_847322"}'
-        }
-    ]
-    
-    # 支持通过format=json查询参数或Accept头获取JSON格式
-    if request.args.get('format') == 'json' or request.headers.get('Accept') == 'application/json':
-        # 返回JSON格式的API文档
-        return jsonify({
-            'api_version': API_VERSION,
-            'title': 'PLC Control API Documentation',
-            'description': 'API documentation for PLC control system',
-            'note': 'All endpoints can use POST or GET methods',
-            'endpoints': api_endpoints
-        })
-    else:
-        # 返回HTML格式的API文档
-        return render_template('doc.html', 
-                               api_version=API_VERSION,
-                               title='PLC Control API Documentation',
-                               endpoints=api_endpoints)
+    return send_from_directory(STATIC_DIR, 'index/doc.html')
 
 
 
