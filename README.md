@@ -10,7 +10,7 @@ All configuration files are located in the `/static/` directory.
 
 - **Main configuration file**: `/static/config.json`
 - Each test station has its own configuration, such as `config_BS_JTAG.json`. Please rename the corresponding file to `config.json` when in use.
-- ![](/Users/zbyang/Library/Application%20Support/marktext/images/2025-07-16-18-26-53-image.png)
+- ![](src/static/index/images/2025-07-16-18-26-53-image.png)
 
 ---
 
@@ -20,13 +20,13 @@ All configuration files are located in the `/static/` directory.
 
 2. After startup, a command-line terminal window will automatically open. This is the core service process for API and user interfaces. All API functions and user interfaces depend on this process, so please keep it running at all times.
    
-   ![](/Users/zbyang/Library/Application%20Support/marktext/images/2025-07-18-14-14-24-image.png)
+   ![](src/static/index/images/2025-07-18-14-14-24-image.png)
 
 3. After startup, the `action_control` and `action_status` pages will automatically open for control and status monitoring, respectively.
    
-   ![](/Users/zbyang/Library/Application%20Support/marktext/images/2025-07-18-14-22-00-image.png)
+   ![](src/static/index/images/2025-07-18-14-22-00-image.png)
    
-   ![](/Users/zbyang/Library/Application%20Support/marktext/images/2025-07-18-14-21-43-image.png)
+   ![](src/static/index/images/2025-07-18-14-21-43-image.png)
 
 ---
 
@@ -39,9 +39,9 @@ Corresponds one-to-one with the PLC_IO_List Excel file.
 | PLC         | IO number (e.g. M2000)  |
 | description | IO function description |
 
-![](/Users/zbyang/Library/Application%20Support/marktext/images/2025-07-16-18-28-47-image.png)
+![](src/static/index/images/2025-07-16-18-28-47-image.png)
 
-![](/Users/zbyang/Library/Application%20Support/marktext/images/2025-07-16-18-29-12-image.png)
+![](src/static/index/images/2025-07-16-18-29-12-image.png)
 
 ---
 
@@ -80,9 +80,9 @@ Corresponds one-to-one with the PLC_IO_List Excel file.
   - **Delay(s)**: Timeout for read operations; within the timeout, the system loops until the target value is reached.
   - **Expected**: Target value. Single coil: 0 or 1. Multiple coils: `0,1` or `1,0`.
 
-![](/Users/zbyang/Library/Application%20Support/marktext/images/2025-07-16-18-30-21-image.png)
+![](src/static/index/images/2025-07-16-18-30-21-image.png)
 
-![](/Users/zbyang/Library/Application%20Support/marktext/images/2025-07-16-18-31-14-image.png)
+![](src/static/index/images/2025-07-16-18-31-14-image.png)
 
 ---
 
