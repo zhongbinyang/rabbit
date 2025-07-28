@@ -37,3 +37,6 @@ IO_SETTING_FILE_PATH = os.path.join(BASE_DIR, _config.get('IO_SETTING_FILE_PATH'
 ACTION_SETTING_FILE_PATH = os.path.join(BASE_DIR, _config.get('ACTION_SETTING_FILE_PATH', {}))
 IO_TYPE_FILE_PATH = os.path.join(BASE_DIR, _config.get('IO_TYPE_FILE_PATH', {}))
 
+hw_rev = _config.get('hw_rev','1.0.0')
+plc_firmware = _config.get('plc_firmware','1.0.0')
+

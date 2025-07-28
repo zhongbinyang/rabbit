@@ -10,7 +10,7 @@ from typing import Dict, Any
 from config.settings import API_CONFIG, PLC_CONFIG
 from utils.logger import logger
 from core.plc_controller import plc_controller
-from config.settings import BASE_DIR, STATIC_DIR
+from config.settings import BASE_DIR, STATIC_DIR, plc_firmware, hw_rev
 
 
 # 自定义API异常类
@@ -195,9 +195,7 @@ def get_control():
     
 @plc_api.route('/get_version', methods=['GET', 'POST'])
 def get_version():
-    return jsonify({'Function':"get_api_version",'Result': True, 'Message': API_VERSION,
-                    'timestamp': datetime.datetime.now().strftime(
-                        "%Y-%m-%d %H:%M:%S_%f")})
+    return jsonify({'service_version': API_VERSION, 'hw_rev': hw_rev, 'plc_firmware': plc_firmware})
 
 @plc_api.route('/api/write_json_file', methods=['POST'])
 def write_json_file():

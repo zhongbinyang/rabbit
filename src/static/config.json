@@ -24,5 +24,7 @@
   },
   "IO_SETTING_FILE_PATH": "static/io_setting_Centaur_9_Tester_A02.json",
   "ACTION_SETTING_FILE_PATH": "static/action_setting_Centaur_9_Tester_A02.json",
-  "IO_TYPE_FILE_PATH": "static/io_type.json"
+  "IO_TYPE_FILE_PATH": "static/io_type.json",
+  "hw_rev":"5Zc3",
+  "plc_firmware":"2.3"
 }
