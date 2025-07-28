@@ -41,9 +41,9 @@ def create_response(function: str, result: bool, message: str) -> Dict[str, Any]
         标准格式的响应字典
     """
     return {
-        'Function': function,
-        'Result': result,
-        'Message': message,
+        'function': function,
+        'result': result,
+        'message': message,
         'timestamp': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S_%f")
     }
 
@@ -78,7 +78,7 @@ def connect_plc():
     logger.info(f"API request: Connect PLC {host}:{port}")
     ret = plc_controller.connect_plc(host, port)
     
-    return jsonify(create_response("ConnectPLC", ret[0], ret[1]))
+    return jsonify(create_response("ConnectPLC", 0 if ret[0] else 1, ret[1]))
 
 
 @plc_api.route('/disconnect_plc', methods=['GET', 'POST'])
@@ -87,7 +87,7 @@ def disconnect_plc():
     logger.info("API request: Disconnect PLC")
     ret = plc_controller.disconnect_plc()
     
-    return jsonify(create_response("DisconnectPLC", ret[0], ret[1]))
+    return jsonify(create_response("DisconnectPLC", 0 if ret[0] else 1, ret[1]))
 
 
 
@@ -101,15 +101,15 @@ def execute_plc_command():
         action = request.args.get('action', type=str, default=None)
     
     if not action:
-        return jsonify(create_response("execute_plc_command", False, "action parameter is required")), 400
+        return jsonify(create_response("execute_plc_command", 1, "action parameter is required")), 400
     
     logger.info(f"API request: Execute PLC command with action '{action}'")
     
     try:
         ret = plc_controller._execute_plc_command(action)
-        return jsonify(create_response("execute_plc_command", ret[0], ret[1]))
+        return jsonify(create_response("execute_plc_command", 0 if ret[0] else 1, ret[1]))
     except Exception as e:
-        return jsonify(create_response("execute_plc_command", False, f"Error executing command: {str(e)}")), 500
+        return jsonify(create_response("execute_plc_command", 1, f"Error executing command: {str(e)}")), 500
 
 
 @plc_api.route('/set_control', methods=['GET', 'POST'])
@@ -124,7 +124,7 @@ def set_control():
         control_state = request.args.get('control_state', type=str, default=None)
     
     if not control_name or not control_state:
-        return jsonify(create_response("set_control", False, "control_name and control_state parameter is required")), 400
+        return jsonify(create_response("set_control", 1, "control_name and control_state parameter is required")), 400
     
     logger.info(f"API request: Set PLC control with control_name '{control_name}' and control_state '{control_state}'")
     
@@ -133,7 +133,7 @@ def set_control():
 
         response_data = {
             "state": control_state if ret[0] else "",
-            "result": ret[0],
+            "result": 0 if ret[0] else 1,
             "status": "" if ret[0] else ret[1]
         }
 
@@ -145,7 +145,7 @@ def set_control():
     except Exception as e:
         response_data = {
             "state": "",
-            "result": False,
+            "result": 1,
             "status": "Error setting control: " + str(e)
         }
 
@@ -165,7 +165,7 @@ def get_control():
         control_name = request.args.get('control_name', type=str, default=None)
     
     if not control_name:
-        return jsonify(create_response("set_control", False, "control_name parameter is required")), 400
+        return jsonify(create_response("set_control", 1, "control_name parameter is required")), 400
     
     logger.info(f"API request: Get PLC control with control_name '{control_name}'")
     
@@ -173,7 +173,7 @@ def get_control():
         ret = plc_controller._get_control(control_name)
         response_data = {
             "state": ret[2],
-            "result": ret[0],
+            "result": 0 if ret[0] else 1,
             "status": "" if ret[0] else ret[1]
         }
         # Return response
@@ -184,7 +184,7 @@ def get_control():
     except Exception as e:
         response_data = {
             "state": ret[2],
-            "result": False,
+            "result": 1,
             "status": "Error getting control: " + str(e)
         }
         # Return response
