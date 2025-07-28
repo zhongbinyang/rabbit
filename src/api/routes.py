@@ -67,7 +67,13 @@ def serve_action_status():
 def api_documentation():
     return send_from_directory(STATIC_DIR, 'index/doc.html')
 
+@plc_api.route('/doc')
+def serve_doc():
+    return send_from_directory(STATIC_DIR, 'index/doc.html')
 
+@plc_api.route('/health')
+def health():
+    return jsonify(create_response("health", True, "OK"))
 
 @plc_api.route('/connect_plc', methods=['GET', 'POST'])
 def connect_plc():
