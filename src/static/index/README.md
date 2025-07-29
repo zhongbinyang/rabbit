@@ -20,7 +20,9 @@ All configuration files are located in the `/static/` directory.
 
 2. After startup, a GUI window will automatically open. This is the core service process for API and user interfaces. All API functions and user interfaces depend on this process, so please keep it running at all times.
    
-   ![](/Users/zbyang/Library/Application%20Support/marktext/images/2025-07-29-19-55-35-image.png)
+   ![](images/2025-07-29-19-55-35-image.png)
+   
+   
 
 ---
 
@@ -33,13 +35,15 @@ Corresponds one-to-one with the PLC_IO_List Excel file.
 | PLC         | IO number (e.g. M2000)  |
 | description | IO function description |
 
-![](/Users/zbyang/Library/Application%20Support/marktext/images/2025-07-29-19-56-40-image.png)
+
+
+![](images/2025-07-29-19-56-40-image.png)
 
 ---
 
 ## 4. ACTION_SETTING Configuration Instructions
 
-![](/Users/zbyang/Library/Application%20Support/marktext/images/2025-07-29-19-57-53-image.png)
+![](images/2025-07-29-19-57-53-image.png)
 
 ### Control Action
 
@@ -78,11 +82,11 @@ Corresponds one-to-one with the PLC_IO_List Excel file.
 
 ## 5. Action Control
 
-![](/Users/zbyang/Library/Application%20Support/marktext/images/2025-07-29-20-00-03-image.png)
+![](images/2025-07-29-20-00-03-image.png)
 
 ## 6. Action Status
 
-![](/Users/zbyang/Library/Application%20Support/marktext/images/2025-07-29-20-00-21-image.png)
+![](images/2025-07-29-20-00-21-image.png)
 
 ---
 
@@ -242,23 +246,23 @@ curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: appli
 curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"plc\", \"control_state\": \"start\"}"
 {"state": "start", "result": false, "status": "Command D6 executed failed: Actual value (4,) does not match expected value [1]"}
 
-#Note: command only availble at auto mode
+Note: command only availble at auto mode
 
 curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"plc\", \"control_state\": \"stop\"}"
 {"state": "stop", "result": true, "status": ""}
 
-#Note: command only availble at auto mode
+Note: command only availble at auto mode
 
 curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"dut\", \"control_state\": \"engage\"}"
 {"state": "engage", "result": ture, "status": ""}
 
-#Note: command only availble at auto mode
+Note: command only availble at auto mode
 
 
 curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"dut\", \"control_state\": \"disengage\"}"
 {"state": "disengage", "result": true, "status": ""}
 
-#Note: command only availble at auto mode
+Note: command only availble at auto mode
 
 
 curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"buzzer\", \"control_state\": \"enable\"}"
@@ -425,6 +429,7 @@ curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: appli
 
 curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"clamp_y\", \"control_state\": \"out\"}"
 {"state": "out", "result": true, "status": ""}
+
 ```
 
 ### 6.2 JTAG Test Station
@@ -527,6 +532,7 @@ curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: appli
 
 curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"testing_ready\"}"
 {"state": "off", "result": false, "status": "Command M10054 executed failed: Actual value (0,) does not match expected value [1]"}
+
 ```
 
 ### 6.3 BS_JTAG Test Station
@@ -605,6 +611,7 @@ curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: appli
 
 curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"safety_light_grid\"}"
 {"state": "off", "result": false, "status": "Command M10035 executed failed: Actual value (0,) does not match expected value [1]"}
+
 ```
 
 ### 6.4 Centaur-9 Test Station
@@ -710,6 +717,7 @@ curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: appli
 
 curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"dut\", \"control_state\": \"disengage\"}"
 {"state": "disengage", "result": true, "status": ""}
+
 ```
 
 ---
