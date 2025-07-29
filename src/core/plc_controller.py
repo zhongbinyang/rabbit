@@ -48,7 +48,7 @@ class PLCController:
             port = self.port
             
         if self.is_connected:
-            return True, f"Connected to PLC {host}:{port}"
+            return True, f"Already connected to PLC {host}:{port}"
         
         ret = self.modbus.open_modbus_tcp(host, port)
         if ret[0]:
@@ -58,7 +58,7 @@ class PLCController:
             logger.info(f"Connected to PLC {host}:{port}")
             return True, f"Connected to PLC {host}:{port}"
         else:
-            self.is_connected = True
+            self.is_connected = False
             logger.error(f"Connect to PLC failed: {ret[1]}")
             return False, f"Connect to PLC failed: {ret[1]}"
     
@@ -93,6 +93,18 @@ class PLCController:
         else:
             return int(command_addr)
 
+    def _ensure_connected(self) -> Tuple[bool, str]:
+        """
+        确保PLC连接，如果未连接则自动连接
+        
+        Returns:
+            连接结果(True/False, 消息)
+        """
+        if self.is_connected:
+            return True, "Already connected"
+        
+        logger.info("PLC not connected, attempting to connect automatically...")
+        return self.connect_plc()
         
     @handle_exception
     def _execute_plc_command(self, action: str) -> Tuple[bool, str]:
@@ -107,9 +119,11 @@ class PLCController:
         """
         logger.info(f"========== START EXECUTING PLC COMMAND: {action} ==========")
         
-        if not self.is_connected:
-            logger.error("Not connected to PLC, cannot execute command")
-            return False, "Not connected to PLC"
+        # 确保PLC连接
+        connect_result, connect_msg = self._ensure_connected()
+        if not connect_result:
+            logger.error(f"Failed to connect to PLC: {connect_msg}")
+            return False, f"Failed to connect to PLC: {connect_msg}"
         
         # 读取动作配置
         logger.info("Reading action configuration file in __init__...")
@@ -288,9 +302,11 @@ class PLCController:
         """
         logger.info(f"========== START EXECUTING PLC COMMAND: {action} ==========")
         
-        if not self.is_connected:
-            logger.error("Not connected to PLC, cannot execute command")
-            return False, "Not connected to PLC"
+        # 确保PLC连接
+        connect_result, connect_msg = self._ensure_connected()
+        if not connect_result:
+            logger.error(f"Failed to connect to PLC: {connect_msg}")
+            return False, f"Failed to connect to PLC: {connect_msg}"
         
         # 读取动作配置
         logger.info("Reading action configuration file in __init__...")
@@ -455,9 +471,11 @@ class PLCController:
         """
         logger.info(f"========== START EXECUTING PLC COMMAND: {action} ==========")
         
-        if not self.is_connected:
-            logger.error("Not connected to PLC, cannot execute command")
-            return False, "Not connected to PLC", ""
+        # 确保PLC连接
+        connect_result, connect_msg = self._ensure_connected()
+        if not connect_result:
+            logger.error(f"Failed to connect to PLC: {connect_msg}")
+            return False, f"Failed to connect to PLC: {connect_msg}", ""
         
         # 读取动作配置
         logger.info("Reading action configuration file in __init__...")

@@ -5,7 +5,7 @@
   <title>Action Setting</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="/static/index/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/static/Sortable.min.css">
+  <link rel="stylesheet" href="/static/index/Sortable.min.css">
   <style>
     :root {
       --primary-color: #3498db;
@@ -212,7 +212,7 @@
   </div>
   <div class="alert alert-success" id="successAlert">Operation successful</div>
   <div class="alert alert-danger" id="errorAlert">Operation failed</div>
-  <script src="/static/Sortable.min.js"></script>
+  <script src="/static/index/Sortable.min.js"></script>
   <script>
     let isLoading = false;
     function toggleLoading(show) {
@@ -458,7 +458,7 @@
         body: JSON.stringify({ filename: filename, content: jsonData }),
       })
       .then(response => response.json())
-      .then(data => { if (data.Result) { showAlert(true, 'Group file saved successfully'); } else { showAlert(false, `Save failed: ${data.Message}`); } })
+      .then(data => { if (data.result) { showAlert(true, 'Group file saved successfully'); } else { showAlert(false, `Save failed: ${data.message}`); } })
       .catch(error => { console.error('Error saving file:', error); showAlert(false, `Save failed: ${error.message}`); })
       .finally(() => { toggleLoading(false); });
     }

@@ -310,7 +310,7 @@
       })
       .then(response => response.json())
       .then(result => {
-        if (result.Result) {
+        if (result.result) {
           showAlert(true, 'IO list file saved successfully');
         } else {
           showAlert(false, `Save failed: ${result.Message}`);

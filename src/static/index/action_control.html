@@ -128,32 +128,8 @@
     function renderControlActions() {
       const container = document.getElementById('controlActions');
       container.innerHTML = '';
-      const connectCol = document.createElement('div');
-      connectCol.className = 'col-md-2 col-sm-3 mb-3';
-      connectCol.innerHTML = `
-        <div class="action-card">
-          <div class="card-header">connect_plc</div>
-          <div class="card-body">
-            <p>Connect to PLC</p>
-            <button class="btn btn-outline-success control-action-btn" onclick="connectPLC()">Connect</button>
-          </div>
-        </div>
-      `;
-      container.appendChild(connectCol);
-      const disconnectCol = document.createElement('div');
-      disconnectCol.className = 'col-md-2 col-sm-3 mb-3';
-      disconnectCol.innerHTML = `
-        <div class="action-card">
-          <div class="card-header">disconnect_plc</div>
-          <div class="card-body">
-            <p>Disconnect PLC</p>
-            <button class="btn btn-outline-danger control-action-btn" onclick="disconnectPLC()">Disconnect</button>
-          </div>
-        </div>
-      `;
-      container.appendChild(disconnectCol);
       if (controlActions.length === 0) {
-        container.innerHTML += '<div class="col-12 text-center p-5">No available control actions</div>';
+        container.innerHTML = '<div class="col-12 text-center p-5">No available control actions</div>';
         return;
       }
       controlActions.forEach(action => {
@@ -187,56 +163,14 @@
           body: JSON.stringify({ action: actionName }),
         });
         const data = await response.json();
-        if (data.Result) {
-          addLog('success', `Action ${actionName} executed successfully: ${data.Message}`, currentTab);
+        if (data.result == 0) {
+          addLog('success', `Action ${actionName} executed successfully: ${data.message}`, currentTab);
         } else {
-          addLog('error', `Action ${actionName} execution failed: ${data.Message}`, currentTab);
+          addLog('error', `Action ${actionName} execution failed: ${data.message}`, currentTab);
         }
       } catch (error) {
         console.error('Error executing action:', error);
         addLog('error', `Execution failed: ${error.message}`, currentTab);
-      } finally {
-        toggleLoading(false);
-      }
-    }
-    async function connectPLC() {
-      addLog('info', 'Connecting to PLC...', currentTab);
-      toggleLoading(true);
-      try {
-        const response = await fetch('/connect_plc', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({}),
-        });
-        const data = await response.json();
-        if (data.Result) {
-          addLog('success', 'Connected to PLC: ' + data.Message, currentTab);
-        } else {
-          addLog('error', 'Failed to connect to PLC: ' + data.Message, currentTab);
-        }
-      } catch (error) {
-        addLog('error', 'PLC connection error: ' + error.message, currentTab);
-      } finally {
-        toggleLoading(false);
-      }
-    }
-    async function disconnectPLC() {
-      addLog('info', 'Disconnecting PLC...', currentTab);
-      toggleLoading(true);
-      try {
-        const response = await fetch('/disconnect_plc', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({}),
-        });
-        const data = await response.json();
-        if (data.Result) {
-          addLog('success', 'PLC disconnected: ' + data.Message, currentTab);
-        } else {
-          addLog('error', 'Failed to disconnect PLC: ' + data.Message, currentTab);
-        }
-      } catch (error) {
-        addLog('error', 'PLC disconnection error: ' + error.message, currentTab);
       } finally {
         toggleLoading(false);
       }

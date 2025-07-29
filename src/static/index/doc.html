@@ -1278,9 +1278,7 @@ pre[class*="language-"] {
     <h3 class="atx" id="61-bm_ft-test-station">6.1 BM_FT Test Station</h3>
     <pre><code class="fenced-code-block language-sh"># The following content is from Log/cURL_BM_FT.txt
     # Each command is immediately followed by its response
-    curl -X POST --url http://192.168.10.30:5001/connect_plc
-    {"Function":"ConnectPLC","Message":"Connected to PLC 192.168.10.31:502","result": 0,"timestamp":"2025-07-13 20:05:52_140954"}
-
+    
     curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"clamp_x\", \"control_state\": \"in\"}"
     {"state": "in", "result": 0, "status": ""}
 
@@ -1607,12 +1605,10 @@ pre[class*="language-"] {
     curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"clamp_y\", \"control_state\": \"out\"}"
     {"state": "out", "result": 0, "status": ""}
 
-    curl -X POST --url http://192.168.10.30:5001/disconnect_plc
-    {"Function":"DisconnectPLC","Message":"Disconnect PLC successfully","result": 0,"timestamp":"2025-07-13 20:10:49_240618"}</code></pre>
+
     <h3 class="atx" id="62-jtag-test-station">6.2 JTAG Test Station</h3>
     <pre><code class="fenced-code-block language-sh"># The following content is from Log/cURL_JTAG.txt
-    curl -X POST --url http://192.168.10.30:5001/connect_plc
-    {"Function":"ConnectPLC","Message":"Connected to PLC 192.168.10.31:502","result": 0,"timestamp":"2025-07-13 17:31:36_688548"}
+ 
 
     curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_x\", \"control_state\": \"in\"}"
     {"state": "in", "result": 0, "status": ""}
@@ -1710,12 +1706,10 @@ pre[class*="language-"] {
     curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"testing_ready\"}"
     {"state": "off", "result": 1, "status": "Command M10054 executed failed: Actual value (0,) does not match expected value [1]"}
 
-    curl -X POST --url http://192.168.10.30:5001/disconnect_plc
-    {"Function":"DisconnectPLC","Message":"Disconnect PLC successfully","result": 0,"timestamp":"2025-07-13 17:32:42_172780"}</code></pre>
+    </code></pre>
     <h3 class="atx" id="63-bs_jtag-test-station">6.3 BS_JTAG Test Station</h3>
     <pre><code class="fenced-code-block language-sh"># The following content is from Log/cURL_BS_JTAG.txt
-    curl -X POST --url http://192.168.10.30:5001/connect_plc
-    {"Function":"ConnectPLC","Message":"Connected to PLC 192.168.10.31:502","result": 0,"timestamp":"2025-07-13 16:31:22_868427"}
+
 
     curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_x\", \"control_state\": \"in\"}"
     {"state": "in", "result": 0, "status": ""}
@@ -1789,13 +1783,11 @@ pre[class*="language-"] {
     curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"safety_light_grid\"}"
     {"state": "off", "result": 1, "status": "Command M10035 executed failed: Actual value (0,) does not match expected value [1]"}
 
-    curl -X POST --url http://192.168.10.30:5001/disconnect_plc
-    {"Function":"DisconnectPLC","Message":"Disconnect PLC successfully","result": 0,"timestamp":"2025-07-13 16:32:09_247179"}</code></pre>
+    </code></pre>
     <h3 class="atx" id="64-centaur-9-test-station">6.4 Centaur-9 Test Station</h3>
     <pre><code class="fenced-code-block language-sh"># The following content is from Log/cURL_Centaur-9.txt
 
-    curl -X POST --url http://192.168.10.30:5001/connect_plc
-    {"Function":"ConnectPLC","Message":"Connected to PLC 192.168.10.31:502","result": 0,"timestamp":"2025-07-15 09:39:47_469405"}
+    
 
     curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"dut\", \"control_state\": \"disengage\"}"
     {"state": "disengage", "result": 0, "status": ""}
@@ -1896,8 +1888,7 @@ pre[class*="language-"] {
     curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"dut\", \"control_state\": \"disengage\"}"
     {"state": "disengage", "result": 0, "status": ""}
 
-    curl -X POST --url http://192.168.10.30:5001/disconnect_plc
-    {"Function":"DisconnectPLC","Message":"Disconnect PLC successfully","result": 0,"timestamp":"2025-07-15 09:41:03_154370"}</code></pre>
+    </code></pre>
     <hr>
   </article>
 </body>

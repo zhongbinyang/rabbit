@@ -204,13 +204,13 @@
             body: JSON.stringify({ action: actionName }),
           });
           const data = await response.json();
-          if (data.Result !== undefined) {
-            updateStatusCard(actionName, data.Result, data.Message);
+          if (data.result !== undefined) {
+            updateStatusCard(actionName, data.result, data.message);
           }
-          if (data.Result) {
-            addLog('success', `[Polling] ${actionName}: ${data.Message}`, 'status');
+          if (data.result == 0) {
+            addLog('success', `[Polling] ${actionName}: ${data.message}`, 'status');
           } else {
-            addLog('error', `[Polling] ${actionName}: ${data.Message}`, 'status');
+            addLog('error', `[Polling] ${actionName}: ${data.message}`, 'status');
           }
         } catch (e) {
           addLog('error', `[Polling] ${actionName}: Request exception`, 'status');
