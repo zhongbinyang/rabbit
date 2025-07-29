@@ -25,6 +25,15 @@ class APIError(Exception):
 api_app = Flask(__name__, static_folder=STATIC_DIR, template_folder=STATIC_DIR)
 api_app.config['JSON_SORT_KEYS'] = False
 
+# 添加CORS支持
+@api_app.after_request
+def after_request(response):
+    """添加CORS头"""
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+    return response
+
 # 创建蓝图
 plc_api = Blueprint('plc_api', __name__)
 

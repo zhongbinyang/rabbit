@@ -27,9 +27,119 @@ class PLCController:
         self.lock = threading.RLock()  # 添加线程锁以保护Modbus通信
         self.delay_time = 1.0  # 操作之间的延迟时间，与PLCAPI一致
         self.io_setting = None
+        self.action_config = None
         
+        # 读取IO设置文件
+        self._load_io_setting()
+        
+    def _load_io_setting(self):
+        """加载IO设置文件"""
+        try:
+            with open(IO_SETTING_FILE_PATH, 'r', encoding='utf-8') as f:
+                self.io_setting = json.load(f)
+                logger.info("IO setting file loaded successfully")
+        except Exception as e:
+            logger.error(f"Failed to load IO setting file: {e}")
+            self.io_setting = None
     
-
+    def get_description_by_plc(self, plc_address: str) -> str:
+        """
+        根据PLC地址查找对应的description
+        
+        Args:
+            plc_address: PLC地址，如 "M100", "D200", "HD100" 等
+            
+        Returns:
+            对应的description，如果找不到则返回空字符串
+        """
+        if not self.io_setting:
+            logger.warning("IO setting not loaded, cannot find description")
+            return ""
+        
+        try:
+            # 遍历IO设置中的所有项
+            for item in self.io_setting:
+                if 'PLC' in item and item['PLC'] == plc_address:
+                    return item.get('description', '')
+            
+            # 如果没找到，记录日志
+            logger.debug(f"No description found for PLC address: {plc_address}")
+            return ""
+            
+        except Exception as e:
+            logger.error(f"Error finding description for PLC address {plc_address}: {e}")
+            return ""
+    
+    def get_plc_info_by_description(self, description: str) -> Dict[str, Any]:
+        """
+        根据description查找对应的PLC信息
+        
+        Args:
+            description: 描述信息
+            
+        Returns:
+            包含PLC信息的字典，如果找不到则返回空字典
+        """
+        if not self.io_setting:
+            logger.warning("IO setting not loaded, cannot find PLC info")
+            return {}
+        
+        try:
+            # 遍历IO设置中的所有项
+            for item in self.io_setting:
+                if 'description' in item and item['description'] == description:
+                    return item
+            
+            # 如果没找到，记录日志
+            logger.debug(f"No PLC info found for description: {description}")
+            return {}
+            
+        except Exception as e:
+            logger.error(f"Error finding PLC info for description {description}: {e}")
+            return {}
+    
+    def get_all_plc_addresses(self) -> List[str]:
+        """
+        获取所有PLC地址列表
+        
+        Returns:
+            PLC地址列表
+        """
+        if not self.io_setting:
+            logger.warning("IO setting not loaded, cannot get PLC addresses")
+            return []
+        
+        try:
+            addresses = []
+            for item in self.io_setting:
+                if 'plc' in item:
+                    addresses.append(item['plc'])
+            return addresses
+        except Exception as e:
+            logger.error(f"Error getting PLC addresses: {e}")
+            return []
+    
+    def get_all_descriptions(self) -> List[str]:
+        """
+        获取所有description列表
+        
+        Returns:
+            description列表
+        """
+        if not self.io_setting:
+            logger.warning("IO setting not loaded, cannot get descriptions")
+            return []
+        
+        try:
+            descriptions = []
+            for item in self.io_setting:
+                if 'description' in item:
+                    descriptions.append(item['description'])
+            return descriptions
+        except Exception as e:
+            logger.error(f"Error getting descriptions: {e}")
+            return []
+    
     @handle_exception
     def connect_plc(self, host: Optional[str] = None, port: Optional[int] = None) -> Tuple[bool, str]:
         """
@@ -154,16 +264,20 @@ class PLCController:
         # 如果readonly为True，则不等待
         readonly = action_config.get('readonly', False)
         
-        
         #
         # 存储每个命令的执行结果
         results = []
         total_commands = len(action_config['commands'])
         logger.info(f"Starting to execute {total_commands} PLC commands...")
 
+
+        command_description = action
+
         # 根据配置中的命令地址和值对执行操作
         for index, command in enumerate(action_config['commands'], 1):
             command_addr = command['command']
+            description = self.get_description_by_plc(command_addr)
+            command_description = f"{action} - {command_addr} - {description}"
             expected_value = command['expected_value']
             delayseconds = command.get('delayseconds', 0)
             type = command['type']
@@ -209,7 +323,7 @@ class PLCController:
                 continue
             
             if not ret[0]:
-                error_msg = f"{action} command failed: {ret[1]}"
+                error_msg = f"Command: {command_description}, failed reason: {ret[1]}"
                 logger.error(error_msg)
                 results.append((False, error_msg))
                 break
@@ -240,7 +354,7 @@ class PLCController:
                                     ret = self.modbus.read_holding_registers(addr, 1)
                                 logger.info(f"Re-read {type} result: {ret}")
                                 if not ret[0]:
-                                    logger.error(f"Command {command_addr} executed failed during re-read: {ret[1]}")
+                                    logger.error(f"Command {command_description} executed failed during re-read: {ret[1]}")
                                     break
                                 if list(ret[1]) == list(expected_value):
                                     logger.info(f"{type} value matches expected value after re-read.")
@@ -249,25 +363,25 @@ class PLCController:
                                 else:
                                     continue
                         if not isPass:
-                            error_msg = f"Command {command_addr} executed failed: Actual value {ret[1]} does not match expected value {expected_value}"
+                            error_msg = f"Command {command_description} executed failed: Actual value {ret[1]} does not match expected value {expected_value}"
                             logger.error(error_msg)
                             results.append((False, error_msg))
                             break
                            
                     else:
-                        error_msg = f"Command {command_addr} executed failed: Actual value {ret[1]} does not match expected value {expected_value}"
+                        error_msg = f"Command {command_description} executed failed: Actual value {ret[1]} does not match expected value {expected_value}"
                         logger.error(error_msg)
                         results.append((False, error_msg))
                         break
                 else:
                     # 读取值与期望值一致，不等待
-                    logger.info(f"Command {command_addr} executed successfully: Actual value {ret[1]} match expected value {expected_value}")
+                    logger.info(f"Command {command_description} executed successfully: Actual value {ret[1]} match expected value {expected_value}")
             # 非读操作，等待delayseconds秒
             else:
                 time.sleep(delayseconds)
 
                 
-            success_msg = f"Command {command_addr} executed successfully"    
+            success_msg = f"Command {command_description} executed successfully"    
             logger.info(success_msg)
             results.append((True, success_msg))
         
@@ -284,7 +398,7 @@ class PLCController:
                     return False, msg
         
         # 全部命令成功执行
-        success_msg = f"{action} command executed successfully"
+        success_msg = f"Action: {action} executed successfully"
         logger.info(success_msg)
         logger.info(f"========== PLC COMMAND EXECUTION ENDED: {action} [SUCCESS] ==========")
         return True, success_msg
@@ -338,9 +452,13 @@ class PLCController:
         total_commands = len(action_config['commands'])
         logger.info(f"Starting to execute {total_commands} PLC commands...")
 
+
+        command_description = action
         # 根据配置中的命令地址和值对执行操作
         for index, command in enumerate(action_config['commands'], 1):
             command_addr = command['command']
+            description = self.get_description_by_plc(command_addr)
+            command_description = f"{action} - {command_addr} - {description}"
             expected_value = command['expected_value']
             timeout = command.get('delayseconds', 0)
             type = command['type']
@@ -385,7 +503,7 @@ class PLCController:
                 break
             
             if not ret[0]:
-                error_msg = f"{action} command failed: {ret[1]}"
+                error_msg = f"Command: {command_description}, failed reason: {ret[1]}"
                 logger.error(error_msg)
                 results.append((False, error_msg))
                 break
@@ -415,7 +533,7 @@ class PLCController:
                                     ret = self.modbus.read_holding_registers(addr, 1)
                                 logger.info(f"Re-read {type} result: {ret}")
                                 if not ret[0]:
-                                    logger.error(f"Command {command_addr} executed failed during re-read: {ret[1]}")
+                                    logger.error(f"Command {command_description} executed failed during re-read: {ret[1]}")
                                     break
                                 if list(ret[1]) == list(expected_value):
                                     logger.info(f"{type} value matches expected value after re-read.")
@@ -424,19 +542,19 @@ class PLCController:
                                 else:
                                     continue
                         if not isPass:
-                            error_msg = f"Command {command_addr} executed failed: Actual value {ret[1]} does not match expected value {expected_value}"
+                            error_msg = f"Command {command_description} executed failed: Actual value {ret[1]} does not match expected value {expected_value}"
                             logger.error(error_msg)
                             results.append((False, error_msg))
                             break
                     else:
-                        error_msg = f"Command {command_addr} executed failed: Actual value {ret[1]} does not match expected value {expected_value}"
+                        error_msg = f"Command {command_description} executed failed: Actual value {ret[1]} does not match expected value {expected_value}"
                         logger.error(error_msg)
                         results.append((False, error_msg))
                         break
                 
             else:
                 time.sleep(timeout)
-            success_msg = f"Command {command_addr} executed successfully"    
+            success_msg = f"Command {command_description} executed successfully"    
             logger.info(success_msg)
             results.append((True, success_msg))
         
@@ -453,7 +571,7 @@ class PLCController:
                     return False, msg
         
         # 全部命令成功执行
-        success_msg = f"{action} command executed successfully"
+        success_msg = f"Command {command_description} executed successfully"
         logger.info(success_msg)
         logger.info(f"========== PLC COMMAND EXECUTION ENDED: {action} [SUCCESS] ==========")
         return True, success_msg
@@ -508,9 +626,12 @@ class PLCController:
         total_commands = len(action_config['commands'])
         logger.info(f"Starting to execute {total_commands} PLC commands...")
 
+        command_description = action
         # 根据配置中的命令地址和值对执行操作
         for index, command in enumerate(action_config['commands'], 1):
             command_addr = command['command']
+            description = self.get_description_by_plc(command_addr)
+            command_description = f"{action} - {command_addr} - {description}"
             expected_value = command['expected_value']
             delayseconds = command.get('delayseconds', 0)
             type = command['type']
@@ -548,7 +669,7 @@ class PLCController:
                 break
             
             if not ret[0]:
-                error_msg = f"{action} command failed: {ret[1]}"
+                error_msg = f"action: {action}, command: {command_description}, failed reason: {ret[1]}"
                 logger.error(error_msg)
                 results.append((False, error_msg))
                 break
@@ -560,7 +681,7 @@ class PLCController:
             if is_check_value:
                 # 新增：对于读操作且checkvalue为真且值不一致时，循环读直到一致或超时
                 if list(ret[1]) != list(expected_value):
-                    error_msg = f"Command {command_addr} executed failed: Actual value {ret[1]} does not match expected value {expected_value}"
+                    error_msg = f"Command {command_description} executed failed: Actual value {ret[1]} does not match expected value {expected_value}"
                     logger.error(error_msg)
                     results.append((False, error_msg))
                     break
@@ -591,7 +712,7 @@ class PLCController:
                     return False, msg, second_part, second_part
         
         # 全部命令成功执行
-        success_msg = f"{action} command executed successfully"
+        success_msg = f"Command {command_description} executed successfully"
         logger.info(success_msg)
         logger.info(f"========== PLC COMMAND EXECUTION ENDED: {action} [SUCCESS] ==========")
         return True, success_msg, first_part

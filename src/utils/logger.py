@@ -7,11 +7,11 @@ from logging.handlers import RotatingFileHandler
 
 from config.settings import LOGGING_CONFIG
 
-# 获取项目根目录(即src的父目录)
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
+from config.settings import BASE_DIR
+
 
 # 确保日志目录存在
-log_file_path = os.path.join(project_root, LOGGING_CONFIG["log_file"])
+log_file_path = os.path.join(BASE_DIR, LOGGING_CONFIG["log_file"])
 log_dir = os.path.dirname(log_file_path)
 if not os.path.exists(log_dir):
     os.makedirs(log_dir)
