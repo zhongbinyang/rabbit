@@ -1,1895 +1,277 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
-  <style>
-  @font-face {
-  font-family: octicons-link;
-  src: url(data:font/woff;charset=utf-8;base64,d09GRgABAAAAAAZwABAAAAAACFQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEU0lHAAAGaAAAAAgAAAAIAAAAAUdTVUIAAAZcAAAACgAAAAoAAQAAT1MvMgAAAyQAAABJAAAAYFYEU3RjbWFwAAADcAAAAEUAAACAAJThvmN2dCAAAATkAAAABAAAAAQAAAAAZnBnbQAAA7gAAACyAAABCUM+8IhnYXNwAAAGTAAAABAAAAAQABoAI2dseWYAAAFsAAABPAAAAZwcEq9taGVhZAAAAsgAAAA0AAAANgh4a91oaGVhAAADCAAAABoAAAAkCA8DRGhtdHgAAAL8AAAADAAAAAwGAACfbG9jYQAAAsAAAAAIAAAACABiATBtYXhwAAACqAAAABgAAAAgAA8ASm5hbWUAAAToAAABQgAAAlXu73sOcG9zdAAABiwAAAAeAAAAME3QpOBwcmVwAAAEbAAAAHYAAAB/aFGpk3jaTY6xa8JAGMW/O62BDi0tJLYQincXEypYIiGJjSgHniQ6umTsUEyLm5BV6NDBP8Tpts6F0v+k/0an2i+itHDw3v2+9+DBKTzsJNnWJNTgHEy4BgG3EMI9DCEDOGEXzDADU5hBKMIgNPZqoD3SilVaXZCER3/I7AtxEJLtzzuZfI+VVkprxTlXShWKb3TBecG11rwoNlmmn1P2WYcJczl32etSpKnziC7lQyWe1smVPy/Lt7Kc+0vWY/gAgIIEqAN9we0pwKXreiMasxvabDQMM4riO+qxM2ogwDGOZTXxwxDiycQIcoYFBLj5K3EIaSctAq2kTYiw+ymhce7vwM9jSqO8JyVd5RH9gyTt2+J/yUmYlIR0s04n6+7Vm1ozezUeLEaUjhaDSuXHwVRgvLJn1tQ7xiuVv/ocTRF42mNgZGBgYGbwZOBiAAFGJBIMAAizAFoAAABiAGIAznjaY2BkYGAA4in8zwXi+W2+MjCzMIDApSwvXzC97Z4Ig8N/BxYGZgcgl52BCSQKAA3jCV8CAABfAAAAAAQAAEB42mNgZGBg4f3vACQZQABIMjKgAmYAKEgBXgAAeNpjYGY6wTiBgZWBg2kmUxoDA4MPhGZMYzBi1AHygVLYQUCaawqDA4PChxhmh/8ODDEsvAwHgMKMIDnGL0x7gJQCAwMAJd4MFwAAAHjaY2BgYGaA4DAGRgYQkAHyGMF8NgYrIM3JIAGVYYDT+AEjAwuDFpBmA9KMDEwMCh9i/v8H8sH0/4dQc1iAmAkALaUKLgAAAHjaTY9LDsIgEIbtgqHUPpDi3gPoBVyRTmTddOmqTXThEXqrob2gQ1FjwpDvfwCBdmdXC5AVKFu3e5MfNFJ29KTQT48Ob9/lqYwOGZxeUelN2U2R6+cArgtCJpauW7UQBqnFkUsjAY/kOU1cP+DAgvxwn1chZDwUbd6CFimGXwzwF6tPbFIcjEl+vvmM/byA48e6tWrKArm4ZJlCbdsrxksL1AwWn/yBSJKpYbq8AXaaTb8AAHja28jAwOC00ZrBeQNDQOWO//sdBBgYGRiYWYAEELEwMTE4uzo5Zzo5b2BxdnFOcALxNjA6b2ByTswC8jYwg0VlNuoCTWAMqNzMzsoK1rEhNqByEyerg5PMJlYuVueETKcd/89uBpnpvIEVomeHLoMsAAe1Id4AAAAAAAB42oWQT07CQBTGv0JBhagk7HQzKxca2sJCE1hDt4QF+9JOS0nbaaYDCQfwCJ7Au3AHj+LO13FMmm6cl7785vven0kBjHCBhfpYuNa5Ph1c0e2Xu3jEvWG7UdPDLZ4N92nOm+EBXuAbHmIMSRMs+4aUEd4Nd3CHD8NdvOLTsA2GL8M9PODbcL+hD7C1xoaHeLJSEao0FEW14ckxC+TU8TxvsY6X0eLPmRhry2WVioLpkrbp84LLQPGI7c6sOiUzpWIWS5GzlSgUzzLBSikOPFTOXqly7rqx0Z1Q5BAIoZBSFihQYQOOBEdkCOgXTOHA07HAGjGWiIjaPZNW13/+lm6S9FT7rLHFJ6fQbkATOG1j2OFMucKJJsxIVfQORl+9Jyda6Sl1dUYhSCm1dyClfoeDve4qMYdLEbfqHf3O/AdDumsjAAB42mNgYoAAZQYjBmyAGYQZmdhL8zLdDEydARfoAqIAAAABAAMABwAKABMAB///AA8AAQAAAAAAAAAAAAAAAAABAAAAAA==) format('woff');
-}
-
-.markdown-body .octicon {
-  display: inline-block;
-  fill: currentColor;
-  vertical-align: text-bottom;
-}
-
-.markdown-body .anchor {
-  float: left;
-  line-height: 1;
-  margin-left: -20px;
-  padding-right: 4px;
-}
-
-.markdown-body .anchor:focus {
-  outline: none;
-}
-
-.markdown-body h1 .octicon-link,
-.markdown-body h2 .octicon-link,
-.markdown-body h3 .octicon-link,
-.markdown-body h4 .octicon-link,
-.markdown-body h5 .octicon-link,
-.markdown-body h6 .octicon-link {
-  color: #1b1f23;
-  vertical-align: middle;
-  visibility: hidden;
-}
-
-.markdown-body h1:hover .anchor,
-.markdown-body h2:hover .anchor,
-.markdown-body h3:hover .anchor,
-.markdown-body h4:hover .anchor,
-.markdown-body h5:hover .anchor,
-.markdown-body h6:hover .anchor {
-  text-decoration: none;
-}
-
-.markdown-body h1:hover .anchor .octicon-link,
-.markdown-body h2:hover .anchor .octicon-link,
-.markdown-body h3:hover .anchor .octicon-link,
-.markdown-body h4:hover .anchor .octicon-link,
-.markdown-body h5:hover .anchor .octicon-link,
-.markdown-body h6:hover .anchor .octicon-link {
-  visibility: visible;
-}
-
-.markdown-body {
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  color: #24292e;
-  line-height: 1.5;
-  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
-  font-size: 16px;
-  line-height: 1.5;
-  word-wrap: break-word;
-}
-
-.markdown-body .pl-c {
-  color: #6a737d;
-}
-
-.markdown-body .pl-c1,
-.markdown-body .pl-s .pl-v {
-  color: #005cc5;
-}
-
-.markdown-body .pl-e,
-.markdown-body .pl-en {
-  color: #6f42c1;
-}
-
-.markdown-body .pl-s .pl-s1,
-.markdown-body .pl-smi {
-  color: #24292e;
-}
-
-.markdown-body .pl-ent {
-  color: #22863a;
-}
-
-.markdown-body .pl-k {
-  color: #d73a49;
-}
-
-.markdown-body .pl-pds,
-.markdown-body .pl-s,
-.markdown-body .pl-s .pl-pse .pl-s1,
-.markdown-body .pl-sr,
-.markdown-body .pl-sr .pl-cce,
-.markdown-body .pl-sr .pl-sra,
-.markdown-body .pl-sr .pl-sre {
-  color: #032f62;
-}
-
-.markdown-body .pl-smw,
-.markdown-body .pl-v {
-  color: #e36209;
-}
-
-.markdown-body .pl-bu {
-  color: #b31d28;
-}
-
-.markdown-body .pl-ii {
-  background-color: #b31d28;
-  color: #fafbfc;
-}
-
-.markdown-body .pl-c2 {
-  background-color: #d73a49;
-  color: #fafbfc;
-}
-
-.markdown-body .pl-c2:before {
-  content: "^M";
-}
-
-.markdown-body .pl-sr .pl-cce {
-  color: #22863a;
-  font-weight: 700;
-}
-
-.markdown-body .pl-ml {
-  color: #735c0f;
-}
-
-.markdown-body .pl-mh,
-.markdown-body .pl-mh .pl-en,
-.markdown-body .pl-ms {
-  color: #005cc5;
-  font-weight: 700;
-}
-
-.markdown-body .pl-mi {
-  color: #24292e;
-  font-style: italic;
-}
-
-.markdown-body .pl-mb {
-  color: #24292e;
-  font-weight: 700;
-}
-
-.markdown-body .pl-md {
-  background-color: #ffeef0;
-  color: #b31d28;
-}
-
-.markdown-body .pl-mi1 {
-  background-color: #f0fff4;
-  color: #22863a;
-}
-
-.markdown-body .pl-mc {
-  background-color: #ffebda;
-  color: #e36209;
-}
-
-.markdown-body .pl-mi2 {
-  background-color: #005cc5;
-  color: #f6f8fa;
-}
-
-.markdown-body .pl-mdr {
-  color: #6f42c1;
-  font-weight: 700;
-}
-
-.markdown-body .pl-ba {
-  color: #586069;
-}
-
-.markdown-body .pl-sg {
-  color: #959da5;
-}
-
-.markdown-body .pl-corl {
-  color: #032f62;
-  text-decoration: underline;
-}
-
-.markdown-body details {
-  display: block;
-}
-
-.markdown-body summary {
-  display: list-item;
-}
-
-.markdown-body a {
-  background-color: transparent;
-}
-
-.markdown-body a:active,
-.markdown-body a:hover {
-  outline-width: 0;
-}
-
-.markdown-body strong {
-  font-weight: inherit;
-  font-weight: bolder;
-}
-
-.markdown-body h1 {
-  font-size: 2em;
-  margin: .67em 0;
-}
-
-.markdown-body img {
-  border-style: none;
-}
-
-.markdown-body code,
-.markdown-body kbd,
-.markdown-body pre {
-  font-family: monospace,monospace;
-  font-size: 1em;
-}
-
-.markdown-body hr {
-  box-sizing: content-box;
-  height: 0;
-  overflow: visible;
-}
-
-.markdown-body input {
-  font: inherit;
-  margin: 0;
-}
-
-.markdown-body input {
-  overflow: visible;
-}
-
-.markdown-body [type=checkbox] {
-  box-sizing: border-box;
-  padding: 0;
-}
-
-.markdown-body * {
-  box-sizing: border-box;
-}
-
-.markdown-body input {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-}
-
-.markdown-body a {
-  color: #0366d6;
-  text-decoration: none;
-}
-
-.markdown-body a:hover {
-  text-decoration: underline;
-}
-
-.markdown-body strong {
-  font-weight: 600;
-}
-
-.markdown-body hr {
-  background: transparent;
-  border: 0;
-  border-bottom: 1px solid #dfe2e5;
-  height: 0;
-  margin: 15px 0;
-  overflow: hidden;
-}
-
-.markdown-body hr:before {
-  content: "";
-  display: table;
-}
-
-.markdown-body hr:after {
-  clear: both;
-  content: "";
-  display: table;
-}
-
-.markdown-body table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-.markdown-body td,
-.markdown-body th {
-  padding: 0;
-}
-
-.markdown-body details summary {
-  cursor: pointer;
-}
-
-.markdown-body h1,
-.markdown-body h2,
-.markdown-body h3,
-.markdown-body h4,
-.markdown-body h5,
-.markdown-body h6 {
-  margin-bottom: 0;
-  margin-top: 0;
-}
-
-.markdown-body h1 {
-  font-size: 32px;
-}
-
-.markdown-body h1,
-.markdown-body h2 {
-  font-weight: 600;
-}
-
-.markdown-body h2 {
-  font-size: 24px;
-}
-
-.markdown-body h3 {
-  font-size: 20px;
-}
-
-.markdown-body h3,
-.markdown-body h4 {
-  font-weight: 600;
-}
-
-.markdown-body h4 {
-  font-size: 16px;
-}
-
-.markdown-body h5 {
-  font-size: 14px;
-}
-
-.markdown-body h5,
-.markdown-body h6 {
-  font-weight: 600;
-}
-
-.markdown-body h6 {
-  font-size: 12px;
-}
-
-.markdown-body p {
-  margin-bottom: 10px;
-  margin-top: 0;
-}
-
-.markdown-body blockquote {
-  margin: 0;
-}
-
-.markdown-body ol,
-.markdown-body ul {
-  margin-bottom: 0;
-  margin-top: 0;
-  padding-left: 0;
-}
-
-.markdown-body ol ol,
-.markdown-body ul ol {
-  list-style-type: lower-roman;
-}
-
-.markdown-body ol ol ol,
-.markdown-body ol ul ol,
-.markdown-body ul ol ol,
-.markdown-body ul ul ol {
-  list-style-type: lower-alpha;
-}
-
-.markdown-body dd {
-  margin-left: 0;
-}
-
-.markdown-body code,
-.markdown-body pre {
-  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
-  font-size: 12px;
-}
-
-.markdown-body pre {
-  margin-bottom: 0;
-  margin-top: 0;
-}
-
-.markdown-body input::-webkit-inner-spin-button,
-.markdown-body input::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  appearance: none;
-  margin: 0;
-}
-
-.markdown-body .border {
-  border: 1px solid #e1e4e8!important;
-}
-
-.markdown-body .border-0 {
-  border: 0!important;
-}
-
-.markdown-body .border-bottom {
-  border-bottom: 1px solid #e1e4e8!important;
-}
-
-.markdown-body .rounded-1 {
-  border-radius: 3px!important;
-}
-
-.markdown-body .bg-white {
-  background-color: #fff!important;
-}
-
-.markdown-body .bg-gray-light {
-  background-color: #fafbfc!important;
-}
-
-.markdown-body .text-gray-light {
-  color: #6a737d!important;
-}
-
-.markdown-body .mb-0 {
-  margin-bottom: 0!important;
-}
-
-.markdown-body .my-2 {
-  margin-bottom: 8px!important;
-  margin-top: 8px!important;
-}
-
-.markdown-body .pl-0 {
-  padding-left: 0!important;
-}
-
-.markdown-body .py-0 {
-  padding-bottom: 0!important;
-  padding-top: 0!important;
-}
-
-.markdown-body .pl-1 {
-  padding-left: 4px!important;
-}
-
-.markdown-body .pl-2 {
-  padding-left: 8px!important;
-}
-
-.markdown-body .py-2 {
-  padding-bottom: 8px!important;
-  padding-top: 8px!important;
-}
-
-.markdown-body .pl-3,
-.markdown-body .px-3 {
-  padding-left: 16px!important;
-}
-
-.markdown-body .px-3 {
-  padding-right: 16px!important;
-}
-
-.markdown-body .pl-4 {
-  padding-left: 24px!important;
-}
-
-.markdown-body .pl-5 {
-  padding-left: 32px!important;
-}
-
-.markdown-body .pl-6 {
-  padding-left: 40px!important;
-}
-
-.markdown-body .f6 {
-  font-size: 12px!important;
-}
-
-.markdown-body .lh-condensed {
-  line-height: 1.25!important;
-}
-
-.markdown-body .text-bold {
-  font-weight: 600!important;
-}
-
-.markdown-body:before {
-  content: "";
-  display: table;
-}
-
-.markdown-body:after {
-  clear: both;
-  content: "";
-  display: table;
-}
-
-.markdown-body>:first-child {
-  margin-top: 0!important;
-}
-
-.markdown-body>:last-child {
-  margin-bottom: 0!important;
-}
-
-.markdown-body a:not([href]) {
-  color: inherit;
-  text-decoration: none;
-}
-
-.markdown-body blockquote,
-.markdown-body dl,
-.markdown-body ol,
-.markdown-body p,
-.markdown-body pre,
-.markdown-body table,
-.markdown-body ul {
-  margin-bottom: 16px;
-  margin-top: 0;
-}
-
-.markdown-body hr {
-  background-color: #e1e4e8;
-  border: 0;
-  height: .25em;
-  margin: 24px 0;
-  padding: 0;
-}
-
-.markdown-body blockquote {
-  border-left: .25em solid #dfe2e5;
-  color: #6a737d;
-  padding: 0 1em;
-}
-
-.markdown-body blockquote>:first-child {
-  margin-top: 0;
-}
-
-.markdown-body blockquote>:last-child {
-  margin-bottom: 0;
-}
-
-.markdown-body kbd {
-  background-color: #fafbfc;
-  border: 1px solid #c6cbd1;
-  border-bottom-color: #959da5;
-  border-radius: 3px;
-  box-shadow: inset 0 -1px 0 #959da5;
-  color: #444d56;
-  display: inline-block;
-  font-size: 11px;
-  line-height: 10px;
-  padding: 3px 5px;
-  vertical-align: middle;
-}
-
-.markdown-body h1,
-.markdown-body h2,
-.markdown-body h3,
-.markdown-body h4,
-.markdown-body h5,
-.markdown-body h6 {
-  font-weight: 600;
-  line-height: 1.25;
-  margin-bottom: 16px;
-  margin-top: 24px;
-}
-
-.markdown-body h1 {
-  font-size: 2em;
-}
-
-.markdown-body h1,
-.markdown-body h2 {
-  border-bottom: 1px solid #eaecef;
-  padding-bottom: .3em;
-}
-
-.markdown-body h2 {
-  font-size: 1.5em;
-}
-
-.markdown-body h3 {
-  font-size: 1.25em;
-}
-
-.markdown-body h4 {
-  font-size: 1em;
-}
-
-.markdown-body h5 {
-  font-size: .875em;
-}
-
-.markdown-body h6 {
-  color: #6a737d;
-  font-size: .85em;
-}
-
-.markdown-body ol,
-.markdown-body ul {
-  padding-left: 2em;
-}
-
-.markdown-body ol ol,
-.markdown-body ol ul,
-.markdown-body ul ol,
-.markdown-body ul ul {
-  margin-bottom: 0;
-  margin-top: 0;
-}
-
-.markdown-body li {
-  word-wrap: break-all;
-}
-
-.markdown-body li>p {
-  margin-top: 16px;
-}
-
-.markdown-body li+li {
-  margin-top: .25em;
-}
-
-.markdown-body dl {
-  padding: 0;
-}
-
-.markdown-body dl dt {
-  font-size: 1em;
-  font-style: italic;
-  font-weight: 600;
-  margin-top: 16px;
-  padding: 0;
-}
-
-.markdown-body dl dd {
-  margin-bottom: 16px;
-  padding: 0 16px;
-}
-
-.markdown-body table {
-  display: block;
-  overflow: auto;
-  width: 100%;
-}
-
-.markdown-body table th {
-  font-weight: 600;
-}
-
-.markdown-body table td,
-.markdown-body table th {
-  border: 1px solid #dfe2e5;
-  padding: 6px 13px;
-}
-
-.markdown-body table tr {
-  background-color: #fff;
-  border-top: 1px solid #c6cbd1;
-}
-
-.markdown-body table tr:nth-child(2n) {
-  background-color: #f6f8fa;
-}
-
-.markdown-body img {
-  background-color: #fff;
-  box-sizing: content-box;
-  max-width: 100%;
-}
-
-.markdown-body img[align=right] {
-  padding-left: 20px;
-}
-
-.markdown-body img[align=left] {
-  padding-right: 20px;
-}
-
-.markdown-body code {
-  background-color: rgba(27,31,35,.05);
-  border-radius: 3px;
-  font-size: 85%;
-  margin: 0;
-  padding: .2em .4em;
-}
-
-.markdown-body pre {
-  word-wrap: break-word;
-  white-space: pre-wrap;
-  overflow-wrap: break-word;
-}
-
-.markdown-body pre>code {
-  background: transparent;
-  border: 0;
-  font-size: 100%;
-  margin: 0;
-  padding: 0;
-  white-space: pre-wrap;
-  word-break: break-all;
-  overflow-wrap: break-word;
-}
-
-.markdown-body .highlight {
-  margin-bottom: 16px;
-}
-
-.markdown-body .highlight pre {
-  margin-bottom: 0;
-  word-break: normal;
-}
-
-.markdown-body .highlight pre,
-.markdown-body pre {
-  background-color: #f6f8fa;
-  border-radius: 3px;
-  font-size: 85%;
-  line-height: 1.45;
-  overflow: auto;
-  padding: 16px;
-  word-wrap: break-word;
-  white-space: pre-wrap;
-  overflow-wrap: break-word;
-}
-
-.markdown-body pre code {
-  background-color: transparent;
-  border: 0;
-  display: inline;
-  line-height: inherit;
-  margin: 0;
-  max-width: auto;
-  overflow: visible;
-  padding: 0;
-  word-wrap: break-word;
-  white-space: pre-wrap;
-  overflow-wrap: break-word;
-}
-
-.markdown-body .commit-tease-sha {
-  color: #444d56;
-  display: inline-block;
-  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
-  font-size: 90%;
-}
-
-.markdown-body .blob-wrapper {
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px;
-  overflow-x: auto;
-  overflow-y: hidden;
-}
-
-.markdown-body .blob-wrapper-embedded {
-  max-height: 240px;
-  overflow-y: auto;
-}
-
-.markdown-body .blob-num {
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -webkit-user-select: none;
-  color: rgba(27,31,35,.3);
-  cursor: pointer;
-  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
-  font-size: 12px;
-  line-height: 20px;
-  min-width: 50px;
-  padding-left: 10px;
-  padding-right: 10px;
-  text-align: right;
-  user-select: none;
-  vertical-align: top;
-  white-space: nowrap;
-  width: 1%;
-}
-
-.markdown-body .blob-num:hover {
-  color: rgba(27,31,35,.6);
-}
-
-.markdown-body .blob-num:before {
-  content: attr(data-line-number);
-}
-
-.markdown-body .blob-code {
-  line-height: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
-  position: relative;
-  vertical-align: top;
-}
-
-.markdown-body .blob-code-inner {
-  color: #24292e;
-  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
-  font-size: 12px;
-  overflow: visible;
-  white-space: pre;
-  word-wrap: normal;
-}
-
-.markdown-body .pl-token.active,
-.markdown-body .pl-token:hover {
-  background: #ffea7f;
-  cursor: pointer;
-}
-
-.markdown-body kbd {
-  background-color: #fafbfc;
-  border: 1px solid #d1d5da;
-  border-bottom-color: #c6cbd1;
-  border-radius: 3px;
-  box-shadow: inset 0 -1px 0 #c6cbd1;
-  color: #444d56;
-  display: inline-block;
-  font: 11px SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
-  line-height: 10px;
-  padding: 3px 5px;
-  vertical-align: middle;
-}
-
-.markdown-body :checked+.radio-label {
-  border-color: #0366d6;
-  position: relative;
-  z-index: 1;
-}
-
-.markdown-body .tab-size[data-tab-size="1"] {
-  -moz-tab-size: 1;
-  tab-size: 1;
-}
-
-.markdown-body .tab-size[data-tab-size="2"] {
-  -moz-tab-size: 2;
-  tab-size: 2;
-}
-
-.markdown-body .tab-size[data-tab-size="3"] {
-  -moz-tab-size: 3;
-  tab-size: 3;
-}
-
-.markdown-body .tab-size[data-tab-size="4"] {
-  -moz-tab-size: 4;
-  tab-size: 4;
-}
-
-.markdown-body .tab-size[data-tab-size="5"] {
-  -moz-tab-size: 5;
-  tab-size: 5;
-}
-
-.markdown-body .tab-size[data-tab-size="6"] {
-  -moz-tab-size: 6;
-  tab-size: 6;
-}
-
-.markdown-body .tab-size[data-tab-size="7"] {
-  -moz-tab-size: 7;
-  tab-size: 7;
-}
-
-.markdown-body .tab-size[data-tab-size="8"] {
-  -moz-tab-size: 8;
-  tab-size: 8;
-}
-
-.markdown-body .tab-size[data-tab-size="9"] {
-  -moz-tab-size: 9;
-  tab-size: 9;
-}
-
-.markdown-body .tab-size[data-tab-size="10"] {
-  -moz-tab-size: 10;
-  tab-size: 10;
-}
-
-.markdown-body .tab-size[data-tab-size="11"] {
-  -moz-tab-size: 11;
-  tab-size: 11;
-}
-
-.markdown-body .tab-size[data-tab-size="12"] {
-  -moz-tab-size: 12;
-  tab-size: 12;
-}
-
-.markdown-body .task-list-item {
-  list-style-type: none;
-}
-
-.markdown-body .task-list-item+.task-list-item {
-  margin-top: 3px;
-}
-
-.markdown-body .task-list-item input {
-  margin: 0 .2em .25em -1.6em;
-  vertical-align: middle;
-}
-
-.markdown-body hr {
-  border-bottom-color: #eee;
-}
-
-.markdown-body .pl-0 {
-  padding-left: 0!important;
-}
-
-.markdown-body .pl-1 {
-  padding-left: 4px!important;
-}
-
-.markdown-body .pl-2 {
-  padding-left: 8px!important;
-}
-
-.markdown-body .pl-3 {
-  padding-left: 16px!important;
-}
-
-.markdown-body .pl-4 {
-  padding-left: 24px!important;
-}
-
-.markdown-body .pl-5 {
-  padding-left: 32px!important;
-}
-
-.markdown-body .pl-6 {
-  padding-left: 40px!important;
-}
-
-.markdown-body .pl-7 {
-  padding-left: 48px!important;
-}
-
-.markdown-body .pl-8 {
-  padding-left: 64px!important;
-}
-
-.markdown-body .pl-9 {
-  padding-left: 80px!important;
-}
-
-.markdown-body .pl-10 {
-  padding-left: 96px!important;
-}
-
-.markdown-body .pl-11 {
-  padding-left: 112px!important;
-}
-
-.markdown-body .pl-12 {
-  padding-left: 128px!important;
-}
-
-/*# sourceURL=webpack://./node_modules/github-markdown-css/github-markdown.css */
-/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL25vZGVfbW9kdWxlcy9naXRodWItbWFya2Rvd24tY3NzL2dpdGh1Yi1tYXJrZG93bi5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSwwQkFBMEI7RUFDMUIsMkRBQXF0RTtBQUN2dEU7O0FBRUE7RUFDRSxxQkFBcUI7RUFDckIsa0JBQWtCO0VBQ2xCLDJCQUEyQjtBQUM3Qjs7QUFFQTtFQUNFLFdBQVc7RUFDWCxjQUFjO0VBQ2Qsa0JBQWtCO0VBQ2xCLGtCQUFrQjtBQUNwQjs7QUFFQTtFQUNFLGFBQWE7QUFDZjs7QUFFQTs7Ozs7O0VBTUUsY0FBYztFQUNkLHNCQUFzQjtFQUN0QixrQkFBa0I7QUFDcEI7O0FBRUE7RUFDRSxrQkFBa0I7RUFDbEIsb0JBQW9CO0VBQ3BCLFNBQVM7RUFDVCxVQUFVO0VBQ1YscUJBQXFCO0FBQ3ZCOztBQUVBOztFQUVFLHlCQUF5QjtBQUMzQjs7QUFFQTtFQUNFLFdBQVc7QUFDYjs7QUFFQTtFQUNFLGdCQUFnQjtFQUNoQixXQUFXO0FBQ2I7O0FBRUE7RUFDRSxrQkFBa0I7QUFDcEI7O0FBRUE7RUFDRSxrQkFBa0I7RUFDbEIsb0JBQW9CO0VBQ3BCLFNBQVM7RUFDVCxVQUFVO0VBQ1YscUJBQXFCO0FBQ3ZCOztBQUVBOztFQUVFLHlCQUF5QjtBQUMzQjs7QUFFQTtFQUNFLFdBQVc7QUFDYjs7QUFFQTtFQUNFLGdCQUFnQjtFQUNoQixnQkFBZ0I7RUFDaEIsZ0JBQWdCO0FBQ2xCOztBQUVBOzs7RUFHRSwyQkFBMkI7QUFDN0I7O0FBRUE7RUFDRSxlQUFlO0FBQ2pCOztBQUVBO0VBQ0UsY0FBYztBQUNoQjs7QUFFQTtFQUNFLGNBQWM7RUFDZCxxQkFBcUI7QUFDdkI7QUFDQTtFQUNFLGNBQWM7RUFDZCxxQkFBcUI7QUFDdkI7O0FBRUE7RUFDRSxPQUFPO0VBQ1AsY0FBYztFQUNkLGNBQWM7RUFDZCwrQkFBK0I7QUFDakMiLCJzb3VyY2VSb290IjoiIn0= */
-  </style>
-  <style>
-  /**
- * prism.js default theme for JavaScript, CSS and HTML
- * Based on dabblet (http://dabblet.com)
- * @author Lea Verou
- */
-
-code[class*="language-"],
-pre[class*="language-"] {
-	color: black;
-	background: none;
-	text-shadow: 0 1px white;
-	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-	font-size: 1em;
-	text-align: left;
-	white-space: pre;
-	word-spacing: normal;
-	word-break: normal;
-	word-wrap: normal;
-	line-height: 1.5;
-
-	-moz-tab-size: 4;
-	-o-tab-size: 4;
-	tab-size: 4;
-
-	-webkit-hyphens: none;
-	-moz-hyphens: none;
-	-ms-hyphens: none;
-	hyphens: none;
-}
-
-pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
-code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
-	text-shadow: none;
-	background: #b3d4fc;
-}
-
-pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
-code[class*="language-"]::selection, code[class*="language-"] ::selection {
-	text-shadow: none;
-	background: #b3d4fc;
-}
-
-@media print {
-	code[class*="language-"],
-	pre[class*="language-"] {
-		text-shadow: none;
-	}
-}
-
-/* Code blocks */
-pre[class*="language-"] {
-	padding: 1em;
-	margin: .5em 0;
-	overflow: auto;
-}
-
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
-	background: #f5f2f0;
-}
-
-/* Inline code */
-:not(pre) > code[class*="language-"] {
-	padding: .1em;
-	border-radius: .3em;
-	white-space: normal;
-}
-
-.token.comment,
-.token.prolog,
-.token.doctype,
-.token.cdata {
-	color: slategray;
-}
-
-.token.punctuation {
-	color: #999;
-}
-
-.token.namespace {
-	opacity: .7;
-}
-
-.token.property,
-.token.tag,
-.token.boolean,
-.token.number,
-.token.constant,
-.token.symbol,
-.token.deleted {
-	color: #905;
-}
-
-.token.selector,
-.token.attr-name,
-.token.string,
-.token.char,
-.token.builtin,
-.token.inserted {
-	color: #690;
-}
-
-.token.operator,
-.token.entity,
-.token.url,
-.language-css .token.string,
-.style .token.string {
-	color: #9a6e3a;
-	/* This background color was intended by the author of this theme. */
-	background: hsla(0, 0%, 100%, .5);
-}
-
-.token.atrule,
-.token.attr-value,
-.token.keyword {
-	color: #07a;
-}
-
-.token.function,
-.token.class-name {
-	color: #DD4A68;
-}
-
-.token.regex,
-.token.important,
-.token.variable {
-	color: #e90;
-}
-
-.token.important,
-.token.bold {
-	font-weight: bold;
-}
-.token.italic {
-	font-style: italic;
-}
-
-.token.entity {
-	cursor: help;
-}
-
-/*# sourceURL=webpack://./node_modules/prismjs/themes/prism.css */
-/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL25vZGVfbW9kdWxlcy9wcmlzbWpzL3RoZW1lcy9wcmlzbS5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7Ozs7RUFJRTs7QUFFRjs7Q0FFQyxZQUFZO0NBQ1osZ0JBQWdCO0NBQ2hCLHdCQUF3QjtDQUN4QixzRUFBc0U7Q0FDdEUsY0FBYztDQUNkLGdCQUFnQjtDQUNoQixnQkFBZ0I7Q0FDaEIsb0JBQW9CO0NBQ3BCLGtCQUFrQjtDQUNsQixpQkFBaUI7Q0FDakIsZ0JBQWdCOztDQUVoQixnQkFBZ0I7Q0FDaEIsY0FBYztDQUNkLFdBQVc7O0NBRVgscUJBQXFCO0NBQ3JCLGtCQUFrQjtDQUNsQixpQkFBaUI7Q0FDakIsYUFBYTtBQUNkOztBQUVBOztDQUVDLGlCQUFpQjtDQUNsQjtBQUNEOztBQUVBLGdCQUFnQjtBQUNoQjtDQUNDLFlBQVk7Q0FDWixjQUFjO0NBQ2QsY0FBYztBQUNmOztBQUVBOztDQUVDLG1CQUFtQjtBQUNwQjs7QUFFQSxnQkFBZ0I7QUFDaEI7Q0FDQyxhQUFhO0NBQ2IsbUJBQW1CO0NBQ25CLG1CQUFtQjtBQUNwQjs7QUFFQTs7OztDQUlDLGdCQUFnQjtBQUNqQjs7QUFFQTtDQUNDLFdBQVc7QUFDWjs7QUFFQTtDQUNDLFdBQVc7QUFDWjs7QUFFQTs7Ozs7OztDQU9DLFdBQVc7QUFDWjs7QUFFQTs7Ozs7O0NBTUMsV0FBVztBQUNaOztBQUVBOzs7OztDQUtDLGNBQWM7Q0FDZCxvRUFBb0U7Q0FDcEUsaUNBQWlDO0FBQ2xDOztBQUVBOzs7Q0FHQyxXQUFXO0FBQ1o7O0FBRUE7O0NBRUMsY0FBYztBQUNmOztBQUVBOzs7Q0FHQyxXQUFXO0FBQ1o7O0FBRUE7O0NBRUMsaUJBQWlCO0FBQ2xCO0FBQ0E7Q0FDQyxrQkFBa0I7QUFDbkI7O0FBRUE7Q0FDQyxZQUFZO0FBQ2IiLCJzb3VyY2VSb290IjoiIn0= */
-  </style>
-  <style>
-  
-  /* 为特定的注释添加红色样式 */
-  .note-comment {
-    color: #e74c3c !important;
-    font-weight: bold;
-  }
-  
-  </style>
-  <script>
-  // 页面加载完成后执行
-  function highlightNoteComments() {
-    // 查找所有代码块
-    const codeBlocks = document.querySelectorAll('pre code, .fenced-code-block');
-    console.log('Found code blocks:', codeBlocks.length);
-    
-    codeBlocks.forEach(function(codeBlock, index) {
-      // 获取代码内容
-      let content = codeBlock.textContent || codeBlock.innerText;
-      
-      // 检查是否包含目标注释
-      if (content.includes('#Note: command only availble at auto')) {
-        console.log('Found note comment in block:', index);
-        // 将注释行包装在span中并添加样式类
-        content = content.replace(
-          /(#Note: command only availble at auto)/g, 
-          '<span class="note-comment">$1</span>'
-        );
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TESTER CONTROL API 文档</title>
+    <script src="/static/index/marked.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
         
-        // 更新HTML内容
-        codeBlock.innerHTML = content;
-      }
-    });
-  }
-  
-  // 页面加载完成后执行
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', highlightNoteComments);
-  } else {
-    // 如果页面已经加载完成，立即执行
-    highlightNoteComments();
-  }
-  
-  // 延迟执行，确保所有内容都已渲染
-  setTimeout(highlightNoteComments, 1000);
-  </script>
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 8px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        
+        h3 {
+            color: #2c3e50;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        
+        h4 {
+            color: #34495e;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #e74c3c;
+        }
+        
+        pre {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        tr:hover {
+            background-color: #e8f4f8;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin: 10px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: #f8f9fa;
+            font-style: italic;
+        }
+        
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        
+        li {
+            margin-bottom: 5px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 18px;
+            color: #666;
+        }
+        
+        .error {
+            color: #e74c3c;
+            background-color: #fdf2f2;
+            padding: 20px;
+            border-radius: 5px;
+            border-left: 4px solid #e74c3c;
+        }
+    </style>
 </head>
 <body>
-  <!-- <div class="d-flex gap-2">
-    <a href="io_setting" class="btn btn-outline-primary btn-sm">IO Setting</a>
-    <a href="action_setting" class="btn btn-outline-primary btn-sm">Action Setting</a>
-    <a href="action_control" class="btn btn-outline-primary btn-sm">Action Control</a>
-    <a href="action_status" class="btn btn-outline-primary btn-sm">Action Status</a>
-  </div> -->
-  <article class="markdown-body">
-    <h1 class="atx" id="tester-control-api">TESTER CONTROL API</h1>
-    <p>Supports four test stations: BS_JTAG, JTAG, FT, Centaur-9. Used for automated control and status monitoring.</p>
-    <hr>
-    <h2 class="atx" id="1-configuration-instructions">1. Configuration Instructions</h2>
-    <p>All configuration files are located in the <code>/static/</code> directory.</p>
-    <ul>
-      <li><strong>Main configuration file</strong>: <code>/static/config.json</code></li>
-      <li>Each test station has its own configuration, such as <code>config_BS_JTAG.json</code>. Please rename the corresponding file to <code>config.json</code> when in use.</li>
-      <li><img alt="" src="/static/index/images/2025-07-16-18-26-53-image.png"></li>
-    </ul>
-    <hr>
-    <h2 class="atx" id="2-start-the-api-service">2. Start the API Service</h2>
-    <ol>
-      <li><p>Double-click <code>FT_API.exe</code> on the desktop to start the API program.</p>
-      </li>
-      <li><p>After startup, a command-line terminal window will automatically open. This is the core service process for API and user interfaces. All API functions and user interfaces depend on this process, so please keep it running at all times.</p>
-      <p><img alt="" src="/static/index/images/2025-07-18-14-14-24-image.png"></p>
-      </li>
-      <li><p>After startup, the <code>action_control</code> and <code>action_status</code> pages will automatically open for control and status monitoring, respectively.</p>
-      <p><img alt="" src="/static/index/images/2025-07-18-14-22-00-image.png"></p>
-      <p><img alt="" src="/static/index/images/2025-07-18-14-21-43-image.png"></p>
-      </li>
-    </ol>
-    <hr>
-    <h2 class="atx" id="3-io_setting-configuration-instructions">3. IO_SETTING Configuration Instructions</h2>
-    <p>Corresponds one-to-one with the PLC_IO_List Excel file.</p>
-    <table>
-      <thead>
-        <tr>
-          <th>Field</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody><tr>
-        <td>PLC</td>
-        <td>IO number (e.g. M2000)</td>
-      </tr>
-      <tr>
-        <td>description</td>
-        <td>IO function description</td>
-      </tr>
-    </tbody></table>
-    <p><img alt="" src="/static/index/images/2025-07-16-18-28-47-image.png"></p>
-    <p><img alt="" src="/static/index/images/2025-07-16-18-29-12-image.png"></p>
-    <hr>
-    <h2 class="atx" id="4-action_setting-configuration-instructions">4. ACTION_SETTING Configuration Instructions</h2>
-    <h3 class="atx" id="control-action">Control Action</h3>
-    <ul>
-      <li><strong>Action Name</strong>: Lowercase letters, no spaces, must contain underscores. Format: <code>functionname_statename</code>, e.g., <code>clamp_x_in</code>, <code>power_on</code>.</li>
-      <li><strong>Description</strong>: The IO used, e.g., <code>M2000</code>.</li>
-      <li><strong>readonly</strong>: <code>false</code> or omitted.</li>
-      <li><strong>Command List</strong>:<ul>
-        <li><strong>PLC</strong>: Select the corresponding IO, e.g., <code>M2000</code>.</li>
-        <li><strong>Type</strong>:<ul>
-          <li><code>write_multiple_coil</code></li>
-          <li><code>read_multiple_coil</code></li>
-          <li><code>write_single_coil</code></li>
-          <li><code>read_single_coil</code></li>
-          <li><code>read_holding_registers</code></li>
-          <li><code>write_holding_registers</code></li>
-          <li>Please confirm the specific selection with the PLC engineer</li>
-        </ul>
-      </li>
-      <li><strong>Delay(s)</strong>: Delay after write operation, default is 0. For read operations, this is the timeout; within the timeout, the system loops until the target value is reached.</li>
-      <li><strong>Expected</strong>: Target value. Single coil: 0 or 1. Multiple coils: <code>0,1</code> or <code>1,0</code>.</li>
-    </ul>
-    </li>
-    </ul>
-    <h3 class="atx" id="state-action">State Action</h3>
-    <ul>
-      <li><strong>Action Name</strong>: Lowercase letters, no spaces, must contain underscores. Format: <code>functionname_state</code>, e.g., <code>clamp_x_in_state</code>.</li>
-      <li><strong>Description</strong>: Optional values for the state, e.g., <code>on_off</code>, <code>engage_disengage</code>, <code>up_down</code>.</li>
-      <li><strong>readonly</strong>: <code>true</code></li>
-      <li><strong>Command List</strong>:<ul>
-        <li><strong>PLC</strong>: Select the corresponding IO, e.g., <code>M2000</code>.</li>
-        <li><strong>Type</strong>:<ul>
-          <li><code>read_multiple_coil</code></li>
-          <li><code>read_single_coil</code></li>
-          <li><code>read_holding_registers</code></li>
-          <li>Please confirm the specific selection with the PLC engineer</li>
-        </ul>
-      </li>
-      <li><strong>Delay(s)</strong>: Timeout for read operations; within the timeout, the system loops until the target value is reached.</li>
-      <li><strong>Expected</strong>: Target value. Single coil: 0 or 1. Multiple coils: <code>0,1</code> or <code>1,0</code>.</li>
-    </ul>
-    </li>
-    </ul>
-    <p><img alt="" src="/static/index/images/2025-07-16-18-30-21-image.png"></p>
-    <p><img alt="" src="/static/index/images/2025-07-16-18-31-14-image.png"></p>
-    <hr>
-    <h2 class="atx" id="5-related-pages">5. Related Pages</h2>
-    <ul>
-      <li><strong>IO Setting</strong>: IO configuration management</li>
-      <li><strong>Action Setting</strong>: Action configuration management</li>
-      <li><strong>Action Control</strong>: Action control interface</li>
-      <li><strong>Action Status</strong>: Action status monitoring</li>
-    </ul>
-    <hr>
-    <p>For detailed help, please contact the project maintainer or refer to the relevant documentation.</p>
-    <hr>
-    <h2 class="atx" id="6-all-curl-commands-and-responses">6. All cURL Commands and Responses</h2>
-    <h3 class="atx" id="61-bm_ft-test-station">6.1 BM_FT Test Station</h3>
-    <pre><code class="fenced-code-block language-sh"># The following content is from Log/cURL_BM_FT.txt
-    # Each command is immediately followed by its response
-    
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"clamp_x\", \"control_state\": \"in\"}"
-    {"state": "in", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"clamp_y\", \"control_state\": \"in\"}"
-    {"state": "in", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"lifter\", \"control_state\": \"up\"}"
-    {"state": "up", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"power\", \"control_state\": \"in\"}"
-    {"state": "in", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"power\", \"control_state\": \"out\"}"
-    {"state": "out", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp1\", \"control_state\": \"in\"}"
-    {"state": "in", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp1\", \"control_state\": \"out\"}"
-    {"state": "out", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp1_speediness\", \"control_state\": \"disable\"}"
-    {"state": "disable", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp1_speediness\", \"control_state\": \"enable\"}"
-    {"state": "enable", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp2_speediness\", \"control_state\": \"disable\"}"
-    {"state": "disable", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp2_speediness\", \"control_state\": \"enable\"}"
-    {"state": "enable", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp2\", \"control_state\": \"in\"}"
-    {"state": "in", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp2\", \"control_state\": \"out\"}"
-    {"state": "out", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp3\", \"control_state\": \"in\"}"
-    {"state": "in", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp3\", \"control_state\": \"out\"}"
-    {"state": "out", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp3_speediness\", \"control_state\": \"disable\"}"
-    {"state": "disable", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp3_speediness\", \"control_state\": \"enable\"}"
-    {"state": "enable", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp4\", \"control_state\": \"in\"}"
-    {"state": "in", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp4\", \"control_state\": \"out\"}"
-    {"state": "out", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp4_speediness\", \"control_state\": \"disable\"}"
-    {"state": "disable", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp4_speediness\", \"control_state\": \"enable\"}"
-    {"state": "enable", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp5\", \"control_state\": \"in\"}"
-    {"state": "in", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp5\", \"control_state\": \"out\"}"
-    {"state": "out", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp5_speediness\", \"control_state\": \"disable\"}"
-    {"state": "disable", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp5_speediness\", \"control_state\": \"enable\"}"
-    {"state": "enable", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp6\", \"control_state\": \"in\"}"
-    {"state": "in", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp6\", \"control_state\": \"out\"}"
-    {"state": "out", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp6_speediness\", \"control_state\": \"disable\"}"
-    {"state": "disable", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp6_speediness\", \"control_state\": \"enable\"}"
-    {"state": "enable", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp7\", \"control_state\": \"in\"}"
-    {"state": "in", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp7\", \"control_state\": \"out\"}"
-    {"state": "out", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp7_speediness\", \"control_state\": \"disable\"}"
-    {"state": "disable", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp7_speediness\", \"control_state\": \"enable\"}"
-    {"state": "enable", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp8\", \"control_state\": \"in\"}"
-    {"state": "in", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp8\", \"control_state\": \"out\"}"
-    {"state": "out", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp8_speediness\", \"control_state\": \"disable\"}"
-    {"state": "disable", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp8_speediness\", \"control_state\": \"enable\"}"
-    {"state": "enable", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp9\", \"control_state\": \"in\"}"
-    {"state": "in", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp9\", \"control_state\": \"out\"}"
-    {"state": "out", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp9_speediness\", \"control_state\": \"disable\"}"
-    {"state": "disable", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"osfp9_speediness\", \"control_state\": \"enable\"}"
-    {"state": "enable", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"eth_usb\", \"control_state\": \"in\"}"
-    {"state": "in", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"eth_usb\", \"control_state\": \"out\"}"
-    {"state": "out", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"fnm\", \"control_state\": \"in\"}"
-    {"state": "in", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"fnm\", \"control_state\": \"out\"}"
-    {"state": "out", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"eth_usb_led\", \"control_state\": \"in\"}"
-    {"state": "", "result": 1, "status": "Command M10295 executed failed: Actual value (0, 0) does not match expected value [0, 1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"manual_auto\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"plc\", \"control_state\": \"start\"}"
-    {"state": "start", "result": 1, "status": "Command D6 executed failed: Actual value (4,) does not match expected value [1]"}
-
-    #Note: command only availble at auto
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"plc\", \"control_state\": \"stop\"}"
-    {"state": "stop", "result": 0, "status": ""}
-
-    #Note: command only availble at auto
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"dut\", \"control_state\": \"engage\"}"
-    {"state": "engage", "result": ture, "status": ""}
-
-    #Note: command only availble at auto
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"dut\", \"control_state\": \"disengage\"}"
-    {"state": "disengage", "result": 0, "status": ""}
-
-    #Note: command only availble at auto
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"buzzer\", \"control_state\": \"enable\"}"
-    {"state": "enable", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"buzzer\", \"control_state\": \"disable\"}"
-    {"state": "disable", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"test_ready\"}"
-    {"state": "off", "result": 1, "status": "Command M10613 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"device_status\"}"
-    {"state": "off", "result": 1, "status": "Command D6 executed failed: Actual value (4,) does not match expected value [-1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"reset_flow\"}"
-    {"state": "off", "result": 1, "status": "Command D7 executed failed: Actual value (0,) does not match expected value [-1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"auto_flow\"}"
-    {"state": "off", "result": 1, "status": "Command D8 executed failed: Actual value (1,) does not match expected value [-1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"alarm\"}"
-    {"state": "off", "result": 1, "status": "Command D150 executed failed: Actual value (0,) does not match expected value [-1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"tray_in_1\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"tray_in_2\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"clamp_x1_home\"}"
-    {"state": "off", "result": 1, "status": "Command M11003 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"clamp_x1_in_place\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"clamp_x2_home\"}"
-    {"state": "off", "result": 1, "status": "Command M11005 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"clamp_x2_in_place\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"clamp_y1_home\"}"
-    {"state": "off", "result": 1, "status": "Command M11007 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"clamp_y1_in_place\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"clamp_y2_home\"}"
-    {"state": "off", "result": 1, "status": "Command M11009 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"clamp_y2_in_place\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"lifter_home\"}"
-    {"state": "off", "result": 1, "status": "Command M11011 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"lifter_in_place\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"power_home\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"power_in_place\"}"
-    {"state": "off", "result": 1, "status": "Command M11014 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_1_home\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_1_mediate_point\"}"
-    {"state": "off", "result": 1, "status": "Command M11016 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_1_in_place\"}"
-    {"state": "off", "result": 1, "status": "Command M11017 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_2_home\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_2_mediate_point\"}"
-    {"state": "off", "result": 1, "status": "Command M11019 executed failed: Actual value (0, 0) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_2_in_place\"}"
-    {"state": "off", "result": 1, "status": "Command M11020 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_3_home\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_3_mediate_point\"}"
-    {"state": "off", "result": 1, "status": "Command M11022 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_3_in_place\"}"
-    {"state": "off", "result": 1, "status": "Command M11023 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_4_home\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_4_mediate_point\"}"
-    {"state": "off", "result": 1, "status": "Command M11025 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_4_in_place\"}"
-    {"state": "off", "result": 1, "status": "Command M11026 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_5_home\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_5_mediate_point\"}"
-    {"state": "off", "result": 1, "status": "Command M11028 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_5_in_place\"}"
-    {"state": "off", "result": 1, "status": "Command M11029 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_6_home\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_6_mediate_point\"}"
-    {"state": "off", "result": 1, "status": "Command M11031 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_6_in_place\"}"
-    {"state": "off", "result": 1, "status": "Command M11032 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_7_home\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_7_mediate_point\"}"
-    {"state": "off", "result": 1, "status": "Command M11034 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_7_in_place\"}"
-    {"state": "off", "result": 1, "status": "Command M11035 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_8_home\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_8_mediate_point\"}"
-    {"state": "off", "result": 1, "status": "Command M11037 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_8_in_place\"}"
-    {"state": "off", "result": 1, "status": "Command M11038 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_9_home\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_9_mediate_point\"}"
-    {"state": "off", "result": 1, "status": "Command M11040 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"osfp_9_in_place\"}"
-    {"state": "off", "result": 1, "status": "Command M11041 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"eth_usb_home\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"eth_usb_in_place\"}"
-    {"state": "off", "result": 1, "status": "Command M11043 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"fnm_home\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json"-d "{\"control_name\": \"fnm_in_place\"}"
-    {"state": "off", "result": 1, "status": "Command M11045 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"lifter\", \"control_state\": \"down\"}"
-    {"state": "down", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"clamp_x\", \"control_state\": \"out\"}"
-    {"state": "out", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"clamp_y\", \"control_state\": \"out\"}"
-    {"state": "out", "result": 0, "status": ""}
-
-
-    <h3 class="atx" id="62-jtag-test-station">6.2 JTAG Test Station</h3>
-    <pre><code class="fenced-code-block language-sh"># The following content is from Log/cURL_JTAG.txt
- 
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_x\", \"control_state\": \"in\"}"
-    {"state": "in", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_x\", \"control_state\": \"out\"}"
-    {"state": "out", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_y\", \"control_state\": \"in\"}"
-    {"state": "in", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_y\", \"control_state\": \"out\"}"
-    {"state": "out", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"jtag\", \"control_state\": \"in\"}"
-    {"state": "in", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"jtag\", \"control_state\": \"out\"}"
-    {"state": "out", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"io\", \"control_state\": \"in\"}"
-    {"state": "in", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"io\", \"control_state\": \"out\"}"
-    {"state": "out", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"power\", \"control_state\": \"in\"}"
-    {"state": "in", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"power\", \"control_state\": \"out\"}"
-    {"state": "out", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"proximity_switch1\"}"
-    {"state": "off", "result": 1, "status": "Command M10020 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"proximity_switch2\"}"
-    {"state": "off", "result": 1, "status": "Command M10021 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_x1_in\"}"
-    {"state": "off", "result": 1, "status": "Command M10022 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_x1_out\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_x2_in\"}"
-    {"state": "off", "result": 1, "status": "Command M10024 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_x2_out\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_y1_in\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_y1_out\"}"
-    {"state": "off", "result": 1, "status": "Command M10027 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_y2_in\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_y2_out\"}"
-    {"state": "off", "result": 1, "status": "Command M10029 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"jtag_out\"}"
-    {"state": "off", "result": 1, "status": "Command M10030 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"jtag_in\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"io_out\"}"
-    {"state": "off", "result": 1, "status": "Command M10032 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"io_in\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"power_out\"}"
-    {"state": "off", "result": 1, "status": "Command M10034 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"power_in\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"safety_light_grid\"}"
-    {"state": "off", "result": 1, "status": "Command M10036 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_x_out\"}"
-    {"state": "off", "result": 1, "status": "Command M10050 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_x_in\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_y_out\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_y_in\"}"
-    {"state": "off", "result": 1, "status": "Command M10053 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"testing_ready\"}"
-    {"state": "off", "result": 1, "status": "Command M10054 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    </code></pre>
-    <h3 class="atx" id="63-bs_jtag-test-station">6.3 BS_JTAG Test Station</h3>
-    <pre><code class="fenced-code-block language-sh"># The following content is from Log/cURL_BS_JTAG.txt
-
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_x\", \"control_state\": \"in\"}"
-    {"state": "in", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_x\", \"control_state\": \"out\"}"
-    {"state": "out", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_y\", \"control_state\": \"in\"}"
-    {"state": "in", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_y\", \"control_state\": \"out\"}"
-    {"state": "out", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"power\", \"control_state\": \"in\"}"
-    {"state": "in", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"power\", \"control_state\": \"out\"}"
-    {"state": "out", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"jtag\", \"control_state\": \"in\"}"
-    {"state": "in", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"jtag\", \"control_state\": \"out\"}"
-    {"state": "out", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"proximity_switch1\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"proximity_switch2\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"proximity_switch3\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_x1_out\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_x1_in\"}"
-    {"state": "off", "result": 1, "status": "Command M10024 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_x2_out\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_x2_in\"}"
-    {"state": "off", "result": 1, "status": "Command M10026 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_y1_out\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_y1_in\"}"
-    {"state": "off", "result": 1, "status": "Command M10028 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_y2_out\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_y2_in\"}"
-    {"state": "off", "result": 1, "status": "Command M10030 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"power_in\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"power_out\"}"
-    {"state": "off", "result": 1, "status": "Command M10032 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"jtag_out\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"jtag_in\"}"
-    {"state": "off", "result": 1, "status": "Command M10034 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"safety_light_grid\"}"
-    {"state": "off", "result": 1, "status": "Command M10035 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    </code></pre>
-    <h3 class="atx" id="64-centaur-9-test-station">6.4 Centaur-9 Test Station</h3>
-    <pre><code class="fenced-code-block language-sh"># The following content is from Log/cURL_Centaur-9.txt
-
-    
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"dut\", \"control_state\": \"disengage\"}"
-    {"state": "disengage", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"fan\", \"control_state\": \"on\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"opticalmodule\", \"control_state\": \"in\"}"
-    {"state": "in", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"holder\", \"control_state\": \"in\"}"
-    {"state": "in", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"fix\", \"control_state\": \"in\"}"
-    {"state": "in", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"debugmodule\", \"control_state\": \"in\"}"
-    {"state": "in", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"mcio124module\", \"control_state\": \"in\"}"
-    {"state": "in", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"rfmodule\", \"control_state\": \"in\"}"
-    {"state": "in", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"holder_work\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"holder_origin\"}"
-    {"state": "off", "result": 1, "status": "Command M11001 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"fix_work\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"fix_origin\"}"
-    {"state": "off", "result": 1, "status": "Command M11003 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"opticalmodule_work\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"opticalmodule_origin\"}"
-    {"state": "off", "result": 1, "status": "Command M11005 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"debugmodule_work\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"debugmodule_origin\"}"
-    {"state": "off", "result": 1, "status": "Command M11007 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"mcio124module_work\"}"
-    {"state": "off", "result": 1, "status": "Command M11008 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"mcio124module_origin\"}"
-    {"state": "off", "result": 1, "status": "Command M11009 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"rfmodule_work\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"rfmodule_origin\"}"
-    {"state": "off", "result": 1, "status": "Command M11011 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"safedoor_front\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"safedoor_rear\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"safedoor_top\"}"
-    {"state": "on", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"testerstatus\"}"
-    {"state": "off", "result": 1, "status": "Command M11015 executed failed: Actual value (0,) does not match expected value [1]"}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"rfmodule\", \"control_state\": \"out\"}"
-    {"state": "out", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"mcio124module\", \"control_state\": \"out\"}"
-    {"state": "out", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"debugmodule\", \"control_state\": \"out\"}"
-    {"state": "out", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"fix\", \"control_state\": \"out\"}"
-    {"state": "out", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"holder\", \"control_state\": \"out\"}"
-    {"state": "out", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"opticalmodule\", \"control_state\": \"out\"}"
-    {"state": "out", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"fan\", \"control_state\": \"off\"}"
-    {"state": "off", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"dut\", \"control_state\": \"engage\"}"
-    {"state": "engage", "result": 0, "status": ""}
-
-    curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"dut\", \"control_state\": \"disengage\"}"
-    {"state": "disengage", "result": 0, "status": ""}
-
-    </code></pre>
-    <hr>
-  </article>
+    <div class="container">
+        <div id="content">
+            <div class="loading">正在加载文档...</div>
+        </div>
+    </div>
+
+    <script>
+        // 配置marked选项
+        marked.setOptions({
+            breaks: true,
+            gfm: true,
+            headerIds: true,
+            mangle: false
+        });
+
+        // 自定义渲染器处理图片路径
+        const renderer = new marked.Renderer();
+        renderer.image = function(href, title, text) {
+            console.log('Processing image:', { href, title, text });
+            
+            // 确保href是字符串
+            let hrefStr = href;
+            if (typeof href === 'object' && href.href) {
+                hrefStr = href.href;
+                console.log('Extracted href from object:', hrefStr);
+            } else if (typeof href !== 'string') {
+                console.log('Invalid href type:', typeof href, href);
+                hrefStr = '';
+            }
+            
+            // 处理相对路径的图片
+            let imagePath = hrefStr;
+            if (hrefStr && typeof hrefStr === 'string' && hrefStr.indexOf('http') !== 0 && hrefStr.indexOf('data:') !== 0) {
+                // 如果是相对路径，转换为完整的URL路径
+                if (hrefStr.indexOf('/') === 0) {
+                    // 已经是绝对路径，直接使用
+                    imagePath = hrefStr;
+                    console.log('Absolute path, using as is:', imagePath);
+                } else {
+                    // 相对路径，需要转换为完整的URL路径
+                    const baseUrl = window.location.origin;
+                    const basePath = '/static/index';
+                    imagePath = baseUrl + basePath + '/' + hrefStr;
+                    console.log('Relative path converted:', { baseUrl, basePath, hrefStr, imagePath });
+                }
+            } else {
+                console.log('Using original path (http/data):', imagePath);
+            }
+            
+            const imgTag = `<img src="${imagePath}" alt="${text || ''}" title="${title || ''}" onerror="this.style.display='none'; console.log('Image failed to load:', '${imagePath}');" onload="console.log('Image loaded successfully:', '${imagePath}');" />`;
+            console.log('Generated img tag:', imgTag);
+            return imgTag;
+        };
+        
+        marked.use({ renderer });
+
+        // 获取URL参数中的文件路径
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // 获取markdown文件路径
+        function getMarkdownPath() {
+            const path = getUrlParameter('path') || '/static/index/README.md';
+            console.log('Markdown path:', path);
+            return path;
+        }
+
+        // 加载并渲染markdown内容
+        async function loadMarkdown() {
+            const contentDiv = document.getElementById('content');
+            const markdownPath = getMarkdownPath();
+            
+            try {
+                console.log('Attempting to fetch:', markdownPath);
+                const response = await fetch(markdownPath);
+                console.log('Response status:', response.status);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const markdownText = await response.text();
+                console.log('Markdown content length:', markdownText.length);
+                
+                const htmlContent = marked.parse(markdownText);
+                
+                contentDiv.innerHTML = htmlContent;
+                
+                // 添加平滑滚动
+                addSmoothScrolling();
+                
+            } catch (error) {
+                console.error('Error loading markdown:', error);
+                contentDiv.innerHTML = `
+                    <div class="error">
+                        <h3>加载文档失败</h3>
+                        <p>错误信息: ${error.message}</p>
+                        <p>请检查文件路径是否正确: ${markdownPath}</p>
+                        <p>当前页面路径: ${window.location.pathname}</p>
+                        <p>您可以通过URL参数指定文件路径: ?path=your-file.md</p>
+                    </div>
+                `;
+            }
+        }
+
+        // 添加平滑滚动
+        function addSmoothScrolling() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', loadMarkdown);
+    </script>
 </body>
 </html>

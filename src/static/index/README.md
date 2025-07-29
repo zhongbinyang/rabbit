@@ -10,7 +10,7 @@ All configuration files are located in the `/static/` directory.
 
 - **Main configuration file**: `/static/config.json`
 - Each test station has its own configuration, such as `config_BS_JTAG.json`. Please rename the corresponding file to `config.json` when in use.
-- ![](src/static/index/images/2025-07-16-18-26-53-image.png)
+- ![](images/2025-07-16-18-26-53-image.png)
 
 ---
 
@@ -18,15 +18,9 @@ All configuration files are located in the `/static/` directory.
 
 1. Double-click `FT_API.exe` on the desktop to start the API program.
 
-2. After startup, a command-line terminal window will automatically open. This is the core service process for API and user interfaces. All API functions and user interfaces depend on this process, so please keep it running at all times.
+2. After startup, a GUI window will automatically open. This is the core service process for API and user interfaces. All API functions and user interfaces depend on this process, so please keep it running at all times.
    
-   ![](src/static/index/images/2025-07-18-14-14-24-image.png)
-
-3. After startup, the `action_control` and `action_status` pages will automatically open for control and status monitoring, respectively.
-   
-   ![](src/static/index/images/2025-07-18-14-22-00-image.png)
-   
-   ![](src/static/index/images/2025-07-18-14-21-43-image.png)
+   ![](/Users/zbyang/Library/Application%20Support/marktext/images/2025-07-29-19-55-35-image.png)
 
 ---
 
@@ -39,13 +33,13 @@ Corresponds one-to-one with the PLC_IO_List Excel file.
 | PLC         | IO number (e.g. M2000)  |
 | description | IO function description |
 
-![](src/static/index/images/2025-07-16-18-28-47-image.png)
-
-![](src/static/index/images/2025-07-16-18-29-12-image.png)
+![](/Users/zbyang/Library/Application%20Support/marktext/images/2025-07-29-19-56-40-image.png)
 
 ---
 
 ## 4. ACTION_SETTING Configuration Instructions
+
+![](/Users/zbyang/Library/Application%20Support/marktext/images/2025-07-29-19-57-53-image.png)
 
 ### Control Action
 
@@ -80,18 +74,15 @@ Corresponds one-to-one with the PLC_IO_List Excel file.
   - **Delay(s)**: Timeout for read operations; within the timeout, the system loops until the target value is reached.
   - **Expected**: Target value. Single coil: 0 or 1. Multiple coils: `0,1` or `1,0`.
 
-![](src/static/index/images/2025-07-16-18-30-21-image.png)
-
-![](src/static/index/images/2025-07-16-18-31-14-image.png)
-
 ---
 
-## 5. Related Pages
+## 5. Action Control
 
-- **IO Setting**: IO configuration management
-- **Action Setting**: Action configuration management
-- **Action Control**: Action control interface
-- **Action Status**: Action status monitoring
+![](/Users/zbyang/Library/Application%20Support/marktext/images/2025-07-29-20-00-03-image.png)
+
+## 6. Action Status
+
+![](/Users/zbyang/Library/Application%20Support/marktext/images/2025-07-29-20-00-21-image.png)
 
 ---
 
@@ -106,8 +97,6 @@ For detailed help, please contact the project maintainer or refer to the relevan
 ```sh
 # The following content is from Log/cURL_BM_FT.txt
 # Each command is immediately followed by its response
-curl -X POST --url http://192.168.10.30:5001/connect_plc
-{"Function":"ConnectPLC","Message":"Connected to PLC 192.168.10.31:502","Result":true,"timestamp":"2025-07-13 20:05:52_140954"}
 
 curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"clamp_x\", \"control_state\": \"in\"}"
 {"state": "in", "result": true, "status": ""}
@@ -436,17 +425,12 @@ curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: appli
 
 curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json"-d "{\"control_name\": \"clamp_y\", \"control_state\": \"out\"}"
 {"state": "out", "result": true, "status": ""}
-
-curl -X POST --url http://192.168.10.30:5001/disconnect_plc
-{"Function":"DisconnectPLC","Message":"Disconnect PLC successfully","Result":true,"timestamp":"2025-07-13 20:10:49_240618"}
 ```
 
 ### 6.2 JTAG Test Station
 
 ```sh
 # The following content is from Log/cURL_JTAG.txt
-curl -X POST --url http://192.168.10.30:5001/connect_plc
-{"Function":"ConnectPLC","Message":"Connected to PLC 192.168.10.31:502","Result":true,"timestamp":"2025-07-13 17:31:36_688548"}
 
 curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_x\", \"control_state\": \"in\"}"
 {"state": "in", "result": true, "status": ""}
@@ -543,17 +527,12 @@ curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: appli
 
 curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"testing_ready\"}"
 {"state": "off", "result": false, "status": "Command M10054 executed failed: Actual value (0,) does not match expected value [1]"}
-
-curl -X POST --url http://192.168.10.30:5001/disconnect_plc
-{"Function":"DisconnectPLC","Message":"Disconnect PLC successfully","Result":true,"timestamp":"2025-07-13 17:32:42_172780"}
 ```
 
 ### 6.3 BS_JTAG Test Station
 
 ```sh
 # The following content is from Log/cURL_BS_JTAG.txt
-curl -X POST --url http://192.168.10.30:5001/connect_plc
-{"Function":"ConnectPLC","Message":"Connected to PLC 192.168.10.31:502","Result":true,"timestamp":"2025-07-13 16:31:22_868427"}
 
 curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"clamp_x\", \"control_state\": \"in\"}"
 {"state": "in", "result": true, "status": ""}
@@ -626,18 +605,12 @@ curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: appli
 
 curl -X POST --url http://192.168.10.30:5001/get_control -H "content-type: application/json" -d "{\"control_name\": \"safety_light_grid\"}"
 {"state": "off", "result": false, "status": "Command M10035 executed failed: Actual value (0,) does not match expected value [1]"}
-
-curl -X POST --url http://192.168.10.30:5001/disconnect_plc
-{"Function":"DisconnectPLC","Message":"Disconnect PLC successfully","Result":true,"timestamp":"2025-07-13 16:32:09_247179"}
 ```
 
 ### 6.4 Centaur-9 Test Station
 
 ```sh
 # The following content is from Log/cURL_Centaur-9.txt
-
-curl -X POST --url http://192.168.10.30:5001/connect_plc
-{"Function":"ConnectPLC","Message":"Connected to PLC 192.168.10.31:502","Result":true,"timestamp":"2025-07-15 09:39:47_469405"}
 
 curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"dut\", \"control_state\": \"disengage\"}"
 {"state": "disengage", "result": true, "status": ""}
@@ -737,9 +710,6 @@ curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: appli
 
 curl -X POST --url http://192.168.10.30:5001/set_control -H "content-type: application/json" -d "{\"control_name\": \"dut\", \"control_state\": \"disengage\"}"
 {"state": "disengage", "result": true, "status": ""}
-
-curl -X POST --url http://192.168.10.30:5001/disconnect_plc
-{"Function":"DisconnectPLC","Message":"Disconnect PLC successfully","Result":true,"timestamp":"2025-07-15 09:41:03_154370"}
 ```
 
 ---
