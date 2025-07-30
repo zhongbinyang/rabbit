@@ -1,0 +1,56 @@
+# TESTER CONTROL API - Python Dependencies
+# 测试站控制系统依赖包
+
+# Web Framework
+Flask>=2.0.0
+Flask-CORS>=3.0.0
+
+# Desktop Application
+pywebview>=4.0.0
+
+# GUI Framework
+# PyQt5>=5.15.0
+
+# Modbus Communication
+modbus-tk>=1.1.0
+pyserial>=3.5
+
+# HTTP Requests
+requests>=2.25.0
+
+# Build Tools (for creating executables)
+pyinstaller>=5.0.0
+
+# Development and Testing (optional)
+# pytest>=6.0.0
+# pytest-cov>=2.10.0
+
+# Logging and Utilities
+# 这些通常是Python标准库的一部分，但列出以供参考
+# logging (built-in)
+# json (built-in)
+# threading (built-in)
+# datetime (built-in)
+# os (built-in)
+# sys (built-in)
+# socket (built-in)
+# signal (built-in)
+# platform (built-in)
+# struct (built-in)
+# time (built-in)
+# typing (built-in for Python 3.5+)
+
+# Platform Specific (Windows)
+# ctypes (built-in)
+
+# Network Utilities
+# ipaddress (built-in for Python 3.3+)
+# subprocess (built-in)
+# concurrent.futures (built-in for Python 3.2+)
+
+# 安装说明：
+# pip install -r requirements.txt
+#
+# 或者分环境安装：
+# 开发环境：pip install -r requirements.txt
+# 生产环境：pip install -r requirements.txt --no-dev 
